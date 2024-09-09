@@ -1,6 +1,6 @@
 # APP
 device_id = 'emulator-5554'
-package = 'ru.limeshop.android.dev'
+package = 'ru.desktop.flutter_hbb'
 app_link = 'app_link'
 
 

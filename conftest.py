@@ -10,7 +10,7 @@ from pages.main_page import MainPage
 
 
 def pytest_addoption(parser):
-    parser.addoption('--device', action='store', default='R58N63MW4QR', help='emulator id')
+    parser.addoption('--device', action='store', default='emulator-5554', help='emulator id')
 
 
 @pytest.fixture
@@ -61,6 +61,5 @@ def setup(request):
     d = u2.connect(dev_id)
     open_app(d)
     page = MainPage(d)
-    page.set_contur()
     yield
     teardown(d)

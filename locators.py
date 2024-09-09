@@ -7,16 +7,28 @@ import uiautomator2 as u2
 
 
 class MainLocators:
-    # BASE
-    X_BUTTON = '//android.widget.ImageButton'
-    NOTIFICATION_NEGATIVE = '//*[@resource-id="ru.limeshop.android.dev:id/notification_negative_button"]'
-    notification_positive_button = "ru.limeshop.android.dev:id/notification_positive_button"
-    TOOLBAR_TITLE = 'ru.limeshop.android.dev:id/toolbarTitle'
-    lime_logo = 'ru.limeshop.android.dev:id/banner_label_image_view'
-    snack_bar_message = '//*[@resource-id="ru.limeshop.android.dev:id/title_text_view"]'
-    SCREENGIFTCARD = "ru.limeshop.android:id/baseContainer"
-    # POPUP
-    POPUP_CLEAR = '//*[@resource-id="ru.limeshop.android.dev:id/positive_button_outlined"]'
-    POPUP_CANCEL = '//*[@resource-id="ru.limeshop.android.dev:id/negative_button"]'
-    POPUP_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/title_text_view"]'
-    POPUP_DESCRIPTION = '//*[@resource-id="ru.limeshop.android.dev:id/message_text_view"]'
+    # SYSTEM
+    ALLOW_ACCESS_TO_MANAGE_ALL_FILES_SWITCH = '//android.widget.ScrollView/android.view.View[2]'
+    BACK_BTN = '//androidx.compose.ui.platform.ComposeView/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]'
+    OK_KEYBOARD = '//*[@resource-id="com.google.android.inputmethod.latin:id/key_pos_ime_action"]/android.widget.FrameLayout[1]'
+
+    # NAVBAR
+    CONNECTION_BTN = '//*[@content-desc="СоединениеTab 1 of 4"]'
+    CHAT_BTN = '//*[@content-desc="ЧатTab 2 of 4"]'
+    ACCESS_BTN = '//*[@content-desc="ДоступTab 3 of 4"]'
+    SETTINGS_BTN = '//*[@content-desc="НастройкиTab 4 of 4"]'
+
+    # CONNECTION_TAB
+    REMOTE_ID_FIELD = '//*[@text="Удаленный идентификатор"]'
+    CONNECT_BTN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.view.View[1]/android.widget.Button[1]'
+    LAST_SEANSES = '//*[@content-desc="Последние сеансы"]'
+    FAVOTITES = '//*[@content-desc="Избранное"]'
+    ADDRESS_BOOK = '//*[@content-desc="Адресная книга"]'
+
+    # ACCESS
+    START_SERVICE_BTN = '//*[@content-desc="Запустить службу"]'
+    CATCH_SCREEN_SW = '//*[@content-desc="Захват экрана"]'
+    CATCH_INPUT_SW = '//*[@content-desc="Захват ввода"]'
+    RECIEVE_FILES_SW = '//*[@content-desc="Передача файлов"]'
+    CATCH_AUDIO_SW = '//*[@content-desc="Захват аудио"]'
+
