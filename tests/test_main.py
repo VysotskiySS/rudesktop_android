@@ -8,11 +8,21 @@ import allure
 @pytest.mark.usefixtures("setup")
 @allure.feature("Основной экран")
 class TestMain:
+
     @pytest.mark.main
     @pytest.mark.smoke
     @allure.title('')
     @allure.testcase("")
-    def test_first(self, connect_to_device):
+    def test_start_service(self, connect_to_device):
+        page = MainPage(connect_to_device)
+
+        page.click_access_nav_bar()
+        page.click_start_service()
+
+        page.get_screen()
+
+
+    def test_input_id(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.set_id('382760227')
         page.click_connect()

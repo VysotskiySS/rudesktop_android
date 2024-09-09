@@ -32,19 +32,12 @@ def open_app(d):
     # page.set_feature_toggles()
 
 
-@allure.title("Сменить контур")
-@pytest.fixture()
-def change_contur():
-    page = MainPage()
-    page.set_contur()
-
-
 @allure.title("Авторизация")
 @pytest.fixture()
 def login():
     d = u2.connect(os.environ["device_id"])
     page = MainPage(d)
-    page.login(valid_email, valid_password)
+    # page.login(valid_email, valid_password)
     # page.set_feature_toggles()
 
 

@@ -27,5 +27,9 @@ class MainPage(BasePage):
     def click_connect(self):
         self.click(MainLocators.CONNECTION_BTN)
 
+    def click_access_nav_bar(self):
+        self.click(MainLocators.ACCESS_BTN)
 
+    def click_start_service(self):
+        self.click(MainLocators.START_SERVICE_BTN)
 
