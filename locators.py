@@ -12,11 +12,16 @@ class MainLocators:
     BACK_BTN = '//androidx.compose.ui.platform.ComposeView/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]'
     OK_KEYBOARD = '//*[@resource-id="com.google.android.inputmethod.latin:id/key_pos_ime_action"]/android.widget.FrameLayout[1]'
 
+    # POPUP
+    CANCEL_BTN = '//*[@content-desc="Отменить"]'
+    OK_BTN = '//*[@content-desc="ОК"]'
+
+
     # NAVBAR
-    CONNECTION_BTN = '//*[@content-desc="СоединениеTab 1 of 4"]'
-    CHAT_BTN = '//*[@content-desc="ЧатTab 2 of 4"]'
-    ACCESS_BTN = '//*[@content-desc="ДоступTab 3 of 4"]'
-    SETTINGS_BTN = '//*[@content-desc="НастройкиTab 4 of 4"]'
+    CONNECTION_BTN = '//*[contains(@content-desc, "Соединение")]'
+    CHAT_BTN = '//*[contains(@content-desc, "Чат")]'
+    ACCESS_BTN = '//*[contains(@content-desc, "Доступ")]'
+    SETTINGS_BTN = '//*[contains(@content-desc, "Настройки")]'
 
     # CONNECTION_TAB
     REMOTE_ID_FIELD = '//*[@text="Удаленный идентификатор"]'

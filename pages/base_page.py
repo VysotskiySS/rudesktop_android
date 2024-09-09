@@ -224,21 +224,6 @@ class BasePage:
     def press_back(self):
         self.d.press("back")
 
-    @allure.step("Проверка заголовка экрана - '{title}'")
-    def checking_title_page(self, title):
-        d = self.d
-        assert d(resourceId='ru.limeshop.android.dev:id/toolbarTitle', text=title).wait(5) == True, print(
-            f"Заголовок экрана некорректен. Текущий заголовок - {self.get_text(MainLocators.TOOLBAR_TITLE)}, ожидаемый - {title}")
-
-    @allure.step('Нажать кнопку "X"')
-    def click_x(self):
-        self.click(MainLocators.X_BUTTON)
-
-    @allure.step('Переход в каталог')
-    def open_catalog(self):
-        self.wait_element(MainLocators.CATALOG_NAV)
-        self.click(MainLocators.CATALOG_NAV, "каталог")
-
     # @allure.step("Получение количества элементов")
     def get_elements_amount(self, locator):
         if locator[0] == '/' and locator[1] == '/':
@@ -264,3 +249,8 @@ class BasePage:
     # @allure.step("Элемент с текстом {text}")
     def get_text_element(self, text):
         return self.d.xpath(f'//*[@text="{text}"]')
+
+    def accept_screen_capture(self):
+        if self.get_elements_amount(MainLocators.OK_BTN) > 0:
+            self.click(MainLocators.OK_BTN)
+            self.click('//*[@resource-id="android:id/button1"]')

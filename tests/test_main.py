@@ -18,7 +18,7 @@ class TestMain:
 
         page.click_access_nav_bar()
         page.click_start_service()
-
+        page.accept_screen_capture()
         page.get_screen()
 
 
