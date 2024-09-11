@@ -36,4 +36,8 @@ class MainLocators:
     CATCH_INPUT_SW = '//*[@content-desc="Захват ввода"]'
     RECIEVE_FILES_SW = '//*[@content-desc="Передача файлов"]'
     CATCH_AUDIO_SW = '//*[@content-desc="Захват аудио"]'
+    LEN_TEMP_PASS = '//*[@content-desc="Длина временного пароля"]'
+    USE_TEMP_PASS = '//*[@content-desc="Использовать временный пароль"]'
+    USE_PASS = '//*[@content-desc="Использовать постоянный пароль"]'
+    USE_ALL_PASS = '//*[@content-desc="Использовать оба пароля"]'
 

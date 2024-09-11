@@ -25,11 +25,11 @@ class MainPage(BasePage):
         self.click(MainLocators.OK_KEYBOARD)
 
     def click_connect(self):
-        self.click(MainLocators.CONNECTION_BTN)
+        self.click(MainLocators.CONNECTION_BTN, 'кнопка Подключиться в поле Удаленный идентификатор')
 
     def click_access_nav_bar(self):
-        self.click(MainLocators.ACCESS_BTN)
+        self.click(MainLocators.ACCESS_BTN, 'кнопка Доступ в нав.баре')
 
     def click_start_service(self):
-        self.click(MainLocators.START_SERVICE_BTN)
+        self.click(MainLocators.START_SERVICE_BTN, 'кнопка Запустить службу')
 
