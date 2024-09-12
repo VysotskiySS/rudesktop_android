@@ -15,12 +15,11 @@ class TestMain:
     @allure.testcase("")
     def test_start_service(self, connect_to_device):
         page = MainPage(connect_to_device)
-
         page.click_access_nav_bar()
         page.click_start_service()
-        page.accept_screen_capture()
+        page.click_ok()
+        page.click_start_now()
         page.get_screen()
-
 
     def test_input_id(self, connect_to_device):
         page = MainPage(connect_to_device)

@@ -33,3 +33,8 @@ class MainPage(BasePage):
     def click_start_service(self):
         self.click(MainLocators.START_SERVICE_BTN, 'кнопка Запустить службу')
 
+    def click_ok(self):
+        self.click(MainLocators.OK_BTN)
+
+    def click_start_now(self):
+        self.click(MainLocators.START_NOW_BTN)

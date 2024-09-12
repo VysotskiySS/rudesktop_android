@@ -40,4 +40,10 @@ class MainLocators:
     USE_TEMP_PASS = '//*[@content-desc="Использовать временный пароль"]'
     USE_PASS = '//*[@content-desc="Использовать постоянный пароль"]'
     USE_ALL_PASS = '//*[@content-desc="Использовать оба пароля"]'
+    COPY_ID = '//*[contains(@content-desc, "Ваше устройство")]/android.widget.Button[1]'
+    RESET_PASS = '//*[contains(@content-desc, "Ваше устройство")]/android.widget.Button[2]'
+    COPY_PASS = '//*[contains(@content-desc, "Ваше устройство")]/android.widget.Button[3]'
+    PASS_MORE_OPTIONS = '//*[contains(@content-desc, "Ваше устройство")]/android.widget.Button[4]'
+    START_NOW_BTN = '//*[@resource-id="android:id/button1"]'
+
 
