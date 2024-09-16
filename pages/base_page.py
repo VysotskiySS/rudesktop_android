@@ -8,10 +8,13 @@ import random
 import string
 from uiautomator2 import Direction
 import unittest
+from faker import Faker
 from PIL import Image
 
 
 class BasePage:
+    faker = Faker()
+
     def __init__(self, d):
         self.d = d
 
@@ -141,20 +144,6 @@ class BasePage:
                 return d(resourceId=locator)[counter]
         else:
             counter = random.randrange(0, locator.count)
-            return locator[counter]
-
-    def get_random_element_catalog(self, locator):
-        d = self.d
-        if isinstance(locator, str):
-            if locator[0] == '/' and locator[1] == '/':
-                counter = random.randrange(3, len(d.xpath(locator).all()) - 2)
-                elements_list = d.xpath(locator).all()
-                return elements_list[counter]
-            else:
-                counter = random.randrange(3, d(resourceId=locator).count - 2)
-                return d(resourceId=locator)[counter]
-        else:
-            counter = random.randrange(3, locator.count - 2)
             return locator[counter]
 
     # @allure.step("Ожидание элемента")

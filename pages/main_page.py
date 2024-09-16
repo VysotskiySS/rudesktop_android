@@ -14,7 +14,6 @@ class MainPage(BasePage):
     def __init__(self, d):
         super().__init__(d)
         self.d = d
-        # self.cart = CartPage(d)
 
     def allow_access(self):
         self.click(MainLocators.ALLOW_ACCESS_TO_MANAGE_ALL_FILES_SWITCH)
@@ -38,3 +37,9 @@ class MainPage(BasePage):
 
     def click_start_now(self):
         self.click(MainLocators.START_NOW_BTN)
+
+    def send_message_to_chat(self, message):
+        self.click(MainLocators.CHAT_BTN)
+        self.set_text(MainLocators.CHAT_FIELD, message)
+        self.get_elements_amount(MainLocators.CHAT_SEND_BTN)
+        self.click(MainLocators.CHAT_SEND_BTN)

@@ -16,7 +16,6 @@ class MainLocators:
     CANCEL_BTN = '//*[@content-desc="Отменить"]'
     OK_BTN = '//*[@content-desc="ОК"]'
 
-
     # NAVBAR
     CONNECTION_BTN = '//*[contains(@content-desc, "Соединение")]'
     CHAT_BTN = '//*[contains(@content-desc, "Чат")]'
@@ -45,5 +44,11 @@ class MainLocators:
     COPY_PASS = '//*[contains(@content-desc, "Ваше устройство")]/android.widget.Button[3]'
     PASS_MORE_OPTIONS = '//*[contains(@content-desc, "Ваше устройство")]/android.widget.Button[4]'
     START_NOW_BTN = '//*[@resource-id="android:id/button1"]'
+    CONNECTION_ERROR = '//*[@content-desc="Ошибка подключения. Нажмите, чтобы посмотреть подробности."]'
 
+    # CHAT
+    TITLE = '//*[@content-desc="RuDesktop"]'
+    CHAT_ICON_USER = '//android.widget.Button'
+    CHAT_FIELD = '//*[@text="Написать сообщение..."]'
+    CHAT_SEND_BTN = '//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[3]'
 

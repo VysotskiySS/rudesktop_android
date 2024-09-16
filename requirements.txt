@@ -13,3 +13,4 @@ facebook-wda~=1.4.9
 requests~=2.32.3
 six~=1.16.0
 setuptools~=74.1.2
+Faker~=23.2.1
