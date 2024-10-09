@@ -10,7 +10,7 @@ from pages.main_page import MainPage
 
 
 def pytest_addoption(parser):
-    parser.addoption('--device', action='store', default='emulator-5554', help='emulator id')
+    parser.addoption('--device', action='store', default=device_id, help='emulator id')
 
 
 @pytest.fixture
@@ -45,6 +45,7 @@ def login():
 def teardown(d):
     BasePage(d).get_screen()
     d.app_stop(package)
+    d.app_clear(package)
 
 
 @pytest.fixture()
