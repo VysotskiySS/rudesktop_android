@@ -46,6 +46,7 @@ class MainLocators:
 
     # ACCESS
     START_SERVICE_BTN = '//*[@content-desc="Запустить службу"]'
+    STOP_SERVICE_BTN = '//*[@content-desc="Остановить службу"]'
     CATCH_SCREEN_SW = '//*[@content-desc="Захват экрана"]'
     CATCH_INPUT_SW = '//*[@content-desc="Захват ввода"]'
     RECIEVE_FILES_SW = '//*[@content-desc="Передача файлов"]'

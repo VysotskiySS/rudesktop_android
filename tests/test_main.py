@@ -13,13 +13,11 @@ class TestMain:
     @pytest.mark.main
     @pytest.mark.smoke
     @allure.title('Запустить службу')
-    @allure.testcase("")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=113")
     def test_start_service(self, connect_to_device):
         page = MainPage(connect_to_device)
-        page.allow_access()
-        page.view_and_accept()
-        page.click_access_nav_bar()
-        page.click_start_service()
+        page.start_service()
+        page.stop_service()
 
     @pytest.mark.main
     @pytest.mark.smoke
@@ -54,7 +52,7 @@ class TestMain:
     @pytest.mark.main
     @pytest.mark.smoke
     @allure.title('Изменить Сервер для подключения')
-    @allure.testcase("")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=118")
     def test_change_server_to_connect(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.click_settings_nav_bar()
@@ -64,7 +62,7 @@ class TestMain:
     @pytest.mark.main
     @pytest.mark.smoke
     @allure.title('Смена языка интерфейса')
-    @allure.testcase("")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=119")
     def test_change_language(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.click_settings_nav_bar()
@@ -73,7 +71,7 @@ class TestMain:
     @pytest.mark.main
     @pytest.mark.smoke
     @allure.title('Смена темы')
-    @allure.testcase("")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=120")
     def test_change_theme(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.click_settings_nav_bar()

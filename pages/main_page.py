@@ -15,22 +15,19 @@ class MainPage(BasePage):
         super().__init__(d)
         self.d = d
 
+    @allure.step("Разрешить доступ")
     def allow_access(self):
         self.wait_a_second()
         if self.get_elements_amount(MainLocators.ALLOW_ACCESS_TO_MANAGE_ALL_FILES_SWITCH) > 0:
             self.click(MainLocators.ALLOW_ACCESS_TO_MANAGE_ALL_FILES_SWITCH, 'свитч Разрешить доступ на управление всеми файлами')
             self.click(MainLocators.BACK_BTN, 'кнопка назад')
 
+    @allure.step("Закрыть окно предупреждения")
     def check_warning(self):
         assert self.get_elements_amount(MainLocators.TITLE_WARNING) == 1
         self.click(MainLocators.OK_BTN, '')
 
-    def view_and_accept(self):
-        if self.get_elements_amount(MainLocators.VIEW_AND_ACCEPT_BNT) > 0:
-            self.click(MainLocators.VIEW_AND_ACCEPT_BNT)
-            self.click(MainLocators.ACCEPT_BTN)
-            self.click(MainLocators.OK_BTN)
-
+    @allure.step("Установить ID")
     def set_id(self, id_string):
         self.set_text(MainLocators.REMOTE_ID_FIELD, id_string)
         # self.click(MainLocators.OK_KEYBOARD, 'кнопка ОК на экранной клавиатуре')
@@ -51,16 +48,27 @@ class MainPage(BasePage):
     def click_settings_nav_bar(self):
         self.click(MainLocators.SETTINGS_BTN, 'кнопка Настройки в нав.баре')
 
-    def click_start_service(self):
+    @allure.step("")
+    def start_service(self):
+        self.allow_access()
+        self.click_access_nav_bar()
         self.click(MainLocators.START_SERVICE_BTN, 'кнопка Запустить службу')
         self.check_warning()
-        self.click_start_now()
+        if self.get_elements_amount(MainLocators.VIEW_AND_ACCEPT_BNT) > 0:
+            self.click(MainLocators.VIEW_AND_ACCEPT_BNT, 'кнопка')
+            self.click(MainLocators.ACCEPT_BTN)
+            self.click(MainLocators.OK_BTN)
+        self.click(MainLocators.START_NOW_BTN)
+
+    def stop_service(self):
+        self.click(MainLocators.STOP_SERVICE_BTN)
+        self.click(MainLocators.CANCEL_BTN)
+        self.wait_element(MainLocators.STOP_SERVICE_BTN)
+        self.click(MainLocators.STOP_SERVICE_BTN)
+        self.click(MainLocators.OK_BTN)
 
     def click_ok(self):
         self.click(MainLocators.OK_BTN, 'кнопка ОК')
-
-    def click_start_now(self):
-        self.click(MainLocators.START_NOW_BTN)
 
     def send_message_to_chat(self, message):
         self.click(MainLocators.CHAT_BTN)
