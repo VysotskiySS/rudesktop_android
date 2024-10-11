@@ -30,6 +30,13 @@ class MainLocators:
     FAVOTITES = '//*[@content-desc="Избранное"]'
     ADDRESS_BOOK = '//*[@content-desc="Адресная книга"]'
     MESSAGE_UPDATE_APP = '//*[@content-desc="Приложение устарело. Обновите его через Google Play или на сайте rudesktop.ru"]'
+    CONNECT_BTN = '//*[@content-desc="Подключиться"]'
+    FILE_TRANSFER = '//*[@content-desc="Передача файлов"]'
+    WAKE_ON_LAN = '//*[@content-desc="Разбудить (Wake On Lan)"]'
+    RENAME = '//*[@content-desc="Переименовать"]'
+    DELETE = '//*[@content-desc="Удалить"]'
+    ADD_TO_FAVORITES = '//*[@content-desc="Добавить в избранное"]'
+    ADD_TO_ADDRESS_BOOK = '//*[@content-desc="Добавить в Адресную книгу"]'
 
     # CHAT
     TITLE = '//*[@content-desc="RuDesktop"]'
@@ -110,8 +117,9 @@ class MainLocators:
     INSERT_CTRL_ALT_DEL = '//*[@content-desc="Вставить Ctrl + Alt + Del"]'
     BLOCK_SESSION = '//*[@content-desc="Заблокировать сессию"]'
     RESTART_REMOTE_DEVICE = '//*[@content-desc="Перезапустить удаленное устройство"]'
-    '//*[@content-desc="Начать запись сессии"]'
+    START_RECORD_SESSION = '//*[@content-desc="Начать запись сессии"]'
 
+    SERVER_TO_CONNECT_FIELD = '//*[contains(@text, "Сервер для подключения")]'
 
 
 

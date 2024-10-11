@@ -72,17 +72,17 @@ class MainPage(BasePage):
         self.click(MainLocators.SERVER_TO_CONNECT, 'кнопка Сервер для подключения')
 
     def check_change_language(self):
-        self.click(MainLocators.LANGUAGE)
-        self.click(MainLocators.ENGLISH_LANGUAGE)
+        self.click(MainLocators.LANGUAGE, 'пункт меню Язык интерфейса')
+        self.click(MainLocators.ENGLISH_LANGUAGE, 'радиобаттон English')
         self.wait_element('//*[@content-desc="Language"]')
-        self.click('//*[@content-desc="Language"]')
-        self.click(MainLocators.RUSSIAN_LANGUAGE)
+        self.click('//*[@content-desc="Language"]', 'пункт меню Language (Язык интерфейса)')
+        self.click(MainLocators.RUSSIAN_LANGUAGE, 'радиобаттон Русский')
         self.wait_element('//*[@content-desc="Язык интерфейса"]')
-        self.click('//*[@content-desc="Язык интерфейса"]')
+        self.click('//*[@content-desc="Язык интерфейса"]', 'пункт меню Язык интерфейса')
         self.click(MainLocators.KAZAK_LANGUAGE)
         self.wait_element('//*[@content-desc="Тіл"]')
-        self.click('//*[@content-desc="Тіл"]')
-        self.click(MainLocators.DEFAULT_LANGUAGE)
+        self.click('//*[@content-desc="Тіл"]', 'пункт меню Тіл (Язык интерфейса)')
+        self.click(MainLocators.DEFAULT_LANGUAGE, 'пункт меню Язык интерфейса')
         self.wait_element('//*[@content-desc="Язык интерфейса"]')
 
     def check_change_theme(self):
@@ -105,3 +105,8 @@ class MainPage(BasePage):
         self.click(MainLocators.DAYTIME_THEME)
         color = self.get_color('//*[@content-desc="Ночная тема"]')
         assert color == (240, 240, 240), f'Цвет иконки {color} а должен быть (240, 240, 240)'
+
+    def connect_form_last_seans(self, id):
+        self.click(f'//*[contains(@content-desc="{id}")]/android.view.View[1]')
+
+

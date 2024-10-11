@@ -30,7 +30,16 @@ class TestMain:
         page.set_id('487765343')
         page.click_connect()
         page.allow_access()
-        page.get_screen()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Подключиться из Последние сеансы')
+    @allure.testcase("")
+    def test_input_id(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.connect_form_last_seans('487765343')
+        page.allow_access()
+
 
     @pytest.mark.main
     @pytest.mark.smoke
@@ -42,15 +51,15 @@ class TestMain:
         new_message = base.faker.text()
         page.send_message_to_chat(new_message)
 
-    # @pytest.mark.main
-    # @pytest.mark.smoke
-    # @allure.title('Изменить Сервер для подключения')
-    # @allure.testcase("")
-    # def test_change_server_to_connect(self, connect_to_device):
-    #     page = MainPage(connect_to_device)
-    #     page.click_settings_nav_bar()
-    #     page.change_server()
-    #     print('EBANY FLUTTER')
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Изменить Сервер для подключения')
+    @allure.testcase("")
+    def test_change_server_to_connect(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.click_settings_nav_bar()
+        page.change_server()
+        print('EBANY FLUTTER')
 
     @pytest.mark.main
     @pytest.mark.smoke
