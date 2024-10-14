@@ -83,6 +83,7 @@ class MainLocators:
     TITLE_ABOUT_PROGRAM = '//*[@content-desc="О программе"]'
     VERSION = '//*[contains(@content-desc, "Version:")]'
     RESET_SETTINGS = '//*[@content-desc="Сбросить настройки"]'
+    RESET_SETTINGS_EN = '//*[@content-desc="Reset settings"]'
 
     DEFAULT_LANGUAGE = '//*[@content-desc="Default"]'
     RUSSIAN_LANGUAGE = '//*[@content-desc="Русский"]'
@@ -95,6 +96,11 @@ class MainLocators:
 
     '//*[@content-desc="Требуется пароль"]'
     '//*[@content-desc="Запомнить пароль"]'
+
+    TITLE_RESET_SETTINGS = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.view.View[1]'
+    RESET_SETTINGS_CONFIRM = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.widget.Button[2]'
+    RESET_SETTINGS_CLOSE = '//*[@content-desc="Закрыть"]'
+    RESET_SETTINGS_CLOSE_EN = '//*[@content-desc="Close"]'
 
     # CONNECTION_SCREEN
     BUTTON_X_CONNECTION_SCREEN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.Button[0]'
@@ -122,8 +128,7 @@ class MainLocators:
 
     SERVER_TO_CONNECT_FIELD = '//*[contains(@text, "Сервер для подключения")]'
 
-
-
+    id_field = '//*[contains(@content-desc="382760227")]/android.view.View[1]'
 
 
 

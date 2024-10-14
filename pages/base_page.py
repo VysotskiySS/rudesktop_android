@@ -87,6 +87,9 @@ class BasePage:
                 self.wait_a_moment()
                 self.get_screen()
 
+    def long_click(self):
+        self.d.long_click(0.5, 0.5)
+
     def set_text(self, locator, text, element_name=None):
         if element_name is not None:
             with allure.step(f"Заполнение поля '{element_name}' текстом '{text}'"):
@@ -104,11 +107,14 @@ class BasePage:
     def get_text(self, locator):
         return self.get_element(locator).get_text()
 
+    def get_description(self, locator):
+        return self.get_element(locator).getAttribute("content-desc")
+
     def wait_a_moment(self):
         time.sleep(0.5)
 
-    def wait_a_second(self):
-        time.sleep(1)
+    def wait_a_second(self, count=1):
+        time.sleep(count)
 
     def swipe_page_up(self, count=None):
         if count is not None:
@@ -123,6 +129,23 @@ class BasePage:
     @allure.step('Сделать свайп влево')
     def swipe(self, swipe_ext):
         self.d.swipe_ext(swipe_ext, scale=0.8)
+
+    @allure.step("Свайп вверх")
+    def swipe_up(self, count=None):
+        if count is not None:
+            for i in range(count):
+                self.d.swipe_ext(Direction.FORWARD)
+        else:
+            self.d.swipe_ext(Direction.FORWARD)
+
+    def swipe_to_element(self, locator):
+        for i in range(10):
+            if self.get_elements_amount(locator) == 0:
+                self.swipe_up()
+                self.wait_a_second()
+            else:
+                self.wait_element(locator)
+                break
 
     def clear_field(self, locator, element_name=None):
         if element_name is not None:

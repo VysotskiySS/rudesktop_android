@@ -114,7 +114,22 @@ class MainPage(BasePage):
         color = self.get_color('//*[@content-desc="Ночная тема"]')
         assert color == (240, 240, 240), f'Цвет иконки {color} а должен быть (240, 240, 240)'
 
-    def connect_form_last_seans(self, id):
-        self.click(f'//*[contains(@content-desc="{id}")]/android.view.View[1]')
+    def change_settings(self):
+        self.click(MainLocators.LANGUAGE)
+        self.click(MainLocators.ENGLISH_LANGUAGE)
+
+    def reset_settings(self):
+        self.change_settings()
+        self.swipe_to_element(MainLocators.RESET_SETTINGS_EN)
+        self.click(MainLocators.RESET_SETTINGS_EN)
+        self.click(MainLocators.RESET_SETTINGS_CLOSE_EN)
+        self.click(MainLocators.RESET_SETTINGS_EN)
+        self.wait_a_second()
+        self.click(MainLocators.RESET_SETTINGS_CONFIRM)
+        self.wait_a_second(3)
+        self.d.app_start(package)
+        self.wait_a_second()
+        self.click_settings_nav_bar()
+        self.wait_element(MainLocators.LANGUAGE)
 
 

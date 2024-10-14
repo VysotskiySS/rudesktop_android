@@ -31,16 +31,6 @@ class TestMain:
 
     @pytest.mark.main
     @pytest.mark.smoke
-    @allure.title('Подключиться из Последние сеансы')
-    @allure.testcase("")
-    def test_input_id(self, connect_to_device):
-        page = MainPage(connect_to_device)
-        page.connect_form_last_seans('487765343')
-        page.allow_access()
-
-
-    @pytest.mark.main
-    @pytest.mark.smoke
     @allure.title('Отправка сообщения в чат')
     @allure.testcase("")
     def test_chat(self, connect_to_device):
@@ -76,3 +66,13 @@ class TestMain:
         page = MainPage(connect_to_device)
         page.click_settings_nav_bar()
         page.check_change_theme()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Сброс настроек')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=131")
+    def test_reset_settings(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.click_settings_nav_bar()
+        page.reset_settings()
+
