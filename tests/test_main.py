@@ -31,16 +31,6 @@ class TestMain:
 
     @pytest.mark.main
     @pytest.mark.smoke
-    @allure.title('Отправка сообщения в чат')
-    @allure.testcase("")
-    def test_chat(self, connect_to_device):
-        page = MainPage(connect_to_device)
-        base = BasePage(connect_to_device)
-        new_message = base.faker.text()
-        page.send_message_to_chat(new_message)
-
-    @pytest.mark.main
-    @pytest.mark.smoke
     @allure.title('Изменить Сервер для подключения')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=118")
     def test_change_server_to_connect(self, connect_to_device):

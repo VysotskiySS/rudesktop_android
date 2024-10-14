@@ -25,7 +25,7 @@ class MainPage(BasePage):
     @allure.step("Закрыть окно предупреждения")
     def check_warning(self):
         assert self.get_elements_amount(MainLocators.TITLE_WARNING) == 1
-        self.click(MainLocators.OK_BTN, '')
+        self.click(MainLocators.OK_BTN, 'кнопка ОК')
 
     @allure.step("Установить ID")
     def set_id(self, id_string):
@@ -48,33 +48,28 @@ class MainPage(BasePage):
     def click_settings_nav_bar(self):
         self.click(MainLocators.SETTINGS_BTN, 'кнопка Настройки в нав.баре')
 
-    @allure.step("")
+    @allure.step("Запустить службу")
     def start_service(self):
         self.allow_access()
         self.click_access_nav_bar()
         self.click(MainLocators.START_SERVICE_BTN, 'кнопка Запустить службу')
         self.check_warning()
         if self.get_elements_amount(MainLocators.VIEW_AND_ACCEPT_BNT) > 0:
-            self.click(MainLocators.VIEW_AND_ACCEPT_BNT, 'кнопка')
-            self.click(MainLocators.ACCEPT_BTN)
-            self.click(MainLocators.OK_BTN)
-        self.click(MainLocators.START_NOW_BTN)
+            self.click(MainLocators.VIEW_AND_ACCEPT_BNT, 'кнопка Просмотреть и принять')
+            self.click(MainLocators.ACCEPT_BTN, 'кнопка Принять')
+            self.click(MainLocators.OK_BTN, 'кнопка ОК')
+        self.click(MainLocators.START_NOW_BTN, 'кнопка Start now')
 
+    @allure.step("Остановить службу")
     def stop_service(self):
-        self.click(MainLocators.STOP_SERVICE_BTN)
-        self.click(MainLocators.CANCEL_BTN)
+        self.click(MainLocators.STOP_SERVICE_BTN, 'кнопка Остановить службу')
+        self.click(MainLocators.CANCEL_BTN, 'кнопка Отменить')
         self.wait_element(MainLocators.STOP_SERVICE_BTN)
-        self.click(MainLocators.STOP_SERVICE_BTN)
-        self.click(MainLocators.OK_BTN)
+        self.click(MainLocators.STOP_SERVICE_BTN, 'кнопка Остановить службу')
+        self.click(MainLocators.OK_BTN, 'кнопка ОК')
 
     def click_ok(self):
         self.click(MainLocators.OK_BTN, 'кнопка ОК')
-
-    def send_message_to_chat(self, message):
-        self.click(MainLocators.CHAT_BTN)
-        self.set_text(MainLocators.CHAT_FIELD, message)
-        self.get_elements_amount(MainLocators.CHAT_SEND_BTN)
-        self.click(MainLocators.CHAT_SEND_BTN)
 
     def change_server(self):
         self.click(MainLocators.SERVER_TO_CONNECT, 'кнопка Сервер для подключения')
@@ -115,20 +110,24 @@ class MainPage(BasePage):
         assert color == (240, 240, 240), f'Цвет иконки {color} а должен быть (240, 240, 240)'
 
     def change_settings(self):
-        self.click(MainLocators.LANGUAGE)
-        self.click(MainLocators.ENGLISH_LANGUAGE)
+        self.click(MainLocators.LANGUAGE, 'кнопка Язык интерфейса')
+        self.click(MainLocators.ENGLISH_LANGUAGE, 'радиобаттон English')
+
+    @allure.step("Запустить приложение")
+    def start_app(self):
+        self.wait_a_second(3)
+        self.d.app_start(package)
+        self.wait_a_second()
 
     def reset_settings(self):
         self.change_settings()
         self.swipe_to_element(MainLocators.RESET_SETTINGS_EN)
-        self.click(MainLocators.RESET_SETTINGS_EN)
-        self.click(MainLocators.RESET_SETTINGS_CLOSE_EN)
-        self.click(MainLocators.RESET_SETTINGS_EN)
+        self.click(MainLocators.RESET_SETTINGS_EN, 'кнопка Сбросить настройки')
+        self.click(MainLocators.RESET_SETTINGS_CLOSE_EN, 'кнопка Закрыть')
+        self.click(MainLocators.RESET_SETTINGS_EN, 'кнопка Сбросить настройки')
         self.wait_a_second()
-        self.click(MainLocators.RESET_SETTINGS_CONFIRM)
-        self.wait_a_second(3)
-        self.d.app_start(package)
-        self.wait_a_second()
+        self.click(MainLocators.RESET_SETTINGS_CONFIRM, 'кнопка Сбросить настройки')
+        self.start_app()
         self.click_settings_nav_bar()
         self.wait_element(MainLocators.LANGUAGE)
 

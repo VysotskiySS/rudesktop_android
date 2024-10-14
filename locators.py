@@ -43,7 +43,6 @@ class MainLocators:
     CHAT_ICON_USER = '//android.widget.Button'
     CHAT_FIELD = '//*[@text="Написать сообщение..."]'
     CHAT_SEND_BTN = '//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[3]'
-
     # ACCESS
     START_SERVICE_BTN = '//*[@content-desc="Запустить службу"]'
     STOP_SERVICE_BTN = '//*[@content-desc="Остановить службу"]'

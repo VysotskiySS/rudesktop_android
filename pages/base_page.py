@@ -232,6 +232,12 @@ class BasePage:
     def coordinate_click(self, x, y):
         self.d.click(x, y)
 
+    @allure.step("Клик в центр элемента")
+    def locator_click(self, locator):
+        center = self.get_element(locator).center()
+        x, y = center
+        self.coordinate_click(x, y)
+
     @allure.step("Клик Назад")
     def press_back(self):
         self.d.press("back")
