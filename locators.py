@@ -25,7 +25,7 @@ class MainLocators:
 
     # CONNECTION_TAB
     REMOTE_ID_FIELD = '//*[@text="Удаленный идентификатор"]'
-    CONNECT_BTN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.view.View[1]/android.widget.Button[1]'
+    # CONNECT_BTN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.view.View[1]/android.widget.Button[1]'
     LAST_SEANSES = '//*[@content-desc="Последние сеансы"]'
     FAVOTITES = '//*[@content-desc="Избранное"]'
     ADDRESS_BOOK = '//*[@content-desc="Адресная книга"]'
@@ -62,6 +62,19 @@ class MainLocators:
     CONNECTION_ERROR = '//*[@content-desc="Ошибка подключения. Нажмите, чтобы посмотреть подробности."]'
     VIEW_AND_ACCEPT_BNT = '//*[@content-desc="Просмотреть и принять"]'
     ACCEPT_BTN = '//*[@content-desc="Принять"]'
+
+    SET_PERMANENT_PASS_BTN = '//*[@content-desc="Установить постоянный пароль"]'
+    PASSWORD_FIELD = '//*[@text="Пароль"]'
+    PASSWORD_CONFIRM_FIELD = '//*[@text="Подтверждение"]'
+    PASSWORD_FIELD_FILLED = '//*[@text="•••••, Пароль"]'
+    PASSWORD_CONFIRM_FIELD_FILLED = '//*[@text="•••••, Подтверждение"]'
+    PASSWORD_WARNING_LENGTH = '//*[@content-desc="Слишком коротко, не менее 6 символов"]'
+    PASSWORD_WARNING_IDENTITY = '//*[@content-desc="Подтверждение не идентично"]'
+
+
+    PASS_LEN_6 = '//*[@content-desc="6"]'
+    PASS_LEN_8 = '//*[@content-desc="8"]'
+    PASS_LEN_10 = '//*[@content-desc="10"]'
 
     # SETTINGS
     ACCOUNT_TITLE = '//*[@content-desc="Аккаунт"]'

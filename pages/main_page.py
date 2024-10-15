@@ -131,4 +131,56 @@ class MainPage(BasePage):
         self.click_settings_nav_bar()
         self.wait_element(MainLocators.LANGUAGE)
 
+    def set_permanent_pass(self, passwd):
+        self.click(MainLocators.PASS_MORE_OPTIONS, 'кнопка ... в блоке Ваше устройство')
+        self.click(MainLocators.SET_PERMANENT_PASS_BTN, 'кнопка Установить постоянный пароль')
+        self.set_text(MainLocators.PASSWORD_FIELD, passwd)
+        self.set_text(MainLocators.PASSWORD_CONFIRM_FIELD, passwd)
+        self.wait_a_second()
+        self.click(MainLocators.OK_BTN, 'кнопка ОК')
+
+    def click_more_option(self):
+        self.click(MainLocators.PASS_MORE_OPTIONS, 'кнопка ... в блоке Ваше устройство')
+
+    def check_set_permanent_pass(self):
+        self.click_more_option()
+        self.click(MainLocators.SET_PERMANENT_PASS_BTN, 'кнопка Установить постоянный пароль')
+        self.set_text(MainLocators.PASSWORD_FIELD, '12345', 'поле Пароль')
+
+        self.wait_a_second()
+        self.wait_element(MainLocators.PASSWORD_WARNING_LENGTH, 'сообщение о минимальной длине')
+        self.wait_element(MainLocators.PASSWORD_WARNING_IDENTITY, 'сообщение о идентичности полей')
+
+        # self.clear_field(MainLocators.PASSWORD_FIELD_FILLED)
+
+        self.set_text(MainLocators.PASSWORD_FIELD_FILLED, '6', 'поле Пароль')
+        self.wait_a_second()
+        self.wait_hidden_element(MainLocators.PASSWORD_WARNING_LENGTH, 'сообщение о минимальной длине')
+        self.set_text(MainLocators.PASSWORD_CONFIRM_FIELD, '12345', 'поле Подтверждение')
+        self.wait_element(MainLocators.PASSWORD_WARNING_IDENTITY, 'сообщение о идентичности полей')
+
+        # self.clear_field(MainLocators.PASSWORD_CONFIRM_FIELD)
+
+        self.set_text(MainLocators.PASSWORD_CONFIRM_FIELD_FILLED, '6', 'поле Подтверждение')
+        self.wait_a_second()
+        self.wait_hidden_element(MainLocators.PASSWORD_WARNING_LENGTH, 'сообщение о минимальной длине')
+        self.wait_hidden_element(MainLocators.PASSWORD_WARNING_IDENTITY, 'сообщение о идентичности полей')
+
+        self.wait_a_second()
+        self.click(MainLocators.OK_BTN, 'кнопка ОК')
+
+    def check_set_len_temp_pass(self):
+        self.click_more_option()
+        self.click(MainLocators.LEN_TEMP_PASS)
+        self.wait_element(MainLocators.LEN_TEMP_PASS)
+        self.click(MainLocators.PASS_LEN_8)
+        self.wait_a_second()
+        self.click_more_option()
+        self.click(MainLocators.LEN_TEMP_PASS)
+        self.click(MainLocators.PASS_LEN_10)
+        self.wait_a_second()
+        self.click_more_option()
+        self.click(MainLocators.LEN_TEMP_PASS)
+        self.wait_element(MainLocators.LEN_TEMP_PASS)
+        self.click(MainLocators.PASS_LEN_6)
 

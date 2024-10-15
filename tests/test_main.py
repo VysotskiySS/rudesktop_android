@@ -66,3 +66,20 @@ class TestMain:
         page.click_settings_nav_bar()
         page.reset_settings()
 
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Установка постоянного пароля')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=132")
+    def test_set_permanent_password(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.start_service()
+        page.check_set_permanent_pass()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Изменение длины временного пароля')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=133")
+    def test_set_len_temp_password(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.start_service()
+        page.check_set_len_temp_pass()
