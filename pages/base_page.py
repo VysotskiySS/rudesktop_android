@@ -87,8 +87,17 @@ class BasePage:
                 self.wait_a_moment()
                 self.get_screen()
 
-    def long_click(self):
-        self.d.long_click(0.5, 0.5)
+    def long_click(self, x, y, time_s):
+        self.d.long_click(x, y, time_s)
+
+    def double_click(self, x, y, time_s):
+        self.d.double_click(x, y, time_s)
+
+    def open_notification(self):
+        self.d.open_notification()
+
+    def open_quick_settings(self):
+        self.d.open_quick_settings()
 
     def set_text(self, locator, text, element_name=None):
         if element_name is not None:
