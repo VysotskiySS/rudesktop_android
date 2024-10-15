@@ -22,7 +22,7 @@ class TestMain:
     @pytest.mark.main
     @pytest.mark.smoke
     @allure.title('Подключиться по ID')
-    @allure.testcase("")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=115")
     def test_input_id(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.set_id('487765343')
@@ -83,3 +83,12 @@ class TestMain:
         page = MainPage(connect_to_device)
         page.start_service()
         page.check_set_len_temp_pass()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Копирование ID и пароля')
+    @allure.testcase("")
+    def test_copy_id_and_password(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.start_service()
+        page.check_copy_id_and_pass()

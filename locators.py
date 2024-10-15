@@ -11,6 +11,8 @@ class MainLocators:
     ALLOW_ACCESS_TO_MANAGE_ALL_FILES_SWITCH = '//android.widget.ScrollView/android.view.View[2]'
     BACK_BTN = '//androidx.compose.ui.platform.ComposeView/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]'
     OK_KEYBOARD = '//*[@resource-id="com.google.android.inputmethod.latin:id/key_pos_ime_action"]/android.widget.FrameLayout[1]'
+    X_BTN_CLIPBOARD = '//*[@resource-id="com.android.systemui:id/dismiss_button"]'
+    CLIPBOARD_PREVIEW = '//*[@resource-id="com.android.systemui:id/clipboard_preview"]'
 
     # POPUP
     CANCEL_BTN = '//*[@content-desc="Отменить"]'
@@ -43,6 +45,8 @@ class MainLocators:
     CHAT_ICON_USER = '//android.widget.Button'
     CHAT_FIELD = '//*[@text="Написать сообщение..."]'
     CHAT_SEND_BTN = '//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[3]'
+                    # '//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[3]'
+
     # ACCESS
     START_SERVICE_BTN = '//*[@content-desc="Запустить службу"]'
     STOP_SERVICE_BTN = '//*[@content-desc="Остановить службу"]'
@@ -54,10 +58,10 @@ class MainLocators:
     USE_TEMP_PASS = '//*[@content-desc="Использовать временный пароль"]'
     USE_PASS = '//*[@content-desc="Использовать постоянный пароль"]'
     USE_ALL_PASS = '//*[@content-desc="Использовать оба пароля"]'
-    COPY_ID = '//*[contains(@content-desc, "Ваше устройство")]/android.widget.Button[1]'
-    RESET_PASS = '//*[contains(@content-desc, "Ваше устройство")]/android.widget.Button[2]'
-    COPY_PASS = '//*[contains(@content-desc, "Ваше устройство")]/android.widget.Button[3]'
-    PASS_MORE_OPTIONS = '//*[contains(@content-desc, "Ваше устройство")]/android.widget.Button[4]'
+    COPY_ID = '//*/android.widget.Button[1]'
+    RESET_PASS = '//*/android.widget.Button[2]'
+    COPY_PASS = '//*/android.widget.Button[3]'
+    PASS_MORE_OPTIONS = '//*/android.widget.Button[4]'
     START_NOW_BTN = '//*[@resource-id="android:id/button1"]'
     CONNECTION_ERROR = '//*[@content-desc="Ошибка подключения. Нажмите, чтобы посмотреть подробности."]'
     VIEW_AND_ACCEPT_BNT = '//*[@content-desc="Просмотреть и принять"]'
@@ -140,7 +144,8 @@ class MainLocators:
 
     SERVER_TO_CONNECT_FIELD = '//*[contains(@text, "Сервер для подключения")]'
 
-    id_field = '//*[contains(@content-desc="382760227")]/android.view.View[1]'
+    id_field = '//*/android.view.View[1]'
+
 
 
 

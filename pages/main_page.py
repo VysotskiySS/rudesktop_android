@@ -1,11 +1,9 @@
-import time
 import allure
-import random
-import pytest
-
-from pages.base_page import BasePage
-from config import *
+import pyperclip
 from locators import *
+from pages.base_page import BasePage
+
+
 # from pages.cart_page import CartPage
 
 
@@ -183,4 +181,43 @@ class MainPage(BasePage):
         self.click(MainLocators.LEN_TEMP_PASS)
         self.wait_element(MainLocators.LEN_TEMP_PASS)
         self.click(MainLocators.PASS_LEN_6)
+
+    def update_temp_pass(self):
+        self.click(MainLocators.RESET_PASS, 'кнопка Обновить временный пароль')
+
+    def copy_temp_pass(self):
+        self.click(MainLocators.COPY_PASS, 'кнопка Копировать временный пароль')
+
+    def copy_id(self):
+        self.click(MainLocators.COPY_ID, 'кнопка Копировать ID')
+
+    def click_chat_send_btn(self):
+        self.wait_a_second()
+        self.click(MainLocators.CHAT_SEND_BTN, 'кнопка Отправить')
+        self.wait_a_second()
+
+    def click_x_on_clipboard_preview(self):
+        if self.get_elements_amount(MainLocators.X_BTN_CLIPBOARD) > 0:
+            self.click(MainLocators.X_BTN_CLIPBOARD, 'кнопка Х на clipboard preview')
+
+    def check_copy_id_and_pass(self):
+        self.update_temp_pass()
+        self.copy_temp_pass()
+        text_to_paste = pyperclip.paste()
+        self.click_x_on_clipboard_preview()
+        self.click_chat_nav_bar()
+
+        self.set_text(MainLocators.CHAT_FIELD, text_to_paste)
+        self.wait_a_second(3)
+        self.click_chat_send_btn()
+
+        self.click_access_nav_bar()
+        self.copy_id()
+        text_to_paste = pyperclip.paste()
+
+        self.click_x_on_clipboard_preview()
+        self.click_chat_nav_bar()
+        self.set_text(MainLocators.CHAT_FIELD, text_to_paste)
+        self.wait_a_second(3)
+        self.click_chat_send_btn()
 
