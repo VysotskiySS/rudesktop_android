@@ -142,9 +142,15 @@ class MainLocators:
     RESTART_REMOTE_DEVICE = '//*[@content-desc="Перезапустить удаленное устройство"]'
     START_RECORD_SESSION = '//*[@content-desc="Начать запись сессии"]'
 
-    SERVER_TO_CONNECT_FIELD = '//*[contains(@text, "Сервер для подключения")]'
+    SERVER_TO_CONNECT_FIELD = '//*[contains(@text, "Сервер для подключения")] OR //*[@text="1.rz.rudesktop.ru:443"]'
 
     id_field = '//*/android.view.View[1]'
+
+    LOGIN_FIELD = '//*[@text="Логин"]'
+    SEE_OR_HIDE_PASS_BTN = '//*/android.widget.Button[1]'
+    SAVE_PASS_SW = '//*[@content-desc="Запомнить пароль"]'
+    WARNING_INVALID_EMAIL_OR_PASS = '//*[@content-desc="Неверный E-Mail или пароль"]'
+
 
 
 

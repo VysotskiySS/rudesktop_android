@@ -21,6 +21,15 @@ class TestMain:
 
     @pytest.mark.main
     @pytest.mark.smoke
+    @allure.title('Авторизоваться (войти)')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=116")
+    def test_login_cloud(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.start_service()
+        page.login_cloud()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
     @allure.title('Подключиться по ID')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=115")
     def test_input_id(self, connect_to_device):
@@ -68,6 +77,15 @@ class TestMain:
 
     @pytest.mark.main
     @pytest.mark.smoke
+    @allure.title('О программе')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=140")
+    def test_about_app(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.click_settings_nav_bar()
+        page.click_about_app()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
     @allure.title('Установка постоянного пароля')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=132")
     def test_set_permanent_password(self, connect_to_device):
@@ -87,7 +105,7 @@ class TestMain:
     @pytest.mark.main
     @pytest.mark.smoke
     @allure.title('Копирование ID и пароля')
-    @allure.testcase("")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=134")
     def test_copy_id_and_password(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.start_service()

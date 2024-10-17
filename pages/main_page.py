@@ -221,3 +221,26 @@ class MainPage(BasePage):
         self.wait_a_second(3)
         self.click_chat_send_btn()
 
+    def click_about_app(self):
+        self.swipe_to_element(MainLocators.VERSION)
+        self.click(MainLocators.VERSION, 'О программе')
+        self.press_back()
+        self.wait_element(MainLocators.VERSION, 'О программе')
+
+    def login_cloud(self, login=f'{valid_login}', password=f'{valid_password}'):
+        self.click_settings_nav_bar()
+        self.click(MainLocators.LOGIN, 'кнопка Войти')
+        self.set_text(MainLocators.LOGIN_FIELD, login)
+        self.set_text(MainLocators.PASSWORD_FIELD, password)
+        self.click(MainLocators.OK_BTN)
+        self.wait_hidden_element(MainLocators.WARNING_INVALID_EMAIL_OR_PASS)
+
+    def check_login_cloud(self, login=f'{valid_login}', password=f'{valid_password}'):
+        self.click_settings_nav_bar()
+        self.click(MainLocators.LOGIN, 'кнопка Войти')
+        self.set_text(MainLocators.LOGIN_FIELD, login)
+        self.set_text(MainLocators.PASSWORD_FIELD, password)
+        self.click(MainLocators.SEE_OR_HIDE_PASS_BTN, 'кнопка Показать/скрыть пароль')
+        self.click(MainLocators.SAVE_PASS_SW, 'свитч Сохранить пароль')
+
+
