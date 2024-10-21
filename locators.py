@@ -20,7 +20,7 @@ class MainLocators:
     TITLE_WARNING = '//*[@content-desc="Предупреждение"]'
 
     # NAVBAR
-    CONNECTION_BTN = '//android.widget.FrameLayout[3]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.view.View[1]/android.widget.Button[1]'
+    CONNECTION_BTN = '//*[contains(@content-desc, "Соединение")]'
     CHAT_BTN = '//*[contains(@content-desc, "Чат")]'
     ACCESS_BTN = '//*[contains(@content-desc, "Доступ")]'
     SETTINGS_BTN = '//*[contains(@content-desc, "Настройки")]'
@@ -151,6 +151,11 @@ class MainLocators:
     SAVE_PASS_SW = '//*[@content-desc="Запомнить пароль"]'
     WARNING_INVALID_EMAIL_OR_PASS = '//*[@content-desc="Неверный E-Mail или пароль"]'
 
+    ADD_ID = '//*[@content-desc="Добавить ID"]'
+    ADD_TAG = '//*[@content-desc="Добавить тег"]'
+    CANCEL_SELECT_TAG = '//*[@content-desc="Отменить выбор всех тегов"]'
+
+    CLEAR_FIELD_RENAME_TAG = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.widget.EditText[1]'
 
 
 

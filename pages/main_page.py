@@ -227,7 +227,7 @@ class MainPage(BasePage):
         self.press_back()
         self.wait_element(MainLocators.VERSION, 'О программе')
 
-    def login_cloud(self, login=f'{valid_login}', password=f'{valid_password}'):
+    def login(self, login=f'{valid_login}', password=f'{valid_password}'):
         self.click_settings_nav_bar()
         self.click(MainLocators.LOGIN, 'кнопка Войти')
         self.set_text(MainLocators.LOGIN_FIELD, login)
@@ -242,5 +242,44 @@ class MainPage(BasePage):
         self.set_text(MainLocators.PASSWORD_FIELD, password)
         self.click(MainLocators.SEE_OR_HIDE_PASS_BTN, 'кнопка Показать/скрыть пароль')
         self.click(MainLocators.SAVE_PASS_SW, 'свитч Сохранить пароль')
+
+    def cancel_warning_server_to_connect(self):
+        self.wait_a_second(3)
+        if self.get_elements_amount('//*[@content-desc="Сервер для подключения"]') > 0:
+            self.click(MainLocators.CANCEL_BTN)
+
+    def ok_warning_server_to_connect(self):
+        self.wait_a_second(3)
+        if self.get_elements_amount('//*[@content-desc="Сервер для подключения"]') > 0:
+            self.click(MainLocators.OK_BTN)
+        self.start_app()
+
+    # def create_tag(self):
+
+    def check_tag(self):
+        self.click_connection_nav_bar()
+        self.click(MainLocators.ADDRESS_BOOK, 'Адресная книга')
+
+        self.wait_a_second()
+        self.coordinate_click(980, 583)
+
+        self.click(MainLocators.ADD_TAG, 'Добавить тег')
+        self.set_text('//*[contains(@text, "Раздельно запятой")]', 'teg1, teg2; teg3')
+        self.click_ok()
+
+        teg1 = '//*[@content-desc="teg1"]'
+        self.long_click(teg1)
+
+        self.click(MainLocators.RENAME, 'Переименовать')
+        self.d(text="teg1").clear_text()
+
+        self.set_text(MainLocators.CLEAR_FIELD_RENAME_TAG, 'renamed_teg_1')
+        self.click_ok()
+
+        renamed_teg_1 = '//*[@content-desc="renamed_teg_1"]'
+        self.long_click(renamed_teg_1)
+        self.click(MainLocators.DELETE, 'Удалить')
+        print('debug')
+
 
 
