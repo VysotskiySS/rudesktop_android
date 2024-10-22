@@ -32,11 +32,15 @@ class MainLocators:
     FAVOTITES = '//*[@content-desc="Избранное"]'
     ADDRESS_BOOK = '//*[@content-desc="Адресная книга"]'
     MESSAGE_UPDATE_APP = '//*[@content-desc="Приложение устарело. Обновите его через Google Play или на сайте rudesktop.ru"]'
+
+    #CONNECTION
+    BUTTON_MORE_OPTIONS_CONNECTION = '//*/android.widget.ImageView[1]/*'
     CONNECT_BTN = '//*[@content-desc="Подключиться"]'
     FILE_TRANSFER = '//*[@content-desc="Передача файлов"]'
     WAKE_ON_LAN = '//*[@content-desc="Разбудить (Wake On Lan)"]'
     RENAME = '//*[@content-desc="Переименовать"]'
     DELETE = '//*[@content-desc="Удалить"]'
+    EDIT_TAG = '//*[@content-desc="Редактировать тег"]'
     ADD_TO_FAVORITES = '//*[@content-desc="Добавить в избранное"]'
     ADD_TO_ADDRESS_BOOK = '//*[@content-desc="Добавить в Адресную книгу"]'
 
@@ -124,7 +128,6 @@ class MainLocators:
     BUTTON_KEYBOARD_CONNECTION_SCREEN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.Button[2]'
     BUTTON_MOUSE_CONNECTION_SCREEN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.Button[3]'
     BUTTON_CHAT_CONNECTION_SCREEN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.Button[4]'
-    BUTTON_MORE_OPTIONS_CONNECTION_SCREEN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.Button[5]'
     BUTTON_HIDE_CONNECTION_SCREEN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.Button[5]'
 
     # CHAT
@@ -156,6 +159,8 @@ class MainLocators:
     CANCEL_SELECT_TAG = '//*[@content-desc="Отменить выбор всех тегов"]'
 
     CLEAR_FIELD_RENAME_TAG = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.widget.EditText[1]'
+
+
 
 
 

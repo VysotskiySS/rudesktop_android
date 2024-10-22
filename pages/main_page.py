@@ -256,6 +256,9 @@ class MainPage(BasePage):
 
     # def create_tag(self):
 
+    def click_more_option_connect(self):
+        self.click(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION, 'кнопка ... в строке подключения')
+
     def check_tag(self):
         self.click_connection_nav_bar()
         self.click(MainLocators.ADDRESS_BOOK, 'Адресная книга')
@@ -279,6 +282,12 @@ class MainPage(BasePage):
         renamed_teg_1 = '//*[@content-desc="renamed_teg_1"]'
         self.long_click(renamed_teg_1)
         self.click(MainLocators.DELETE, 'Удалить')
+
+        self.click_more_option_connect()
+        self.click(MainLocators.EDIT_TAG, 'кнопка Редактировать тег')
+        self.click('//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.view.View[2]/android.view.View[1]')
+        self.click_ok()
+
         print('debug')
 
 
