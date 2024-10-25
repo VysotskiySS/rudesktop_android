@@ -152,4 +152,5 @@ class TestMain:
         page.allow_access()
         page.ok_warning_server_to_connect()
         page.click_settings_nav_bar()
+        page.start_service_after_start()
 
