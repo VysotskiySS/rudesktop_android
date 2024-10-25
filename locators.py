@@ -20,7 +20,7 @@ class MainLocators:
     TITLE_WARNING = '//*[@content-desc="Предупреждение"]'
 
     # NAVBAR
-    CONNECTION_BTN = '//*[contains(@content-desc, "Соединение")]'
+    CONNECTION_BTN = '//*/android.widget.Button[1]'
     CHAT_BTN = '//*[contains(@content-desc, "Чат")]'
     ACCESS_BTN = '//*[contains(@content-desc, "Доступ")]'
     SETTINGS_BTN = '//*[contains(@content-desc, "Настройки")]'

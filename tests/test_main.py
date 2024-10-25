@@ -36,10 +36,13 @@ class TestMain:
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=115")
     def test_input_id(self, connect_to_device):
         page = MainPage(connect_to_device)
-        page.cancel_warning_server_to_connect()
-        page.set_id('487765343')
+        page.ok_warning_server_to_connect()
+        page.set_id('854385414')
         page.click_connect()
-        page.allow_access()
+        page.enter_passwd()
+        page.check_connection_screen()
+        # print('debug')
+        # page.allow_access()
 
     @pytest.mark.main
     @pytest.mark.smoke

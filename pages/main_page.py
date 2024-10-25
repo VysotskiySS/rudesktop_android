@@ -27,7 +27,9 @@ class MainPage(BasePage):
 
     @allure.step("Установить ID")
     def set_id(self, id_string):
+        self.wait_a_second()
         self.set_text(MainLocators.REMOTE_ID_FIELD, id_string)
+        self.wait_a_second()
         # self.click(MainLocators.OK_KEYBOARD, 'кнопка ОК на экранной клавиатуре')
 
     def click_connect(self):
@@ -290,5 +292,18 @@ class MainPage(BasePage):
 
         print('debug')
 
+    def enter_passwd(self, passwd='Kief22Mo'):
+        self.set_text('//*[contains(@text, "Пароль")]', passwd)
+        self.click('//*/android.widget.Button[1]')
+        self.click('//*[@content-desc="Запомнить пароль"]')
+        self.click('//*/android.widget.Button[1]')
+        self.click('//*[@content-desc="Запомнить пароль"]')
+        self.click(MainLocators.OK_BTN)
+
+    def check_connection_screen(self):
+        self.wait_element('//android.widget.FrameLayout[1]')
+
+    def close_connection(self):
+        self.click()
 
 
