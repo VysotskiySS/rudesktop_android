@@ -44,13 +44,13 @@ class TestMain:
         page.check_connection_screen()
         # print('debug')
 
-
     @pytest.mark.main
     @pytest.mark.smoke
     @allure.title('Изменить Сервер для подключения')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=118")
     def test_change_server_to_connect(self, connect_to_device):
         page = MainPage(connect_to_device)
+        page.allow_access()
         page.cancel_warning_server_to_connect()
         page.click_settings_nav_bar()
         page.change_server()
@@ -62,6 +62,7 @@ class TestMain:
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=119")
     def test_change_language(self, connect_to_device):
         page = MainPage(connect_to_device)
+        page.allow_access()
         page.cancel_warning_server_to_connect()
         page.click_settings_nav_bar()
         page.check_change_language()
@@ -72,6 +73,7 @@ class TestMain:
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=120")
     def test_change_theme(self, connect_to_device):
         page = MainPage(connect_to_device)
+        page.allow_access()
         page.cancel_warning_server_to_connect()
         page.click_settings_nav_bar()
         page.check_change_theme()
@@ -92,6 +94,7 @@ class TestMain:
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=140")
     def test_about_app(self, connect_to_device):
         page = MainPage(connect_to_device)
+        page.allow_access()
         page.cancel_warning_server_to_connect()
         page.click_settings_nav_bar()
         page.click_about_app()
@@ -102,6 +105,7 @@ class TestMain:
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=132")
     def test_set_permanent_password(self, connect_to_device):
         page = MainPage(connect_to_device)
+        page.allow_access()
         page.cancel_warning_server_to_connect()
         page.start_service()
         page.check_set_permanent_pass()
@@ -112,6 +116,7 @@ class TestMain:
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=133")
     def test_set_len_temp_password(self, connect_to_device):
         page = MainPage(connect_to_device)
+        page.allow_access()
         page.cancel_warning_server_to_connect()
         page.start_service()
         page.check_set_len_temp_pass()
@@ -122,6 +127,7 @@ class TestMain:
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?ordering=id&page=1&page_size=100&test_case=134")
     def test_copy_id_and_password(self, connect_to_device):
         page = MainPage(connect_to_device)
+        page.allow_access()
         page.cancel_warning_server_to_connect()
         page.start_service()
         page.check_copy_id_and_pass()
@@ -132,8 +138,18 @@ class TestMain:
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?page=1&page_size=1000&test_case=167")
     def test_tag(self, connect_to_device):
         page = MainPage(connect_to_device)
+        page.allow_access()
         page.ok_warning_server_to_connect()
         page.login()
         page.check_tag()
 
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Запускать после включения')
+    @allure.testcase("")
+    def test_tag(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.click_settings_nav_bar()
 

@@ -14,20 +14,22 @@ class MainLocators:
     X_BTN_CLIPBOARD = '//*[@resource-id="com.android.systemui:id/dismiss_button"]'
     CLIPBOARD_PREVIEW = '//*[@resource-id="com.android.systemui:id/clipboard_preview"]'
 
+    PERMISSION_ALLOW_BTN = '//*[@resource-id="com.android.permissioncontroller:id/permission_allow_foreground_only_button"]'
+
     # POPUP
     CANCEL_BTN = '//*[@content-desc="Отменить"]'
     OK_BTN = '//*[@content-desc="ОК"]'
     TITLE_WARNING = '//*[@content-desc="Предупреждение"]'
 
     # NAVBAR
-    CONNECTION_BTN = '//*/android.widget.Button[1]'
+    CONNECTION_BTN = '//*[contains(@content-desc, "Соединение")]'
     CHAT_BTN = '//*[contains(@content-desc, "Чат")]'
     ACCESS_BTN = '//*[contains(@content-desc, "Доступ")]'
     SETTINGS_BTN = '//*[contains(@content-desc, "Настройки")]'
 
     # CONNECTION_TAB
     REMOTE_ID_FIELD = '//*[@text="Удаленный идентификатор"]'
-    # CONNECT_BTN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.view.View[1]/android.widget.Button[1]'
+    CONNECT_BTN = '//*/android.widget.Button[1]'
     LAST_SEANSES = '//*[@content-desc="Последние сеансы"]'
     FAVOTITES = '//*[@content-desc="Избранное"]'
     ADDRESS_BOOK = '//*[@content-desc="Адресная книга"]'
@@ -35,7 +37,7 @@ class MainLocators:
 
     #CONNECTION
     BUTTON_MORE_OPTIONS_CONNECTION = '//*/android.widget.ImageView[1]/*'
-    CONNECT_BTN = '//*[@content-desc="Подключиться"]'
+    # CONNECT_BTN = '//*[@content-desc="Подключиться"]'
     FILE_TRANSFER = '//*[@content-desc="Передача файлов"]'
     WAKE_ON_LAN = '//*[@content-desc="Разбудить (Wake On Lan)"]'
     RENAME = '//*[@content-desc="Переименовать"]'

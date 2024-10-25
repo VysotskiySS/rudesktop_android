@@ -20,6 +20,9 @@ class MainPage(BasePage):
             self.click(MainLocators.ALLOW_ACCESS_TO_MANAGE_ALL_FILES_SWITCH, 'свитч Разрешить доступ на управление всеми файлами')
             self.click(MainLocators.BACK_BTN, 'кнопка назад')
 
+    def allow_permission(self):
+        self.click(MainLocators.PERMISSION_ALLOW_BTN, 'While using the app')
+
     @allure.step("Закрыть окно предупреждения")
     def check_warning(self):
         assert self.get_elements_amount(MainLocators.TITLE_WARNING) == 1
@@ -32,7 +35,7 @@ class MainPage(BasePage):
 
     def click_connect(self):
         self.wait_a_second(3)
-        self.click(MainLocators.CONNECTION_BTN, 'кнопка Подключиться в поле Удаленный идентификатор')
+        self.click(MainLocators.CONNECT_BTN, 'кнопка Подключиться в поле Удаленный идентификатор')
 
     def click_connection_nav_bar(self):
         self.click(MainLocators.CONNECTION_BTN, 'кнопка Соединение в нав.баре')
@@ -277,33 +280,25 @@ class MainPage(BasePage):
     def check_tag(self):
         self.click_connection_nav_bar()
         self.click(MainLocators.ADDRESS_BOOK, 'Адресная книга')
-
         self.wait_a_second()
         self.coordinate_click(980, 583)
-
         self.click(MainLocators.ADD_TAG, 'Добавить тег')
         self.set_text('//*[contains(@text, "Раздельно запятой")]', 'teg1, teg2; teg3')
         self.click_ok()
-
         teg1 = '//*[@content-desc="teg1"]'
         self.long_click(teg1)
-
         self.click(MainLocators.RENAME, 'Переименовать')
         self.d(text="teg1").clear_text()
-
         self.set_text(MainLocators.CLEAR_FIELD_RENAME_TAG, 'renamed_teg_1')
         self.click_ok()
-
         renamed_teg_1 = '//*[@content-desc="renamed_teg_1"]'
         self.long_click(renamed_teg_1)
         self.click(MainLocators.DELETE, 'Удалить')
-
         self.click_more_option_connect()
         self.click(MainLocators.EDIT_TAG, 'кнопка Редактировать тег')
         self.click('//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.view.View[2]/android.view.View[1]')
         self.click_ok()
 
-        print('debug')
 
     @allure.step("Нажать показать/скрыть пароль")
     def click_show_hide_pass(self):
@@ -334,4 +329,19 @@ class MainPage(BasePage):
         self.click('//*/android.widget.Button[1]')
         self.click(MainLocators.OK_BTN)
         # self.wait_hidden_element('//android.widget.FrameLayout[1]')
+
+    def start_service_after_start(self):
+        self.swipe_to_element(MainLocators.START_AFTER_SWITCHING_ON)
+        self.click(MainLocators.START_AFTER_SWITCHING_ON, 'свитч Запускать после включения')
+        self.click('//*[@resource-id="android:id/button1"]')
+        self.swipe_to_element('//*[@text="RuDesktop"]/..')
+        self.click('//*[@text="RuDesktop"]/..')
+        self.click('//android.widget.ScrollView/android.view.View[2]')
+        self.press_back()
+        self.press_back()
+        self.d.app_stop(package)
+        self.start_app()
+        self.click_access_nav_bar()
+        self.wait_hidden_element('//*[contains(@content-desc, "Служба не запущена")]')
+
 
