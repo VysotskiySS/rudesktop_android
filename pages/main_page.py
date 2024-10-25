@@ -15,7 +15,7 @@ class MainPage(BasePage):
 
     @allure.step("Разрешить доступ")
     def allow_access(self):
-        self.wait_a_second()
+        self.wait_a_second(3)
         if self.get_elements_amount(MainLocators.ALLOW_ACCESS_TO_MANAGE_ALL_FILES_SWITCH) > 0:
             self.click(MainLocators.ALLOW_ACCESS_TO_MANAGE_ALL_FILES_SWITCH, 'свитч Разрешить доступ на управление всеми файлами')
             self.click(MainLocators.BACK_BTN, 'кнопка назад')
@@ -27,13 +27,11 @@ class MainPage(BasePage):
 
     @allure.step("Установить ID")
     def set_id(self, id_string):
-        self.wait_a_second()
         self.set_text(MainLocators.REMOTE_ID_FIELD, id_string)
         self.wait_a_second()
-        # self.click(MainLocators.OK_KEYBOARD, 'кнопка ОК на экранной клавиатуре')
 
     def click_connect(self):
-        self.wait_a_second()
+        self.wait_a_second(3)
         self.click(MainLocators.CONNECTION_BTN, 'кнопка Подключиться в поле Удаленный идентификатор')
 
     def click_connection_nav_bar(self):
@@ -119,6 +117,7 @@ class MainPage(BasePage):
         self.d.app_start(package)
         self.wait_a_second()
 
+    @allure.step("Сбросить настройки")
     def reset_settings(self):
         self.change_settings()
         self.swipe_to_element(MainLocators.RESET_SETTINGS_EN)
@@ -128,9 +127,11 @@ class MainPage(BasePage):
         self.wait_a_second()
         self.click(MainLocators.RESET_SETTINGS_CONFIRM, 'кнопка Сбросить настройки')
         self.start_app()
+        self.ok_warning_server_to_connect()
         self.click_settings_nav_bar()
         self.wait_element(MainLocators.LANGUAGE)
 
+    @allure.step("Установить постоянный пароль")
     def set_permanent_pass(self, passwd):
         self.click(MainLocators.PASS_MORE_OPTIONS, 'кнопка ... в блоке Ваше устройство')
         self.click(MainLocators.SET_PERMANENT_PASS_BTN, 'кнопка Установить постоянный пароль')
@@ -142,6 +143,7 @@ class MainPage(BasePage):
     def click_more_option(self):
         self.click(MainLocators.PASS_MORE_OPTIONS, 'кнопка ... в блоке Ваше устройство')
 
+    @allure.step("Установить постоянный пароль")
     def check_set_permanent_pass(self):
         self.click_more_option()
         self.click(MainLocators.SET_PERMANENT_PASS_BTN, 'кнопка Установить постоянный пароль')
@@ -169,6 +171,7 @@ class MainPage(BasePage):
         self.wait_a_second()
         self.click(MainLocators.OK_BTN, 'кнопка ОК')
 
+    @allure.step("Изменить длину пароля")
     def check_set_len_temp_pass(self):
         self.click_more_option()
         self.click(MainLocators.LEN_TEMP_PASS)
@@ -184,20 +187,25 @@ class MainPage(BasePage):
         self.wait_element(MainLocators.LEN_TEMP_PASS)
         self.click(MainLocators.PASS_LEN_6)
 
+    @allure.step("Обновить временный пароль")
     def update_temp_pass(self):
         self.click(MainLocators.RESET_PASS, 'кнопка Обновить временный пароль')
 
+    @allure.step("Копировать временный пароль")
     def copy_temp_pass(self):
         self.click(MainLocators.COPY_PASS, 'кнопка Копировать временный пароль')
 
+    @allure.step("Копировать ID")
     def copy_id(self):
         self.click(MainLocators.COPY_ID, 'кнопка Копировать ID')
 
+    @allure.step("Отправить в чат")
     def click_chat_send_btn(self):
         self.wait_a_second()
         self.click(MainLocators.CHAT_SEND_BTN, 'кнопка Отправить')
         self.wait_a_second()
 
+    @allure.step("Закрыть превью буфера обмена")
     def click_x_on_clipboard_preview(self):
         if self.get_elements_amount(MainLocators.X_BTN_CLIPBOARD) > 0:
             self.click(MainLocators.X_BTN_CLIPBOARD, 'кнопка Х на clipboard preview')
@@ -223,12 +231,14 @@ class MainPage(BasePage):
         self.wait_a_second(3)
         self.click_chat_send_btn()
 
+    @allure.step("Нажать - О программе")
     def click_about_app(self):
         self.swipe_to_element(MainLocators.VERSION)
         self.click(MainLocators.VERSION, 'О программе')
         self.press_back()
         self.wait_element(MainLocators.VERSION, 'О программе')
 
+    @allure.step("Авторизоваться")
     def login(self, login=f'{valid_login}', password=f'{valid_password}'):
         self.click_settings_nav_bar()
         self.click(MainLocators.LOGIN, 'кнопка Войти')
@@ -237,6 +247,7 @@ class MainPage(BasePage):
         self.click(MainLocators.OK_BTN)
         self.wait_hidden_element(MainLocators.WARNING_INVALID_EMAIL_OR_PASS)
 
+    @allure.step("Авторизоваться")
     def check_login_cloud(self, login=f'{valid_login}', password=f'{valid_password}'):
         self.click_settings_nav_bar()
         self.click(MainLocators.LOGIN, 'кнопка Войти')
@@ -245,11 +256,13 @@ class MainPage(BasePage):
         self.click(MainLocators.SEE_OR_HIDE_PASS_BTN, 'кнопка Показать/скрыть пароль')
         self.click(MainLocators.SAVE_PASS_SW, 'свитч Сохранить пароль')
 
+    @allure.step("Отменить изменение сервера после сброса кэша при запуске приложения")
     def cancel_warning_server_to_connect(self):
         self.wait_a_second(3)
         if self.get_elements_amount('//*[@content-desc="Сервер для подключения"]') > 0:
             self.click(MainLocators.CANCEL_BTN)
 
+    @allure.step("Подтвердить изменение сервера после сброса кэша при запуске приложения")
     def ok_warning_server_to_connect(self):
         self.wait_a_second(3)
         if self.get_elements_amount('//*[@content-desc="Сервер для подключения"]') > 0:
@@ -292,18 +305,33 @@ class MainPage(BasePage):
 
         print('debug')
 
+    @allure.step("Нажать показать/скрыть пароль")
+    def click_show_hide_pass(self):
+        self.click('//*/android.widget.Button[1]')
+
+    @allure.step("Нажать сохранить пароль")
+    def click_save_pass(self):
+        self.click('//*[@content-desc="Запомнить пароль"]')
+
+    @allure.step("Ввести пароль")
     def enter_passwd(self, passwd='Kief22Mo'):
         self.set_text('//*[contains(@text, "Пароль")]', passwd)
-        self.click('//*/android.widget.Button[1]')
-        self.click('//*[@content-desc="Запомнить пароль"]')
-        self.click('//*/android.widget.Button[1]')
-        self.click('//*[@content-desc="Запомнить пароль"]')
+        self.click_show_hide_pass()
+        self.click_save_pass()
+        self.click_show_hide_pass()
+        self.click_save_pass()
         self.click(MainLocators.OK_BTN)
 
+    @allure.step("Проверка что выполнено удаленное подключение")
     def check_connection_screen(self):
         self.wait_element('//android.widget.FrameLayout[1]')
+        self.wait_hidden_element('//*[@content-desc="Неверный пароль"]')
+        self.click_x_on_clipboard_preview()
+        self.close_connection()
 
+    @allure.step("Завершить подключение")
     def close_connection(self):
-        self.click()
-
+        self.click('//*/android.widget.Button[1]')
+        self.click(MainLocators.OK_BTN)
+        # self.wait_hidden_element('//android.widget.FrameLayout[1]')
 
