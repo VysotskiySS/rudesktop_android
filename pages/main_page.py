@@ -333,12 +333,14 @@ class MainPage(BasePage):
     def start_service_after_start(self):
         self.swipe_to_element(MainLocators.START_AFTER_SWITCHING_ON)
         self.click(MainLocators.START_AFTER_SWITCHING_ON, 'свитч Запускать после включения')
-        self.click('//*[@resource-id="android:id/button1"]')
-        self.swipe_to_element('//*[@text="RuDesktop"]/..')
-        self.click('//*[@text="RuDesktop"]/..')
-        self.click('//android.widget.ScrollView/android.view.View[2]')
-        self.press_back()
-        self.press_back()
+        if self.get_elements_amount('//*[@resource-id="android:id/button1"]') > 0:
+            self.click('//*[@resource-id="android:id/button1"]')
+            self.swipe_to_element('//*[@text="RuDesktop"]/..')
+            self.click('//*[@text="RuDesktop"]/..')
+            self.click('//android.widget.ScrollView/android.view.View[2]')
+            self.press_back()
+            self.press_back()
+
         self.d.app_stop(package)
         self.start_app()
         self.click_access_nav_bar()
