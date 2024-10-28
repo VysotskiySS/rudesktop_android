@@ -6,21 +6,9 @@ app_link = 'app_link'
 
 #Remote device
 valid_remote_device_id = '854385414'
-
-# Reg valid data
-valid_name_lat = "Ivan"
-valid_surname_lat = 'Petrov'
-valid_name_kir = "Иван"
-valid_surname_kir = 'Петров'
-
-valid_password2 = '87654321'
-valid_email = 'tester23@rude.com'
-valid_phone = '9639447845'
-valid_city = 'Новосибирск'
-valid_street = 'Лаврентьева д 2/2'
-valid_apartment = '555'
+valid_password = 'Kief22Mo'
 
 valid_login = 'rude'
-valid_password = 'Kief22Mo'
+
 
 
