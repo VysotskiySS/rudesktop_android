@@ -4,6 +4,8 @@ device_id = 'emulator-5554'
 package = 'ru.desktop.flutter_hbb'
 app_link = 'app_link'
 
+#Remote device
+valid_remote_device_id = '854385414'
 
 # Reg valid data
 valid_name_lat = "Ivan"

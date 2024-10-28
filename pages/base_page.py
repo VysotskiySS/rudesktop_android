@@ -119,7 +119,8 @@ class BasePage:
         return self.get_element(locator).get_text()
 
     def get_description(self, locator):
-        return self.get_element(locator).getAttribute("content-desc")
+        d = self.d
+        return d.xpath(locator).attrib.get("content-desc")
 
     def wait_a_moment(self):
         time.sleep(0.5)

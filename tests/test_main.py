@@ -38,7 +38,7 @@ class TestMain:
         page = MainPage(connect_to_device)
         page.allow_access()
         page.ok_warning_server_to_connect()
-        page.set_id('854385414')
+        page.set_id(valid_remote_device_id)
         page.click_connect()
         page.enter_passwd()
         page.check_connection_screen()
@@ -145,7 +145,7 @@ class TestMain:
     @pytest.mark.smoke
     @allure.title('Запускать после включения')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=194")
-    def test_tag(self, connect_to_device):
+    def test_start_service_after_start_app(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.allow_access()
         page.ok_warning_server_to_connect()
@@ -153,3 +153,40 @@ class TestMain:
         page.click_settings_nav_bar()
         page.start_service_after_start()
 
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Добавить в адресную книгу / Удалить из адресной книги')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=124")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=125")
+    def test_add_and_delete_from_address_book(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.set_id(valid_remote_device_id)
+        page.click_connect()
+        page.enter_passwd()
+        page.check_connection_screen()
+        page.login()
+        page.clear_address_book()
+        page.click_connection_nav_bar()
+        page.add_to_address_book()
+        page.clear_address_book()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Добавить в избранное / Удалить из избранного')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=122")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=123")
+    def test_add_and_delete_from_favorites(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.set_id(valid_remote_device_id)
+        page.click_connect()
+        page.enter_passwd()
+        page.check_connection_screen()
+        page.login()
+        page.clear_favorites()
+        page.click_connection_nav_bar()
+        page.add_to_favorites()
+        page.clear_favorites()
