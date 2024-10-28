@@ -3,11 +3,6 @@ import pyperclip
 from locators import *
 from pages.base_page import BasePage
 
-
-# from pages.cart_page import CartPage
-
-
-
 class MainPage(BasePage):
     def __init__(self, d):
         super().__init__(d)
@@ -95,17 +90,14 @@ class MainPage(BasePage):
         self.click(MainLocators.NIGHT_THEME)
         color = self.get_color('//*[@content-desc="Ночная тема"]')
         assert color == (27, 27, 27), f'Цвет иконки {color} а должен быть (27, 27, 27)'
-
         self.click(MainLocators.NIGHT_THEME_SETTINGS, 'кнопка [Ночная тема] на экране Настройки')
         self.click(MainLocators.SYSTEM_THEME)
         color = self.get_color('//*[@content-desc="Ночная тема"]')
         assert color == (240, 240, 240), f'Цвет иконки {color} а должен быть (240, 240, 240)'
-
         self.click(MainLocators.NIGHT_THEME_SETTINGS, 'кнопка [Ночная тема] на экране Настройки')
         self.click(MainLocators.NIGHT_THEME)
         color = self.get_color('//*[@content-desc="Ночная тема"]')
         assert color == (27, 27, 27), f'Цвет иконки {color} а должен быть (27, 27, 27)'
-
         self.click(MainLocators.NIGHT_THEME_SETTINGS, 'кнопка [Ночная тема] на экране Настройки')
         self.click(MainLocators.DAYTIME_THEME)
         color = self.get_color('//*[@content-desc="Ночная тема"]')
@@ -152,26 +144,18 @@ class MainPage(BasePage):
         self.click_more_option()
         self.click(MainLocators.SET_PERMANENT_PASS_BTN, 'кнопка [Установить постоянный пароль]')
         self.set_text(MainLocators.PASSWORD_FIELD, '12345', 'поле Пароль')
-
         self.wait_a_second()
         self.wait_element(MainLocators.PASSWORD_WARNING_LENGTH, 'сообщение о минимальной длине')
         self.wait_element(MainLocators.PASSWORD_WARNING_IDENTITY, 'сообщение о идентичности полей')
-
-        # self.clear_field(MainLocators.PASSWORD_FIELD_FILLED)
-
         self.set_text(MainLocators.PASSWORD_FIELD_FILLED, '6', 'поле Пароль')
         self.wait_a_second()
         self.wait_hidden_element(MainLocators.PASSWORD_WARNING_LENGTH, 'сообщение о минимальной длине')
         self.set_text(MainLocators.PASSWORD_CONFIRM_FIELD, '12345', 'поле Подтверждение')
         self.wait_element(MainLocators.PASSWORD_WARNING_IDENTITY, 'сообщение о идентичности полей')
-
-        # self.clear_field(MainLocators.PASSWORD_CONFIRM_FIELD)
-
         self.set_text(MainLocators.PASSWORD_CONFIRM_FIELD_FILLED, '6', 'поле Подтверждение')
         self.wait_a_second()
         self.wait_hidden_element(MainLocators.PASSWORD_WARNING_LENGTH, 'сообщение о минимальной длине')
         self.wait_hidden_element(MainLocators.PASSWORD_WARNING_IDENTITY, 'сообщение о идентичности полей')
-
         self.wait_a_second()
         self.click(MainLocators.OK_BTN, 'кнопка [ОК]')
 
@@ -220,15 +204,12 @@ class MainPage(BasePage):
         text_to_paste = pyperclip.paste()
         self.click_x_on_clipboard_preview()
         self.click_chat_nav_bar()
-
         self.set_text(MainLocators.CHAT_FIELD, text_to_paste)
         self.wait_a_second(3)
         self.click_chat_send_btn()
-
         self.click_access_nav_bar()
         self.copy_id()
         text_to_paste = pyperclip.paste()
-
         self.click_x_on_clipboard_preview()
         self.click_chat_nav_bar()
         self.set_text(MainLocators.CHAT_FIELD, text_to_paste)
@@ -273,8 +254,6 @@ class MainPage(BasePage):
             self.click(MainLocators.OK_BTN)
         self.start_app()
 
-    # def create_tag(self):
-
     def click_more_option_connect(self):
         self.click(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION, 'кнопка [...] в строке подключения')
 
@@ -299,7 +278,6 @@ class MainPage(BasePage):
         self.click(MainLocators.EDIT_TAG, 'кнопка [Редактировать тег]')
         self.click('//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.view.View[2]/android.view.View[1]')
         self.click_ok()
-
 
     @allure.step("Нажать показать/скрыть пароль")
     def click_show_hide_pass(self):
@@ -329,7 +307,6 @@ class MainPage(BasePage):
     def close_connection(self):
         self.click('//*/android.widget.Button[1]')
         self.click(MainLocators.OK_BTN)
-        # self.wait_hidden_element('//android.widget.FrameLayout[1]')
 
     @allure.step("Активировать опцию - запускать после включения")
     def start_service_after_start(self):
@@ -342,7 +319,6 @@ class MainPage(BasePage):
             self.click('//android.widget.ScrollView/android.view.View[2]')
             self.press_back()
             self.press_back()
-
         self.d.app_stop(package)
         self.start_app()
         self.click_access_nav_bar()

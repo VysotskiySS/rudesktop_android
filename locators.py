@@ -2,7 +2,6 @@
 from config import *
 import uiautomator2 as u2
 
-
 # d = u2.connect(device_id)
 
 
@@ -13,7 +12,6 @@ class MainLocators:
     OK_KEYBOARD = '//*[@resource-id="com.google.android.inputmethod.latin:id/key_pos_ime_action"]/android.widget.FrameLayout[1]'
     X_BTN_CLIPBOARD = '//*[@resource-id="com.android.systemui:id/dismiss_button"]'
     CLIPBOARD_PREVIEW = '//*[@resource-id="com.android.systemui:id/clipboard_preview"]'
-
     PERMISSION_ALLOW_BTN = '//*[@resource-id="com.android.permissioncontroller:id/permission_allow_foreground_only_button"]'
 
     # POPUP
@@ -38,7 +36,6 @@ class MainLocators:
     #CONNECTION
     BUTTON_MORE_OPTIONS_CONNECTION = '//*/android.widget.ImageView[1]/*'
     DEVICE_IN_LIST = '//*/android.widget.ImageView[1]'
-    # CONNECT_BTN = '//*[@content-desc="Подключиться"]'
     FILE_TRANSFER = '//*[@content-desc="Передача файлов"]'
     WAKE_ON_LAN = '//*[@content-desc="Разбудить (Wake On Lan)"]'
     RENAME = '//*[@content-desc="Переименовать"]'
@@ -52,7 +49,6 @@ class MainLocators:
     CHAT_ICON_USER = '//android.widget.Button'
     CHAT_FIELD = '//*[@text="Написать сообщение..."]'
     CHAT_SEND_BTN = '//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[3]'
-                    # '//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[3]'
 
     # ACCESS
     START_SERVICE_BTN = '//*[@content-desc="Запустить службу"]'
@@ -73,7 +69,6 @@ class MainLocators:
     CONNECTION_ERROR = '//*[@content-desc="Ошибка подключения. Нажмите, чтобы посмотреть подробности."]'
     VIEW_AND_ACCEPT_BNT = '//*[@content-desc="Просмотреть и принять"]'
     ACCEPT_BTN = '//*[@content-desc="Принять"]'
-
     SET_PERMANENT_PASS_BTN = '//*[@content-desc="Установить постоянный пароль"]'
     PASSWORD_FIELD = '//*[@text="Пароль"]'
     PASSWORD_CONFIRM_FIELD = '//*[@text="Подтверждение"]'
@@ -81,8 +76,6 @@ class MainLocators:
     PASSWORD_CONFIRM_FIELD_FILLED = '//*[@text="•••••, Подтверждение"]'
     PASSWORD_WARNING_LENGTH = '//*[@content-desc="Слишком коротко, не менее 6 символов"]'
     PASSWORD_WARNING_IDENTITY = '//*[@content-desc="Подтверждение не идентично"]'
-
-
     PASS_LEN_6 = '//*[@content-desc="6"]'
     PASS_LEN_8 = '//*[@content-desc="8"]'
     PASS_LEN_10 = '//*[@content-desc="10"]'
@@ -107,31 +100,17 @@ class MainLocators:
     VERSION = '//*[contains(@content-desc, "Version:")]'
     RESET_SETTINGS = '//*[@content-desc="Сбросить настройки"]'
     RESET_SETTINGS_EN = '//*[@content-desc="Reset settings"]'
-
     DEFAULT_LANGUAGE = '//*[@content-desc="Default"]'
     RUSSIAN_LANGUAGE = '//*[@content-desc="Русский"]'
     ENGLISH_LANGUAGE = '//*[@content-desc="English"]'
     KAZAK_LANGUAGE = '//*[@content-desc="Қазақ"]'
-
     DAYTIME_THEME = '//*[@content-desc="Дневная"]'
     NIGHT_THEME = '//*[@content-desc="Ночная"]'
     SYSTEM_THEME = '//*[@content-desc="Системная"]'
-
-    '//*[@content-desc="Требуется пароль"]'
-    '//*[@content-desc="Запомнить пароль"]'
-
     TITLE_RESET_SETTINGS = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.view.View[1]'
     RESET_SETTINGS_CONFIRM = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.widget.Button[2]'
     RESET_SETTINGS_CLOSE = '//*[@content-desc="Закрыть"]'
     RESET_SETTINGS_CLOSE_EN = '//*[@content-desc="Close"]'
-
-    # CONNECTION_SCREEN
-    BUTTON_X_CONNECTION_SCREEN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.Button[0]'
-    BUTTON_DISPLAY_CONNECTION_SCREEN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.Button[1]'
-    BUTTON_KEYBOARD_CONNECTION_SCREEN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.Button[2]'
-    BUTTON_MOUSE_CONNECTION_SCREEN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.Button[3]'
-    BUTTON_CHAT_CONNECTION_SCREEN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.Button[4]'
-    BUTTON_HIDE_CONNECTION_SCREEN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.widget.Button[5]'
 
     # CHAT
     CHAT_HIDE = '//*[@content-desc="Чат"]/android.widget.Button[1]'
@@ -147,24 +126,24 @@ class MainLocators:
     BLOCK_SESSION = '//*[@content-desc="Заблокировать сессию"]'
     RESTART_REMOTE_DEVICE = '//*[@content-desc="Перезапустить удаленное устройство"]'
     START_RECORD_SESSION = '//*[@content-desc="Начать запись сессии"]'
-
     SERVER_TO_CONNECT_FIELD = '//*[contains(@text, "Сервер для подключения")] OR //*[@text="1.rz.rudesktop.ru:443"]'
-
-    id_field = '//*/android.view.View[1]'
-
     LOGIN_FIELD = '//*[@text="Логин"]'
     SEE_OR_HIDE_PASS_BTN = '//*/android.widget.Button[1]'
     SAVE_PASS_SW = '//*[@content-desc="Запомнить пароль"]'
     WARNING_INVALID_EMAIL_OR_PASS = '//*[@content-desc="Неверный E-Mail или пароль"]'
-
     ADD_ID = '//*[@content-desc="Добавить ID"]'
     ADD_TAG = '//*[@content-desc="Добавить тег"]'
     CANCEL_SELECT_TAG = '//*[@content-desc="Отменить выбор всех тегов"]'
+    CLEAR_FIELD_RENAME_TAG = '//*/android.widget.EditText[1]'
 
-    CLEAR_FIELD_RENAME_TAG = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.widget.EditText[1]'
-
-
-
+# CONNECTION_SCREEN
+class CSLocators:
+    BUTTON_X_CONNECTION_SCREEN = '//*/android.widget.Button[0]'
+    BUTTON_DISPLAY_CONNECTION_SCREEN = '//*/android.widget.Button[1]'
+    BUTTON_KEYBOARD_CONNECTION_SCREEN = '//*/android.widget.Button[2]'
+    BUTTON_MOUSE_CONNECTION_SCREEN = '//*/android.widget.Button[3]'
+    BUTTON_CHAT_CONNECTION_SCREEN = '//*/android.widget.Button[4]'
+    BUTTON_HIDE_CONNECTION_SCREEN = '//*/android.widget.Button[5]'
 
 
 
