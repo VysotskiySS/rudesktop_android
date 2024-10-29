@@ -215,3 +215,14 @@ class TestMain:
         page.check_connection_screen()
         page.clear_last_seanses()
         page.check_set_alias()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Обновление временного пароля')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=173")
+    def test_update_temp_pass(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.start_service()
+        page.update_temp_pass()

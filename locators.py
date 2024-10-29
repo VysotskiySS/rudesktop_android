@@ -80,6 +80,7 @@ class MainLocators:
     PASS_LEN_6 = '//*[@content-desc="6"]'
     PASS_LEN_8 = '//*[@content-desc="8"]'
     PASS_LEN_10 = '//*[@content-desc="10"]'
+    TEMP_PASS = '//*/android.widget.Button[2]/..'
 
     # SETTINGS
     ACCOUNT_TITLE = '//*[@content-desc="Аккаунт"]'

@@ -177,7 +177,11 @@ class MainPage(BasePage):
 
     @allure.step("Обновить временный пароль")
     def update_temp_pass(self):
+        old_temp_pass = self.get_temp_pass()
         self.click(MainLocators.RESET_PASS, 'кнопка [Обновить временный пароль]')
+        self.wait_a_second()
+        new_temp_pass = self.get_temp_pass()
+        assert old_temp_pass != new_temp_pass, f'Пароль устройства не изменился. Пароль до обновления {old_temp_pass}, после обновления {new_temp_pass}'
 
     @allure.step("Копировать временный пароль")
     def copy_temp_pass(self):
@@ -199,7 +203,7 @@ class MainPage(BasePage):
             self.click(MainLocators.X_BTN_CLIPBOARD, 'кнопка [Х] на clipboard preview')
 
     def check_copy_id_and_pass(self):
-        self.update_temp_pass()
+        # self.update_temp_pass()
         self.copy_temp_pass()
         text_to_paste = pyperclip.paste()
         self.click_x_on_clipboard_preview()
@@ -410,5 +414,17 @@ class MainPage(BasePage):
         self.click(MainLocators.LAST_SEANSES, 'вкладка Последние сеансы')
         self.wait_a_second(2)
         self.del_all_devices_from_list(1)
+
+    def get_temp_pass(self):
+        string = self.get_description(MainLocators.TEMP_PASS)
+        string = string.split('\n')
+        temp_pass = string[4]
+        return temp_pass
+
+    def get_id(self):
+        string = self.get_description(MainLocators.TEMP_PASS)
+        string = string.split('\n')
+        id = string[2]
+        return id
 
 
