@@ -383,13 +383,24 @@ class MainPage(BasePage):
         id_favorites = self.get_description(MainLocators.DEVICE_IN_LIST)
         assert id_favorites == id_last_seanses, f'ID устройства из адресной книги {id_favorites} не совпадает с ID устройства в последних сеансах {id_last_seanses}'
 
-    def set_alias(self, alias='Test-Device_123'):
+    @allure.step("Переименовать устройство")
+    def set_alias(self, alias):
         self.click_connection_nav_bar()
         self.click_more_option_connect()
         self.click(MainLocators.RENAME, 'кнопка [Переименовать]')
         self.set_text(MainLocators.ALIAS_FIELD, alias)
+
+    def click_cancel(self):
+        self.click(MainLocators.CANCEL_BTN, 'кнопка [Отменить]')
+
+    def check_set_alias(self, alias='Test-Device_123'):
+        self.set_alias(alias)
+        self.click_cancel()
+        name = self.get_description(MainLocators.DEVICE_IN_LIST)
+        name = name.replace(" ", "")
+        assert valid_remote_device_id in name, f'Ожидалось {valid_remote_device_id}, но в строке {name} не найдено'
+        self.set_alias(alias)
         self.click_ok()
-        # self.wait_hidden_element(MainLocators.ALIAS_FIELD)
         name = self.get_description(MainLocators.DEVICE_IN_LIST)
         assert alias in name, f'Ожидалось {alias}, но в строке {name} не найдено'
 

@@ -214,4 +214,4 @@ class TestMain:
         page.enter_passwd()
         page.check_connection_screen()
         page.clear_last_seanses()
-        page.set_alias()
+        page.check_set_alias()
