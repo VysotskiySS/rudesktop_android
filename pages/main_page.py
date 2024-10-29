@@ -415,12 +415,14 @@ class MainPage(BasePage):
         self.wait_a_second(2)
         self.del_all_devices_from_list(1)
 
+    @allure.step("Считываем временный пароль")
     def get_temp_pass(self):
         string = self.get_description(MainLocators.TEMP_PASS)
         string = string.split('\n')
         temp_pass = string[4]
         return temp_pass
 
+    @allure.step("Считываем идентификатор устройства")
     def get_id(self):
         string = self.get_description(MainLocators.TEMP_PASS)
         string = string.split('\n')
