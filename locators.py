@@ -43,6 +43,7 @@ class MainLocators:
     EDIT_TAG = '//*[@content-desc="Редактировать тег"]'
     ADD_TO_FAVORITES = '//*[@content-desc="Добавить в избранное"]'
     ADD_TO_ADDRESS_BOOK = '//*[@content-desc="Добавить в Адресную книгу"]'
+    ALIAS_FIELD = '//*/android.widget.EditText[1]'
 
     # CHAT
     TITLE = '//*[@content-desc="RuDesktop"]'
@@ -83,6 +84,7 @@ class MainLocators:
     # SETTINGS
     ACCOUNT_TITLE = '//*[@content-desc="Аккаунт"]'
     LOGIN = '//*[@content-desc="Аккаунт"]/android.view.View[1]'
+    LOGIN_ADDRESS_BOOK = '//*[@content-desc="Войти"]'
     SETTINGS_TITLE = '//*[@content-desc="Настройки"]'
     SERVER_TO_CONNECT = '//*[@content-desc="Сервер для подключения"]'
     LANGUAGE = '//*[@content-desc="Язык интерфейса"]'

@@ -24,11 +24,21 @@ class TestMain:
     @pytest.mark.smoke
     @allure.title('Авторизоваться (войти)')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?est_case=116")
-    def test_login_cloud(self, connect_to_device):
+    def test_login(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.ok_warning_server_to_connect()
         page.start_service()
         page.login()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Авторизоваться (войти) через кнопку в адресной книге')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?est_case=116")
+    def test_login_address_book(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.ok_warning_server_to_connect()
+        page.start_service()
+        page.login_address_book()
 
     @pytest.mark.main
     @pytest.mark.smoke
@@ -190,3 +200,18 @@ class TestMain:
         page.click_connection_nav_bar()
         page.add_to_favorites()
         page.clear_favorites()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Задать псевдоним устройству')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=128")
+    def test_set_alias(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.set_id(valid_remote_device_id)
+        page.click_connect()
+        page.enter_passwd()
+        page.check_connection_screen()
+        page.clear_last_seanses()
+        page.set_alias()

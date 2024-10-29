@@ -231,6 +231,22 @@ class MainPage(BasePage):
         self.set_text(MainLocators.PASSWORD_FIELD, password)
         self.click(MainLocators.OK_BTN)
         self.wait_hidden_element(MainLocators.WARNING_INVALID_EMAIL_OR_PASS)
+        self.wait_hidden_element(MainLocators.LOGIN)
+
+    @allure.step("Авторизоваться через адресную книгу")
+    def login_address_book(self, login=f'{valid_login}', password=f'{valid_password}'):
+        self.open_address_book()
+        self.click(MainLocators.LOGIN_ADDRESS_BOOK, 'кнопка [Войти]')
+        self.set_text(MainLocators.LOGIN_FIELD, login)
+        self.set_text(MainLocators.PASSWORD_FIELD, password)
+        self.click(MainLocators.OK_BTN)
+        self.wait_hidden_element(MainLocators.WARNING_INVALID_EMAIL_OR_PASS)
+        self.wait_hidden_element(MainLocators.LOGIN_ADDRESS_BOOK)
+
+    @allure.step("Открыть адресную книгу")
+    def open_address_book(self):
+        self.click_connection_nav_bar()
+        self.click(MainLocators.ADDRESS_BOOK, 'вкладка [Адресная книга]')
 
     @allure.step("Авторизоваться")
     def check_login_cloud(self, login=f'{valid_login}', password=f'{valid_password}'):
@@ -342,9 +358,9 @@ class MainPage(BasePage):
         self.wait_element('//*[@content-desc="Пусто"]')
 
     @allure.step("Удалить все устройства из списка")
-    def del_all_devices_from_list(self):
+    def del_all_devices_from_list(self, count_save_in_list=0):
         i = self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION)
-        while i > 0:
+        while i > count_save_in_list:
             self.click_more_option_connect()
             self.click(MainLocators.DELETE, 'кнопка [Удалить]')
             i -= 1
@@ -366,3 +382,22 @@ class MainPage(BasePage):
         self.click(MainLocators.FAVOTITES, 'вкладка [Избранное]')
         id_favorites = self.get_description(MainLocators.DEVICE_IN_LIST)
         assert id_favorites == id_last_seanses, f'ID устройства из адресной книги {id_favorites} не совпадает с ID устройства в последних сеансах {id_last_seanses}'
+
+    def set_alias(self, alias='Test-Device_123'):
+        self.click_connection_nav_bar()
+        self.click_more_option_connect()
+        self.click(MainLocators.RENAME, 'кнопка [Переименовать]')
+        self.set_text(MainLocators.ALIAS_FIELD, alias)
+        self.click_ok()
+        # self.wait_hidden_element(MainLocators.ALIAS_FIELD)
+        name = self.get_description(MainLocators.DEVICE_IN_LIST)
+        assert alias in name, f'Ожидалось {alias}, но в строке {name} не найдено'
+
+    @allure.step("Очистить список последних сеансов")
+    def clear_last_seanses(self):
+        self.click_connection_nav_bar()
+        self.click(MainLocators.LAST_SEANSES, 'вкладка Последние сеансы')
+        self.wait_a_second(2)
+        self.del_all_devices_from_list(1)
+
+
