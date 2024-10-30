@@ -228,7 +228,6 @@ class TestMain:
         page = MainPage(connect_to_device)
         page.allow_access()
         page.ok_warning_server_to_connect()
-        # page.start_service()
         page.connect_from_id()
         page.check_icon_connection_color(251, 255, 253)
         page.activate_connect_always_from_bridge()

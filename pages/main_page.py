@@ -441,7 +441,9 @@ class MainPage(BasePage):
         id = string[2]
         return id
 
+    @allure.step("Проверка иконки подключения Прямое/Мост")
     def check_icon_connection_color(self, r, g, b):
+        # Делаем скрин, определяем цвет пикселя в иконке по координатам и сравниваем с тем что на входе
         self.click(CSLocators.BUTTON_DISPLAY_CONNECTION_SCREEN, 'кнопка [Дисплей]')
         x, y = self.get_element(CSLocators.ALL_SCREEN).center()
         y = 456
@@ -451,12 +453,10 @@ class MainPage(BasePage):
         self.click(CSLocators.BUTTON_DISPLAY_CONNECTION_SCREEN, 'кнопка [Дисплей]')
         self.close_connection()
 
+    @allure.step("Активировать опцию [Всегда подключаться через мост]")
     def activate_connect_always_from_bridge(self):
         self.click_settings_nav_bar()
         self.click(MainLocators.CONNECTING_VIA_A_BRIDGE_SW)
-
-
-
 
 
 
