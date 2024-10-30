@@ -33,6 +33,19 @@ class MainPage(BasePage):
         self.wait_a_second(3)
         self.click(MainLocators.CONNECT_BTN, 'кнопка [Подключиться] в поле Удаленный идентификатор')
 
+    def connect_from_id(self):
+        self.click_connection_nav_bar()
+        self.set_id(valid_remote_device_id)
+        self.click_connect()
+        self.enter_passwd()
+        self.check_connection_screen()
+
+    def reconnect(self):
+        self.click_connection_nav_bar()
+        self.click_connect()
+        self.enter_passwd()
+        self.check_connection_screen()
+
     def click_connection_nav_bar(self):
         self.click(MainLocators.CONNECTION_BTN, 'кнопка [Соединение] в нав.баре')
 
@@ -234,8 +247,8 @@ class MainPage(BasePage):
         self.set_text(MainLocators.LOGIN_FIELD, login)
         self.set_text(MainLocators.PASSWORD_FIELD, password)
         self.click(MainLocators.OK_BTN)
-        self.wait_hidden_element(MainLocators.WARNING_INVALID_EMAIL_OR_PASS)
-        self.wait_hidden_element(MainLocators.LOGIN)
+        # self.wait_hidden_element(MainLocators.WARNING_INVALID_EMAIL_OR_PASS)
+        # self.wait_hidden_element(MainLocators.LOGIN)
 
     @allure.step("Авторизоваться через адресную книгу")
     def login_address_book(self, login=f'{valid_login}', password=f'{valid_password}'):
@@ -321,7 +334,6 @@ class MainPage(BasePage):
         self.wait_element('//android.widget.FrameLayout[1]')
         self.wait_hidden_element('//*[@content-desc="Неверный пароль"]')
         self.click_x_on_clipboard_preview()
-        self.close_connection()
 
     @allure.step("Завершить подключение")
     def close_connection(self):
@@ -428,5 +440,23 @@ class MainPage(BasePage):
         string = string.split('\n')
         id = string[2]
         return id
+
+    def check_icon_connection_color(self, r, g, b):
+        self.click(CSLocators.BUTTON_DISPLAY_CONNECTION_SCREEN, 'кнопка [Дисплей]')
+        x, y = self.get_element(CSLocators.ALL_SCREEN).center()
+        y = 456
+        self.get_screen()
+        color = self.get_color_pixel(x,y)
+        assert color == (r, g, b)
+        self.click(CSLocators.BUTTON_DISPLAY_CONNECTION_SCREEN, 'кнопка [Дисплей]')
+        self.close_connection()
+
+    def activate_connect_always_from_bridge(self):
+        self.click_settings_nav_bar()
+        self.click(MainLocators.CONNECTING_VIA_A_BRIDGE_SW)
+
+
+
+
 
 

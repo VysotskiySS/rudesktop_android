@@ -14,6 +14,7 @@ class TestMain:
     @pytest.mark.smoke
     @allure.title('Запустить службу')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=113")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=114")
     def test_start_service(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.cancel_warning_server_to_connect()
@@ -33,7 +34,7 @@ class TestMain:
     @pytest.mark.main
     @pytest.mark.smoke
     @allure.title('Авторизоваться (войти) через кнопку в адресной книге')
-    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?est_case=116")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?est_case=162")
     def test_login_address_book(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.ok_warning_server_to_connect()
@@ -48,10 +49,8 @@ class TestMain:
         page = MainPage(connect_to_device)
         page.allow_access()
         page.ok_warning_server_to_connect()
-        page.set_id(valid_remote_device_id)
-        page.click_connect()
-        page.enter_passwd()
-        page.check_connection_screen()
+        page.connect_from_id()
+        page.close_connection()
 
     @pytest.mark.main
     @pytest.mark.smoke
@@ -143,6 +142,9 @@ class TestMain:
     @pytest.mark.main
     @pytest.mark.smoke
     @allure.title('Проверка создания, переименования, удаления и тп тега')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=165")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=164")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=169")
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=167")
     def test_tag(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -172,10 +174,7 @@ class TestMain:
         page = MainPage(connect_to_device)
         page.allow_access()
         page.ok_warning_server_to_connect()
-        page.set_id(valid_remote_device_id)
-        page.click_connect()
-        page.enter_passwd()
-        page.check_connection_screen()
+        page.connect_from_id()
         page.login()
         page.clear_address_book()
         page.click_connection_nav_bar()
@@ -191,10 +190,7 @@ class TestMain:
         page = MainPage(connect_to_device)
         page.allow_access()
         page.ok_warning_server_to_connect()
-        page.set_id(valid_remote_device_id)
-        page.click_connect()
-        page.enter_passwd()
-        page.check_connection_screen()
+        page.connect_from_id()
         page.login()
         page.clear_favorites()
         page.click_connection_nav_bar()
@@ -209,10 +205,7 @@ class TestMain:
         page = MainPage(connect_to_device)
         page.allow_access()
         page.ok_warning_server_to_connect()
-        page.set_id(valid_remote_device_id)
-        page.click_connect()
-        page.enter_passwd()
-        page.check_connection_screen()
+        page.connect_from_id()
         page.clear_last_seanses()
         page.check_set_alias()
 
@@ -226,3 +219,18 @@ class TestMain:
         page.ok_warning_server_to_connect()
         page.start_service()
         page.update_temp_pass()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Всегда подключаться через мост')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=139")
+    def test_always_connect_from_bridge(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        # page.start_service()
+        page.connect_from_id()
+        page.check_icon_connection_color(251, 255, 253)
+        page.activate_connect_always_from_bridge()
+        page.reconnect()
+        page.check_icon_connection_color(62, 125, 70)

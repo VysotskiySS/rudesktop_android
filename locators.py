@@ -141,12 +141,14 @@ class MainLocators:
 
 # CONNECTION_SCREEN
 class CSLocators:
-    BUTTON_X_CONNECTION_SCREEN = '//*/android.widget.Button[0]'
-    BUTTON_DISPLAY_CONNECTION_SCREEN = '//*/android.widget.Button[1]'
-    BUTTON_KEYBOARD_CONNECTION_SCREEN = '//*/android.widget.Button[2]'
-    BUTTON_MOUSE_CONNECTION_SCREEN = '//*/android.widget.Button[3]'
-    BUTTON_CHAT_CONNECTION_SCREEN = '//*/android.widget.Button[4]'
-    BUTTON_HIDE_CONNECTION_SCREEN = '//*/android.widget.Button[5]'
+    BUTTON_X_CONNECTION_SCREEN = '//*/android.widget.Button[1]'
+    BUTTON_DISPLAY_CONNECTION_SCREEN = '//*/android.widget.Button[2]'
+    BUTTON_KEYBOARD_CONNECTION_SCREEN = '//*/android.widget.Button[3]'
+    BUTTON_MOUSE_CONNECTION_SCREEN = '//*/android.widget.Button[4]'
+    BUTTON_CHAT_CONNECTION_SCREEN = '//*/android.widget.Button[5]'
+    BUTTON_HIDE_CONNECTION_SCREEN = '//*/android.widget.Button[6]'
+
+    ALL_SCREEN = '//android.widget.FrameLayout[1]'
 
 
 
