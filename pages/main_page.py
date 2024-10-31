@@ -15,6 +15,11 @@ class MainPage(BasePage):
             self.click(MainLocators.ALLOW_ACCESS_TO_MANAGE_ALL_FILES_SWITCH, 'свитч Разрешить доступ на управление всеми файлами')
             self.click(MainLocators.BACK_BTN, 'кнопка [назад]')
 
+    def accept_new_cert(self):
+        if self.get_elements_amount(MainLocators.TITLE_CHANGE_CERT_SERVER) >0:
+            self.click(MainLocators.ACCEPT_NEW_CERT_BTN)
+            self.wait_a_second(10)
+
     def allow_permission(self):
         self.click(MainLocators.PERMISSION_ALLOW_BTN, 'While using the app')
 
@@ -25,9 +30,12 @@ class MainPage(BasePage):
 
     @allure.step("Установить ID")
     def set_id(self, id_string):
-        self.wait_a_second(2)
-        self.set_text(MainLocators.REMOTE_ID_FIELD, id_string)
-        self.wait_a_second()
+        # self.set_text(MainLocators.REMOTE_ID_FIELD, id_string)
+        # self.wait_a_second()
+        self.click(MainLocators.REMOTE_ID_FIELD)
+        for i in range(len(id_string)):
+            self.wait_a_second()
+            self.d.send_keys(id_string[i])
 
     def click_connect(self):
         self.wait_a_second(3)
@@ -35,6 +43,7 @@ class MainPage(BasePage):
 
     def connect_from_id(self):
         self.click_connection_nav_bar()
+        self.wait_a_second(3)
         self.set_id(valid_remote_device_id)
         self.click_connect()
         self.enter_passwd()
@@ -337,7 +346,9 @@ class MainPage(BasePage):
 
     @allure.step("Завершить подключение")
     def close_connection(self):
+        self.wait_element('//*/android.widget.Button[1]')
         self.click('//*/android.widget.Button[1]')
+        self.wait_element(MainLocators.OK_BTN)
         self.click(MainLocators.OK_BTN)
 
     @allure.step("Активировать опцию - запускать после включения")
@@ -449,7 +460,7 @@ class MainPage(BasePage):
         y = 456
         self.get_screen()
         color = self.get_color_pixel(x,y)
-        assert color == (r, g, b)
+        assert color == (r, g, b), f'Ожидалось {r, g, b}, а получено {color}'
         self.click(CSLocators.BUTTON_DISPLAY_CONNECTION_SCREEN, 'кнопка [Дисплей]')
         self.close_connection()
 

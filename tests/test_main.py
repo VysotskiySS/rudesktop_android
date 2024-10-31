@@ -206,6 +206,7 @@ class TestMain:
         page.allow_access()
         page.ok_warning_server_to_connect()
         page.connect_from_id()
+        page.close_connection()
         page.clear_last_seanses()
         page.check_set_alias()
 
