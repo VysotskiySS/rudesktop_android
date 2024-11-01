@@ -47,7 +47,6 @@ def teardown(d):
     d.app_stop(package)
     d.app_clear(package)
 
-
 @pytest.fixture()
 def setup(request):
     dev_id = request.config.getoption('--device')
