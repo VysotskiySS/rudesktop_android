@@ -30,11 +30,9 @@ class MainPage(BasePage):
 
     @allure.step("Установить ID")
     def set_id(self, id_string):
-        # self.set_text(MainLocators.REMOTE_ID_FIELD, id_string)
-        # self.wait_a_second()
         self.click(MainLocators.REMOTE_ID_FIELD)
         for i in range(len(id_string)):
-            self.wait_a_second()
+        #     self.wait_a_second()
             self.d.send_keys(id_string[i])
 
     def click_connect(self):
@@ -43,7 +41,6 @@ class MainPage(BasePage):
 
     def connect_from_id(self):
         self.click_connection_nav_bar()
-        self.wait_a_second(3)
         self.set_id(valid_remote_device_id)
         self.click_connect()
         self.enter_passwd()
@@ -90,8 +87,13 @@ class MainPage(BasePage):
     def click_ok(self):
         self.click(MainLocators.OK_BTN, 'кнопка [ОК]')
 
-    def change_server(self):
+    def change_server(self, server_to_connect):
         self.click(MainLocators.SERVER_TO_CONNECT, 'кнопка [Сервер для подключения]')
+        self.click('//*/android.widget.EditText')
+        self.d.clear_text()
+        self.d.send_keys(server_to_connect)
+        self.click_ok()
+
 
     def check_change_language(self):
         self.click(MainLocators.LANGUAGE, 'пункт меню Язык интерфейса')

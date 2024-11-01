@@ -1,9 +1,9 @@
 pytest==6.2.4
 #Appium-Python-Client~=2.2.0
-#selenium~=4.17.2
+selenium~=4.17.2
 uiautomator2~=3.2.3
-#allure-pytest==2.13.2
-#allure-python-commons~=2.13.2
+allure-pytest==2.13.2
+allure-python-commons~=2.13.2
 pillow~=10.4.0
 #weditor~=0.7.4.dev1
 #tornado~=6.4.1

@@ -61,7 +61,8 @@ class TestMain:
         page.allow_access()
         page.cancel_warning_server_to_connect()
         page.click_settings_nav_bar()
-        page.change_server()
+        page.change_server(server_to_connect)
+        # page.connect_from_id()
 
     @pytest.mark.main
     @pytest.mark.smoke
@@ -152,6 +153,7 @@ class TestMain:
         page.ok_warning_server_to_connect()
         page.login()
         page.check_tag()
+        # добавить добавление устройства в адресную книгу т.к. падает когда там пусто
 
     @pytest.mark.main
     @pytest.mark.smoke
