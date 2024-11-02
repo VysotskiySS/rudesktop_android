@@ -130,9 +130,10 @@ class TestMain:
         page.check_set_len_temp_pass()
 
     @pytest.mark.main
-    @pytest.mark.smoke
+    @pytest.mark.demo
     @allure.title('Копирование ID и пароля')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=134")
+    @pytest.mark.flaky(reruns=3)
     def test_copy_id_and_password(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.allow_access()
@@ -153,7 +154,13 @@ class TestMain:
         page.ok_warning_server_to_connect()
         page.login()
         page.add_device_to_address_book_from_id()
-        page.check_tag()
+        page.open_address_book()
+        page.delete_all_tags()
+        page.add_tag()
+        page.rename_tag()
+        page.delete_tag()
+        page.edit_device_tag()
+        page.cancel_select_all_tags()
 
     @pytest.mark.main
     @pytest.mark.smoke

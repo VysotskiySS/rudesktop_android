@@ -94,7 +94,6 @@ class MainPage(BasePage):
         self.d.send_keys(server_to_connect)
         self.click_ok()
 
-
     def check_change_language(self):
         self.click(MainLocators.LANGUAGE, 'пункт меню Язык интерфейса')
         self.click(MainLocators.ENGLISH_LANGUAGE, 'радиобаттон English')
@@ -270,6 +269,7 @@ class MainPage(BasePage):
         self.click(MainLocators.OK_BTN)
         self.wait_hidden_element(MainLocators.WARNING_INVALID_EMAIL_OR_PASS)
         self.wait_hidden_element(MainLocators.LOGIN_ADDRESS_BOOK)
+        self.wait_element('//*[@content-desc="Теги"]')
 
     @allure.step("Открыть адресную книгу")
     def open_address_book(self):
@@ -301,9 +301,11 @@ class MainPage(BasePage):
     def click_more_option_connect(self):
         self.click(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION, 'кнопка [...] в строке подключения')
 
+    @allure.step("Нажать кнопку [...] в блоке Теги")
     def click_more_option_address_book(self):
         self.coordinate_click(980, 583) # не смог подобрать локатор, пока клик по координатам, ЗАМЕНИТЬ!!!
 
+    @allure.step("Добавить устройство в адресную книгу по ID")
     def add_device_to_address_book_from_id(self):
         self.click_connection_nav_bar()
         self.click(MainLocators.ADDRESS_BOOK)
@@ -313,16 +315,16 @@ class MainPage(BasePage):
             self.set_text('//*/android.widget.EditText', valid_remote_device_id)
             self.click_ok()
 
-    def check_tag(self):
-        self.click_connection_nav_bar()
-        self.click(MainLocators.ADDRESS_BOOK, 'Адресная книга')
-        self.wait_element('//*[@content-desc="Теги"]')
-        self.delete_all_tags()
+    @allure.step("Добавить теги")
+    def add_tag(self):
         self.click_more_option_address_book()
         self.click(MainLocators.ADD_TAG, 'Добавить тег')
         self.set_text('//*[contains(@text, "Раздельно запятой")]', 'teg1, teg2; teg3')
         self.click_ok()
+        self.update_tag()
 
+    @allure.step("Переименовать тег")
+    def rename_tag(self):
         teg1 = '//*[@content-desc="teg1"]'
         self.wait_a_second()
         self.long_click(teg1)
@@ -330,31 +332,43 @@ class MainPage(BasePage):
         self.d(text="teg1").clear_text()
         self.set_text(MainLocators.CLEAR_FIELD_RENAME_TAG, 'renamed_teg_1')
         self.click_ok()
+        self.update_tag()
+
+    def update_tag(self):
+        self.click_more_option_address_book()
+        self.click(MainLocators.UPDATE)
+
+    @allure.step("Удалить тег")
+    def delete_tag(self):
         renamed_teg_1 = '//*[@content-desc="renamed_teg_1"]'
-        self.wait_a_second()
+        self.wait_a_second(2)
         self.long_click(renamed_teg_1)
         self.click(MainLocators.DELETE, 'Удалить')
 
+    @allure.step("Редактировать тег устройства")
+    def edit_device_tag(self):
         self.click('//*[@content-desc="teg2"]')
         self.wait_element('//*[@content-desc="Пусто"]')
         self.click('//*[@content-desc="teg2"]')
-
         self.click_more_option_connect()
         self.click(MainLocators.EDIT_TAG, 'кнопка [Редактировать тег]')
         self.click('//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.view.View[2]/android.view.View[1]')
         self.click_ok()
-
         self.click('//*[@content-desc="teg3"]')
         self.wait_element('//*[@content-desc="Пусто"]')
         self.click('//*[@content-desc="teg2"]')
         self.wait_hidden_element('//*[@content-desc="Пусто"]')
 
+    @allure.step("Отменить выбор всех тегов")
+    def cancel_select_all_tags(self):
         self.click('//*[@content-desc="teg2"]')
         self.wait_element('//*[@content-desc="Пусто"]')
         self.click_more_option_address_book()
         self.click(MainLocators.CANCEL_SELECT_TAG)
+        self.update_tag()
         self.wait_hidden_element('//*[@content-desc="Пусто"]')
 
+    @allure.step("Удалить все теги")
     def delete_all_tags(self):
         count = self.get_elements_amount('//*[@content-desc="Теги"]/android.view.View[1]/*')
         for i in range(count):
@@ -460,6 +474,7 @@ class MainPage(BasePage):
     def click_cancel(self):
         self.click(MainLocators.CANCEL_BTN, 'кнопка [Отменить]')
 
+    @allure.step("Переименовать устройство и проверить отображение имени")
     def check_set_alias(self, alias='Test-Device_123'):
         self.set_alias(alias)
         self.click_cancel()
