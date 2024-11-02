@@ -301,27 +301,65 @@ class MainPage(BasePage):
     def click_more_option_connect(self):
         self.click(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION, 'кнопка [...] в строке подключения')
 
+    def click_more_option_address_book(self):
+        self.coordinate_click(980, 583) # не смог подобрать локатор, пока клик по координатам, ЗАМЕНИТЬ!!!
+
+    def add_device_to_address_book_from_id(self):
+        self.click_connection_nav_bar()
+        self.click(MainLocators.ADDRESS_BOOK)
+        if self.get_elements_amount('//*[@content-desc="Пусто"]') > 0:
+            self.click_more_option_address_book()
+            self.click(MainLocators.ADD_ID)
+            self.set_text('//*/android.widget.EditText', valid_remote_device_id)
+            self.click_ok()
+
     def check_tag(self):
         self.click_connection_nav_bar()
         self.click(MainLocators.ADDRESS_BOOK, 'Адресная книга')
-        self.wait_a_second()
-        self.coordinate_click(980, 583)
+        self.wait_element('//*[@content-desc="Теги"]')
+        self.delete_all_tags()
+        self.click_more_option_address_book()
         self.click(MainLocators.ADD_TAG, 'Добавить тег')
         self.set_text('//*[contains(@text, "Раздельно запятой")]', 'teg1, teg2; teg3')
         self.click_ok()
+
         teg1 = '//*[@content-desc="teg1"]'
+        self.wait_a_second()
         self.long_click(teg1)
         self.click(MainLocators.RENAME, 'Переименовать')
         self.d(text="teg1").clear_text()
         self.set_text(MainLocators.CLEAR_FIELD_RENAME_TAG, 'renamed_teg_1')
         self.click_ok()
         renamed_teg_1 = '//*[@content-desc="renamed_teg_1"]'
+        self.wait_a_second()
         self.long_click(renamed_teg_1)
         self.click(MainLocators.DELETE, 'Удалить')
+
+        self.click('//*[@content-desc="teg2"]')
+        self.wait_element('//*[@content-desc="Пусто"]')
+        self.click('//*[@content-desc="teg2"]')
+
         self.click_more_option_connect()
         self.click(MainLocators.EDIT_TAG, 'кнопка [Редактировать тег]')
         self.click('//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.view.View[2]/android.view.View[1]')
         self.click_ok()
+
+        self.click('//*[@content-desc="teg3"]')
+        self.wait_element('//*[@content-desc="Пусто"]')
+        self.click('//*[@content-desc="teg2"]')
+        self.wait_hidden_element('//*[@content-desc="Пусто"]')
+
+        self.click('//*[@content-desc="teg2"]')
+        self.wait_element('//*[@content-desc="Пусто"]')
+        self.click_more_option_address_book()
+        self.click(MainLocators.CANCEL_SELECT_TAG)
+        self.wait_hidden_element('//*[@content-desc="Пусто"]')
+
+    def delete_all_tags(self):
+        count = self.get_elements_amount('//*[@content-desc="Теги"]/android.view.View[1]/*')
+        for i in range(count):
+            self.long_click('//*[@content-desc="Теги"]/android.view.View[1]/*')
+            self.click(MainLocators.DELETE)
 
     @allure.step("Нажать показать/скрыть пароль")
     def click_show_hide_pass(self):

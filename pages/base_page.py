@@ -88,6 +88,7 @@ class BasePage:
                 self.get_screen()
 
     def long_click(self, locator, time_s=1):
+        self.wait_a_second()
         center = self.get_element(locator).center()
         x, y = center
         self.d.long_click(x, y, time_s)

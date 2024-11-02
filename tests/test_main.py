@@ -142,7 +142,7 @@ class TestMain:
 
     @pytest.mark.main
     @pytest.mark.smoke
-    @allure.title('Проверка создания, переименования, удаления и тп тега')
+    @allure.title('Проверка создания, переименования, удаления, присвоения и тп тега')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=165")
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=164")
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=169")
@@ -152,8 +152,8 @@ class TestMain:
         page.allow_access()
         page.ok_warning_server_to_connect()
         page.login()
+        page.add_device_to_address_book_from_id()
         page.check_tag()
-        # добавить добавление устройства в адресную книгу т.к. падает когда там пусто
 
     @pytest.mark.main
     @pytest.mark.smoke
