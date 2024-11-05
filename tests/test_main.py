@@ -130,16 +130,17 @@ class TestMain:
         page.check_set_len_temp_pass()
 
     @pytest.mark.main
-    @pytest.mark.demo
+    @pytest.mark.smoke
     @allure.title('Копирование ID и пароля')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=134")
-    @pytest.mark.flaky(reruns=3)
+    # @pytest.mark.flaky(reruns=3)
     def test_copy_id_and_password(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.allow_access()
         page.cancel_warning_server_to_connect()
         page.start_service()
-        page.check_copy_id_and_pass()
+        page.check_copy_id()
+        page.check_copy_pass()
 
     @pytest.mark.main
     @pytest.mark.smoke
@@ -241,7 +242,19 @@ class TestMain:
         page.allow_access()
         page.ok_warning_server_to_connect()
         page.connect_from_id()
-        page.check_icon_connection_color(251, 255, 253)
+        page.check_icon_connection_color(250, 248, 251)
         page.activate_connect_always_from_bridge()
         page.reconnect()
         page.check_icon_connection_color(62, 125, 70)
+
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Пароль операционной системы')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=150")
+    def test_password_os(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.connect_from_id()
+        page.set_password_os()
+        page.check_password_os()

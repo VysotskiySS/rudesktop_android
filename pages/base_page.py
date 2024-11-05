@@ -66,6 +66,13 @@ class BasePage:
         self.d.screenshot(screen)
         allure.attach.file(f'./{screen}', attachment_type=allure.attachment_type.PNG)
 
+    def truncate_string(self, input_string, n):
+        return input_string[:n]
+
+    def get_text_before_newline(self, input_string):
+        # Разделяем строку по символу новой строки и берем первую часть
+        return input_string.split('\n')[0]
+
     def click(self, locator, element_name=None):
         if element_name is not None:
             with allure.step(f"Клик по элементу '{element_name}'"):

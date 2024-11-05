@@ -123,15 +123,8 @@ class MainLocators:
     CHAT_X = '//*[@content-desc="Чат"]/android.widget.Button[2]'
     CHAR_BTN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[4]'
 
-    # MORE OPTIONS
     UPDATE = '//*[@content-desc="Обновить"]'
-    PASSWORD_OS= '//*[@content-desc="Пароль операционной системы"]'
-    PASTE = '//*[@content-desc="Вставить"]'
-    ORIGINAL_SCALE = '//*[@content-desc="Оригинальный масштаб"]'
-    INSERT_CTRL_ALT_DEL = '//*[@content-desc="Вставить Ctrl + Alt + Del"]'
-    BLOCK_SESSION = '//*[@content-desc="Заблокировать сессию"]'
-    RESTART_REMOTE_DEVICE = '//*[@content-desc="Перезапустить удаленное устройство"]'
-    START_RECORD_SESSION = '//*[@content-desc="Начать запись сессии"]'
+
     SERVER_TO_CONNECT_FIELD = '//*[contains(@text, "Сервер для подключения")] OR //*[@text="1.rz.rudesktop.ru:443"]'
     LOGIN_FIELD = '//*[@text="Логин"]'
     SEE_OR_HIDE_PASS_BTN = '//*/android.widget.Button[1]'
@@ -149,9 +142,23 @@ class CSLocators:
     BUTTON_KEYBOARD_CONNECTION_SCREEN = '//*/android.widget.Button[3]'
     BUTTON_MOUSE_CONNECTION_SCREEN = '//*/android.widget.Button[4]'
     BUTTON_CHAT_CONNECTION_SCREEN = '//*/android.widget.Button[5]'
-    BUTTON_HIDE_CONNECTION_SCREEN = '//*/android.widget.Button[6]'
 
+    BUTTON_MORE_OPTION = '//*/android.widget.Button[6]'
+    BUTTON_HIDE_CONNECTION_SCREEN = '//*/android.widget.Button[7]'
     ALL_SCREEN = '//android.widget.FrameLayout[1]'
+
+    # MORE OPTIONS
+    UPDATE = '//*[@content-desc="Обновить"]'
+    PASSWORD_OS= '//*[@content-desc="Пароль операционной системы"]'
+    PASTE = '//*[@content-desc="Вставить"]'
+    ORIGINAL_SCALE = '//*[@content-desc="Оригинальный масштаб"]'
+    INSERT_CTRL_ALT_DEL = '//*[@content-desc="Вставить Ctrl + Alt + Del"]'
+    BLOCK_SESSION = '//*[@content-desc="Заблокировать сессию"]'
+    RESTART_REMOTE_DEVICE = '//*[@content-desc="Перезапустить удаленное устройство"]'
+    START_RECORD_SESSION = '//*[@content-desc="Начать запись сессии"]'
+
+
+
 
 
 

@@ -216,16 +216,18 @@ class MainPage(BasePage):
 
     @allure.step("Отправить в чат")
     def click_chat_send_btn(self):
-        self.wait_a_second()
-        self.click(MainLocators.CHAT_SEND_BTN, 'кнопка [Отправить]')
-        self.wait_a_second()
+        # self.wait_a_second()
+        # self.click(MainLocators.CHAT_SEND_BTN, 'кнопка [Отправить]')
+        # self.wait_a_second()
+        x,y = self.get_element('//*/android.view.View[3]').center()
+        self.coordinate_click(x,y)
 
     @allure.step("Закрыть превью буфера обмена")
     def click_x_on_clipboard_preview(self):
         if self.get_elements_amount(MainLocators.X_BTN_CLIPBOARD) > 0:
             self.click(MainLocators.X_BTN_CLIPBOARD, 'кнопка [Х] на clipboard preview')
 
-    def check_copy_id_and_pass(self):
+    def check_copy_id(self):
         # self.update_temp_pass()
         self.copy_temp_pass()
         text_to_paste = pyperclip.paste()
@@ -234,6 +236,8 @@ class MainPage(BasePage):
         self.set_text(MainLocators.CHAT_FIELD, text_to_paste)
         self.wait_a_second(3)
         self.click_chat_send_btn()
+
+    def check_copy_pass(self):
         self.click_access_nav_bar()
         self.copy_id()
         text_to_paste = pyperclip.paste()
@@ -425,10 +429,12 @@ class MainPage(BasePage):
     def add_to_address_book(self):
         self.click(MainLocators.LAST_SEANSES, 'вкладка [Последние сеансы]')
         id_last_seanses = self.get_description(MainLocators.DEVICE_IN_LIST)
+        id_last_seanses = self.get_text_before_newline(id_last_seanses)
         self.click_more_option_connect()
         self.click(MainLocators.ADD_TO_ADDRESS_BOOK, 'кнопка [Добавить в адресную книгу]')
         self.click(MainLocators.ADDRESS_BOOK, 'вкладка [Адресная книга]')
         id_address_book = self.get_description(MainLocators.DEVICE_IN_LIST)
+        id_address_book = self.get_text_before_newline(id_address_book)
         assert id_address_book == id_last_seanses, f'ID устройства из адресной книги {id_address_book} не совпадает с ID устройства в последних сеансах {id_last_seanses}'
 
     @allure.step("Очистить адресную книгу")
@@ -512,7 +518,7 @@ class MainPage(BasePage):
         # Делаем скрин, определяем цвет пикселя в иконке по координатам и сравниваем с тем что на входе
         self.click(CSLocators.BUTTON_DISPLAY_CONNECTION_SCREEN, 'кнопка [Дисплей]')
         x, y = self.get_element(CSLocators.ALL_SCREEN).center()
-        y = 456
+        y = 520
         self.get_screen()
         color = self.get_color_pixel(x,y)
         assert color == (r, g, b), f'Ожидалось {r, g, b}, а получено {color}'
@@ -523,6 +529,17 @@ class MainPage(BasePage):
     def activate_connect_always_from_bridge(self):
         self.click_settings_nav_bar()
         self.click(MainLocators.CONNECTING_VIA_A_BRIDGE_SW)
+
+    def set_password_os(self):
+        self.click(CSLocators.BUTTON_MORE_OPTION)
+        self.coordinate_click(761, 1543)
+        self.set_text('//*[contains(@text, "Пароль")]', 'Kief22Mo')
+        self.click_ok()
+
+    def check_password_os(self):
+        self.click(CSLocators.BLOCK_SESSION)
+        self.click(CSLocators.BUTTON_MORE_OPTION)
+        self.click(CSLocators.PASSWORD_OS)
 
 
 
