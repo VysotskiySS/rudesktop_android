@@ -46,6 +46,17 @@ class MainPage(BasePage):
         self.enter_passwd()
         self.check_connection_screen()
 
+    def connect_from_invalid_id(self):
+        self.click_connection_nav_bar()
+        self.set_id(invalid_remote_device_id)
+        self.click_connect()
+        self.wait_element('//*[@content-desc="Ошибка подключения"]')
+        self.wait_element('//*[@text="ID не существует"]')
+        self.click_ok()
+        self.wait_element(MainLocators.CONNECTION_BTN)
+
+
+
     def reconnect(self):
         self.click_connection_nav_bar()
         self.click_connect()
@@ -541,5 +552,35 @@ class MainPage(BasePage):
         self.click(CSLocators.BUTTON_MORE_OPTION)
         self.click(CSLocators.PASSWORD_OS)
 
+    def search_by_id(self):
+        self.click_connection_nav_bar()
+        self.click(MainLocators.SEARCH_BTN)
+        self.d.send_keys(invalid_remote_device_id)
+        self.wait_a_second()
+        self.wait_hidden_element(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION)
+        self.click(MainLocators.CANCEL_SEARCH)
+        self.click(MainLocators.SEARCH_BTN)
+        self.d.send_keys(valid_remote_device_id)
+        self.wait_a_second()
+        self.wait_element(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION)
+        self.click(MainLocators.CANCEL_SEARCH)
 
+    def search_by_alias(self):
+        self.set_alias('alias')
+        self.click_ok()
+        self.click(MainLocators.SEARCH_BTN)
+        self.d.send_keys('invalid_alias')
+        self.wait_a_second()
+        self.wait_hidden_element(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION)
+        self.click(MainLocators.CANCEL_SEARCH)
+        self.click(MainLocators.SEARCH_BTN)
+        self.d.send_keys('alias')
+        self.wait_a_second()
+        self.wait_element(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION)
+        self.click(MainLocators.CANCEL_SEARCH)
 
+    def delete_alias(self):
+        self.click(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION)
+        self.click(MainLocators.RENAME)
+        self.d.clear_text(MainLocators.ALIAS_FIELD)
+        self.click_ok()

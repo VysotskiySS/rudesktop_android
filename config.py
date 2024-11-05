@@ -8,8 +8,9 @@ server_to_connect = '192.168.10.74:433'
 #Remote device
 valid_remote_device_id = '000111333'
 valid_password = 'Kief22Mo'
-
 valid_login = 'rude'
+
+invalid_remote_device_id = '999999999'
 
 
 

@@ -54,6 +54,17 @@ class TestMain:
 
     @pytest.mark.main
     @pytest.mark.smoke
+    @allure.title('Подключиться по невалидному ID')
+    @allure.testcase("")
+    def test_connect_from_invalid_id(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.connect_from_invalid_id()
+
+
+    @pytest.mark.main
+    @pytest.mark.smoke
     @allure.title('Изменить Сервер для подключения')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=118")
     def test_change_server_to_connect(self, connect_to_device):
@@ -258,3 +269,25 @@ class TestMain:
         page.connect_from_id()
         page.set_password_os()
         page.check_password_os()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Поле Поиск')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=126")
+    def test_search_field(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.connect_from_id()
+        page.close_connection()
+        page.login()
+        page.search_by_id()
+        page.search_by_alias()
+        page.delete_alias()
+        page.add_to_favorites()
+        page.search_by_id()
+        page.search_by_alias()
+        page.delete_alias()
+        page.add_to_address_book()
+        page.search_by_id()
+        page.search_by_alias()
