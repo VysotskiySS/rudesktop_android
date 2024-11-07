@@ -43,6 +43,16 @@ class TestMain:
 
     @pytest.mark.main
     @pytest.mark.smoke
+    @allure.title('Авторизоваться (войти) - невалидные данные')
+    @allure.testcase("")
+    def test_login(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.ok_warning_server_to_connect()
+        page.start_service()
+        page.login_invalid()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
     @allure.title('Подключиться по ID')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=115")
     def test_connect_from_id(self, connect_to_device):
@@ -282,6 +292,7 @@ class TestMain:
         page.connect_from_id()
         page.set_password_os()
         page.check_password_os()
+        # Нужно добавить проверку на то что действительно прошла авторизация, пока кроме скрина или цвета точки ничего не придумал
 
     @pytest.mark.main
     @pytest.mark.smoke
@@ -304,3 +315,14 @@ class TestMain:
         page.add_to_address_book()
         page.search_by_id()
         page.search_by_alias()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Перезапустить удаленное устройство')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=158")
+    def test_reboot_remote_device(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.connect_from_id()
+        page.reboot_remote_device()

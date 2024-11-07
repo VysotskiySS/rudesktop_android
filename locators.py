@@ -159,7 +159,7 @@ class CSLocators:
     ORIGINAL_SCALE = '//*[@content-desc="Оригинальный масштаб"]'
     INSERT_CTRL_ALT_DEL = '//*[@content-desc="Вставить Ctrl + Alt + Del"]'
     BLOCK_SESSION = '//*[@content-desc="Заблокировать сессию"]'
-    RESTART_REMOTE_DEVICE = '//*[@content-desc="Перезапустить удаленное устройство"]'
+    REBOOT_REMOTE_DEVICE = '//*[@content-desc="Перезапустить удаленное устройство"]'
     START_RECORD_SESSION = '//*[@content-desc="Начать запись сессии"]'
 
 

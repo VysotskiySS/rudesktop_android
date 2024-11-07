@@ -11,6 +11,8 @@ valid_password = 'Kief22Mo'
 valid_login = 'rude'
 
 invalid_remote_device_id = '999999999'
+invalid_password = 'Invalid-pass!'
+invalid_login = 'Invalid-login!'
 
 
 

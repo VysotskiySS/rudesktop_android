@@ -1,5 +1,7 @@
 import allure
 import pyperclip
+from pkginfo.sdist import SDist
+
 from locators import *
 from pages.base_page import BasePage
 
@@ -284,6 +286,17 @@ class MainPage(BasePage):
         self.click(MainLocators.OK_BTN)
         # self.wait_hidden_element(MainLocators.WARNING_INVALID_EMAIL_OR_PASS)
         # self.wait_hidden_element(MainLocators.LOGIN)
+
+    @allure.step("Авторизоваться с невалидными данными")
+    def login_invalid(self, login=f'{invalid_login}', password=f'{invalid_password}'):
+        self.click_settings_nav_bar()
+        self.click(MainLocators.LOGIN, 'кнопка [Войти]')
+        self.set_text(MainLocators.LOGIN_FIELD, login)
+        self.set_text(MainLocators.PASSWORD_FIELD, password)
+        self.click(MainLocators.OK_BTN)
+        self.wait_element(MainLocators.WARNING_INVALID_EMAIL_OR_PASS)
+        self.click_cancel()
+        self.wait_element(MainLocators.LOGIN)
 
     @allure.step("Авторизоваться через адресную книгу")
     def login_address_book(self, login=f'{valid_login}', password=f'{valid_password}'):
@@ -587,12 +600,12 @@ class MainPage(BasePage):
     def search_by_alias(self):
         self.set_alias('alias')
         self.click_ok()
-        self.click(MainLocators.SEARCH_BTN)
+        self.click_search_btn()
         self.d.send_keys('invalid_alias')
         self.wait_a_second()
         self.wait_hidden_element(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION)
-        self.click(MainLocators.CANCEL_SEARCH)
-        self.click(MainLocators.SEARCH_BTN)
+        self.click_x_btn_in_search_field()
+        self.click_search_btn()
         self.d.send_keys('alias')
         self.wait_a_second()
         self.wait_element(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION)
@@ -604,3 +617,14 @@ class MainPage(BasePage):
         self.click(MainLocators.RENAME, 'пункт меню [Переименовать]')
         self.d.clear_text(MainLocators.ALIAS_FIELD)
         self.click_ok()
+
+    @allure.step("Перезапустить удаленное устройство")
+    def reboot_remote_device(self):
+        self.click(CSLocators.BUTTON_MORE_OPTION, 'кнопка [...] на панели в окне подключения')
+        self.click(CSLocators.REBOOT_REMOTE_DEVICE, 'пункт меню [Перезапустить удаленное устройство]')
+        self.wait_element('//*[@content-desc="Перезапустить удаленное устройство"]')
+        self.click_ok()
+        self.wait_element('//*[@text="Ожидание перезагрузки удалённого устройства..."]')
+        self.wait_a_second(60)
+        self.wait_hidden_element('//*[@text="Ожидание перезагрузки удалённого устройства..."]')
+
