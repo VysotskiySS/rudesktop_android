@@ -39,11 +39,18 @@ class MainPage(BasePage):
         self.wait_a_second(3)
         self.click(MainLocators.CONNECT_BTN, 'кнопка [Подключиться] в поле Удаленный идентификатор')
 
-    def connect_from_id(self):
+    def connect_from_id(self, save='no'):
         self.click_connection_nav_bar()
         self.set_id(valid_remote_device_id)
         self.click_connect()
         self.enter_passwd()
+        if save == 'yes':
+            self.click_save_pass()
+        # self.click_show_hide_pass()
+        # self.click_save_pass()
+        # self.click_show_hide_pass()
+        # self.click_save_pass()
+        self.click(MainLocators.OK_BTN)
         self.check_connection_screen()
 
     def connect_from_invalid_id(self):
@@ -55,12 +62,15 @@ class MainPage(BasePage):
         self.click_ok()
         self.wait_element(MainLocators.CONNECTION_BTN)
 
-
+    def connect_from_history(self):
+        self.click(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION)
+        self.click(MainLocators.CONNECT_BNT_MORE_OPTION)
 
     def reconnect(self):
         self.click_connection_nav_bar()
         self.click_connect()
         self.enter_passwd()
+        self.click_ok()
         self.check_connection_screen()
 
     def click_connection_nav_bar(self):
@@ -401,11 +411,11 @@ class MainPage(BasePage):
     @allure.step("Ввести пароль")
     def enter_passwd(self, passwd='Kief22Mo'):
         self.set_text('//*[contains(@text, "Пароль")]', passwd)
-        self.click_show_hide_pass()
-        self.click_save_pass()
-        self.click_show_hide_pass()
-        self.click_save_pass()
-        self.click(MainLocators.OK_BTN)
+        # self.click_show_hide_pass()
+        # self.click_save_pass()
+        # self.click_show_hide_pass()
+        # self.click_save_pass()
+        # self.click(MainLocators.OK_BTN)
 
     @allure.step("Проверка что выполнено удаленное подключение")
     def check_connection_screen(self):
@@ -541,6 +551,7 @@ class MainPage(BasePage):
         self.click_settings_nav_bar()
         self.click(MainLocators.CONNECTING_VIA_A_BRIDGE_SW)
 
+    @allure.step("Установить пароль операционной системы")
     def set_password_os(self):
         self.click(CSLocators.BUTTON_MORE_OPTION)
         self.coordinate_click(761, 1543)
@@ -548,23 +559,31 @@ class MainPage(BasePage):
         self.click_ok()
 
     def check_password_os(self):
-        self.click(CSLocators.BLOCK_SESSION)
-        self.click(CSLocators.BUTTON_MORE_OPTION)
-        self.click(CSLocators.PASSWORD_OS)
+        self.click(CSLocators.BLOCK_SESSION, 'пункт меню [Заблокировать сессию]')
+        self.click(CSLocators.BUTTON_MORE_OPTION, 'кнопка [...] на панели окна подключения')
+        self.click(CSLocators.PASSWORD_OS, 'пункт меню [Пароль операционной системы]')
 
+    def click_search_btn(self):
+        self.click(MainLocators.SEARCH_BTN, 'кнопка [Поиск]')
+
+    def click_x_btn_in_search_field(self):
+        self.click(MainLocators.CANCEL_SEARCH, 'кнопка [x] в поле [Поиск]')
+
+    @allure.step("Выполнить поиск по ID")
     def search_by_id(self):
         self.click_connection_nav_bar()
-        self.click(MainLocators.SEARCH_BTN)
+        self.click_search_btn()
         self.d.send_keys(invalid_remote_device_id)
         self.wait_a_second()
         self.wait_hidden_element(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION)
-        self.click(MainLocators.CANCEL_SEARCH)
-        self.click(MainLocators.SEARCH_BTN)
+        self.click_x_btn_in_search_field()
+        self.click_search_btn()
         self.d.send_keys(valid_remote_device_id)
         self.wait_a_second()
         self.wait_element(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION)
-        self.click(MainLocators.CANCEL_SEARCH)
+        self.click_x_btn_in_search_field()
 
+    @allure.step("Выполнить поиск по псевдониму устройства")
     def search_by_alias(self):
         self.set_alias('alias')
         self.click_ok()
@@ -577,10 +596,11 @@ class MainPage(BasePage):
         self.d.send_keys('alias')
         self.wait_a_second()
         self.wait_element(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION)
-        self.click(MainLocators.CANCEL_SEARCH)
+        self.click_x_btn_in_search_field()
 
+    @allure.step("Удалить псевдоним устройства")
     def delete_alias(self):
-        self.click(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION)
-        self.click(MainLocators.RENAME)
+        self.click_more_option_connect()
+        self.click(MainLocators.RENAME, 'пункт меню [Переименовать]')
         self.d.clear_text(MainLocators.ALIAS_FIELD)
         self.click_ok()

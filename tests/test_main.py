@@ -54,6 +54,20 @@ class TestMain:
 
     @pytest.mark.main
     @pytest.mark.smoke
+    @allure.title('Подключиться из истории/Сохранение пароля')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=129")
+    def test_connect_from_history_with_saved_pass(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.connect_from_id(save='yes')
+        page.close_connection()
+        page.connect_from_history()
+        page.check_connection_screen()
+        page.close_connection()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
     @allure.title('Подключиться по невалидному ID')
     @allure.testcase("")
     def test_connect_from_invalid_id(self, connect_to_device):
@@ -61,7 +75,6 @@ class TestMain:
         page.allow_access()
         page.ok_warning_server_to_connect()
         page.connect_from_invalid_id()
-
 
     @pytest.mark.main
     @pytest.mark.smoke

@@ -138,6 +138,8 @@ class MainLocators:
     CANCEL_SELECT_TAG = '//*[@content-desc="Отменить выбор всех тегов"]'
     CLEAR_FIELD_RENAME_TAG = '//*/android.widget.EditText[1]'
 
+    CONNECT_BNT_MORE_OPTION = '//*[@content-desc="Подключиться"]'
+
 # CONNECTION_SCREEN
 class CSLocators:
     BUTTON_X_CONNECTION_SCREEN = '//*/android.widget.Button[1]'
