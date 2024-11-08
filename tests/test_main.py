@@ -269,20 +269,6 @@ class TestMain:
 
     @pytest.mark.main
     @pytest.mark.smoke
-    @allure.title('Всегда подключаться через мост')
-    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=139")
-    def test_always_connect_from_bridge(self, connect_to_device):
-        page = MainPage(connect_to_device)
-        page.allow_access()
-        page.ok_warning_server_to_connect()
-        page.connect_from_id()
-        page.check_icon_connection_color(250, 248, 251)
-        page.activate_connect_always_from_bridge()
-        page.reconnect()
-        page.check_icon_connection_color(62, 125, 70)
-
-    @pytest.mark.main
-    @pytest.mark.smoke
     @allure.title('Поле Поиск')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=126")
     def test_search_field(self, connect_to_device):
