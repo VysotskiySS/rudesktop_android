@@ -45,11 +45,21 @@ class TestMain:
     @pytest.mark.smoke
     @allure.title('Авторизоваться (войти) - невалидные данные')
     @allure.testcase("")
-    def test_login(self, connect_to_device):
+    def test_login_invalid(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.ok_warning_server_to_connect()
         page.start_service()
         page.login_invalid()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Авторизоваться (войти) под доменной учетной записью')
+    @allure.testcase("")
+    def test_login_domain(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.ok_warning_server_to_connect()
+        page.start_service()
+        page.login(login=valid_domain_login, method='domain')
 
     @pytest.mark.main
     @pytest.mark.smoke
@@ -269,16 +279,36 @@ class TestMain:
 
     @pytest.mark.main
     @pytest.mark.smoke
-    @allure.title('Поле Поиск')
+    @allure.title('Поиск по ID устройства')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=126")
-    def test_search_field(self, connect_to_device):
+    def test_search_by_id(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.allow_access()
         page.ok_warning_server_to_connect()
+        page.login()
+        page.clear_all_device_lists()
         page.connect_from_id()
         page.close_connection()
-        page.login()
+        page.click_settings_nav_bar()
         page.search_by_id()
+        page.add_to_favorites()
+        page.search_by_id()
+        page.add_to_address_book()
+        page.search_by_id()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Поиск по псевдониму устройства')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=198")
+    def test_search_by_alias(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.login()
+        page.clear_all_device_lists()
+        page.connect_from_id()
+        page.close_connection()
+        page.click_settings_nav_bar()
         page.search_by_alias()
         page.delete_alias()
         page.add_to_favorites()
@@ -288,4 +318,21 @@ class TestMain:
         page.add_to_address_book()
         page.search_by_id()
         page.search_by_alias()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Задать псевдоним устройству')
+    @allure.testcase("")
+    def test_set_alias(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.login()
+        page.clear_all_device_lists()
+        page.connect_from_id()
+        page.close_connection()
+        page.check_alias('alias')
+
+
+
 

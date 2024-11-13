@@ -10,6 +10,8 @@ valid_remote_device_id = '000111333'
 valid_password = 'Kief22Mo'
 valid_login = 'rude'
 
+valid_domain_login = 'v.ivanov'
+
 invalid_remote_device_id = '999999999'
 invalid_password = 'Invalid-pass!'
 invalid_login = 'Invalid-login!'

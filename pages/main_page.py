@@ -41,18 +41,20 @@ class MainPage(BasePage):
         self.wait_a_second(3)
         self.click(MainLocators.CONNECT_BTN, 'кнопка [Подключиться] в поле Удаленный идентификатор')
 
-    def connect_from_id(self, save='no'):
+    def connect_from_id(self, auth='no', save='no'):
         self.click_connection_nav_bar()
+        self.clear_last_seanses()
         self.set_id(valid_remote_device_id)
         self.click_connect()
-        self.enter_passwd()
-        if save == 'yes':
-            self.click_save_pass()
-        # self.click_show_hide_pass()
-        # self.click_save_pass()
-        # self.click_show_hide_pass()
-        # self.click_save_pass()
-        self.click(MainLocators.OK_BTN)
+        if auth == 'yes':
+            self.enter_passwd()
+            if save == 'yes':
+                self.click_save_pass()
+                # self.click_show_hide_pass()
+                # self.click_save_pass()
+                # self.click_show_hide_pass()
+                # self.click_save_pass()
+                self.click(MainLocators.OK_BTN)
         self.check_connection_screen()
 
     def connect_from_invalid_id(self):
@@ -278,14 +280,17 @@ class MainPage(BasePage):
         self.wait_element(MainLocators.VERSION, '[О программе]')
 
     @allure.step("Авторизоваться")
-    def login(self, login=f'{valid_login}', password=f'{valid_password}'):
+    def login(self, login=f'{valid_login}', password=f'{valid_password}', method='local'):
         self.click_settings_nav_bar()
         self.click(MainLocators.LOGIN, 'кнопка [Войти]')
+        if method == 'domain':
+            self.click('//*[@content-desc="@win2012.local"]')
         self.set_text(MainLocators.LOGIN_FIELD, login)
         self.set_text(MainLocators.PASSWORD_FIELD, password)
         self.click(MainLocators.OK_BTN)
-        # self.wait_hidden_element(MainLocators.WARNING_INVALID_EMAIL_OR_PASS)
-        # self.wait_hidden_element(MainLocators.LOGIN)
+        self.wait_a_second()
+        self.wait_hidden_element(MainLocators.WARNING_INVALID_EMAIL_OR_PASS)
+        self.wait_hidden_element('//*[@content-desc="Локальный"]')
 
     @allure.step("Авторизоваться с невалидными данными")
     def login_invalid(self, login=f'{invalid_login}', password=f'{invalid_password}'):
@@ -471,6 +476,11 @@ class MainPage(BasePage):
         id_address_book = self.get_text_before_newline(id_address_book)
         assert id_address_book == id_last_seanses, f'ID устройства из адресной книги {id_address_book} не совпадает с ID устройства в последних сеансах {id_last_seanses}'
 
+    def clear_all_device_lists(self):
+        self.clear_last_seanses()
+        self.clear_favorites()
+        self.clear_address_book()
+
     @allure.step("Очистить адресную книгу")
     def clear_address_book(self):
         self.click_connection_nav_bar()
@@ -531,7 +541,7 @@ class MainPage(BasePage):
         self.click_connection_nav_bar()
         self.click(MainLocators.LAST_SEANSES, 'вкладка Последние сеансы')
         self.wait_a_second(2)
-        self.del_all_devices_from_list(1)
+        self.del_all_devices_from_list()
 
     @allure.step("Считываем временный пароль")
     def get_temp_pass(self):
@@ -545,6 +555,13 @@ class MainPage(BasePage):
         string = self.get_description(MainLocators.TEMP_PASS)
         string = string.split('\n')
         id = string[2]
+        return id
+
+    @allure.step("Считываем идентификатор устройства")
+    def get_id_or_alias_device(self):
+        string = self.get_description(MainLocators.DEVICE_IN_LIST)
+        string = string.split('\n')
+        id = string[0]
         return id
 
     @allure.step("Проверка иконки подключения Прямое/Мост")
@@ -586,8 +603,11 @@ class MainPage(BasePage):
     def search_by_id(self):
         self.click_connection_nav_bar()
         self.click_search_btn()
+        # self.wait_a_second()
+        # self.click('//*[@text="Поиск"]')
+        self.wait_a_second(2)
         self.d.send_keys(invalid_remote_device_id)
-        self.wait_a_second()
+        self.wait_a_second(2)
         self.wait_hidden_element(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION)
         self.click_x_btn_in_search_field()
         self.click_search_btn()
@@ -597,8 +617,8 @@ class MainPage(BasePage):
         self.click_x_btn_in_search_field()
 
     @allure.step("Выполнить поиск по псевдониму устройства")
-    def search_by_alias(self):
-        self.set_alias('alias')
+    def search_by_alias(self, alias='alias'):
+        self.set_alias(alias)
         self.click_ok()
         self.click_search_btn()
         self.d.send_keys('invalid_alias')
@@ -606,7 +626,7 @@ class MainPage(BasePage):
         self.wait_hidden_element(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION)
         self.click_x_btn_in_search_field()
         self.click_search_btn()
-        self.d.send_keys('alias')
+        self.d.send_keys(alias)
         self.wait_a_second()
         self.wait_element(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION)
         self.click_x_btn_in_search_field()
@@ -627,4 +647,19 @@ class MainPage(BasePage):
         self.wait_element('//*[@text="Ожидание перезагрузки удалённого устройства..."]')
         self.wait_a_second(60)
         self.wait_hidden_element('//*[@text="Ожидание перезагрузки удалённого устройства..."]')
+        self.wait_hidden_element('//*[@content-desc="Ошибка подключения"]')
+        self.wait_hidden_element('//*[@text="Обнаружено нестабильное соединение, попытка повторного подключения..."]')
+
+    def check_alias(self, alias):
+        self.click_settings_nav_bar()
+        self.set_alias(alias)
+        self.click_ok()
+        device_alias = self.get_id_or_alias_device()
+        assert alias == device_alias, f'Ожидался псевдоним устройства {alias}, но найден псевдоним {device_alias}'
+        self.add_to_favorites()
+        device_alias = self.get_id_or_alias_device()
+        assert alias == device_alias
+        self.add_to_address_book()
+        device_alias = self.get_id_or_alias_device()
+        assert alias == device_alias
 

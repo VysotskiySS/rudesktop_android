@@ -46,4 +46,5 @@ class TestConnection:
         page.connect_from_id()
         page.set_password_os()
         page.check_password_os()
+        page.get_screen()
         # Нужно добавить проверку на то что действительно прошла авторизация, пока кроме сравнения скрина или цвета точки ничего не придумал
