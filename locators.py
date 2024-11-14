@@ -41,7 +41,7 @@ class MainLocators:
 
     #CONNECTION
     BUTTON_MORE_OPTIONS_CONNECTION = '//*/android.widget.ImageView/*'
-    DEVICE_IN_LIST = '//*/android.widget.ImageView'
+    DEVICE_IN_LIST = '//*//android.view.View//android.widget.ImageView'
     FILE_TRANSFER = '//*[@content-desc="Передача файлов"]'
     WAKE_ON_LAN = '//*[@content-desc="Разбудить (Wake On Lan)"]'
     RENAME = '//*[@content-desc="Переименовать"]'

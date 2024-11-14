@@ -241,6 +241,7 @@ class BasePage:
         d = self.d
         assert d(textContains=text).wait_gone(10) == True, print(f"Элемент с текстом '{text}' присутствует на экране")
 
+    @allure.step("Закрыть поп-ап окно")
     def close_popup(self):
         self.d.click(0.477, 0.031)
 

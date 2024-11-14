@@ -255,19 +255,6 @@ class TestMain:
 
     @pytest.mark.main
     @pytest.mark.smoke
-    @allure.title('Задать псевдоним устройству')
-    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=128")
-    def test_set_alias(self, connect_to_device):
-        page = MainPage(connect_to_device)
-        page.allow_access()
-        page.ok_warning_server_to_connect()
-        page.connect_from_id()
-        page.close_connection()
-        page.clear_last_seanses()
-        page.check_set_alias()
-
-    @pytest.mark.main
-    @pytest.mark.smoke
     @allure.title('Обновление временного пароля')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=173")
     def test_update_temp_pass(self, connect_to_device):
@@ -287,7 +274,7 @@ class TestMain:
         page.ok_warning_server_to_connect()
         page.login()
         page.clear_all_device_lists()
-        page.connect_from_id()
+        page.connect_from_id(auth='no')
         page.close_connection()
         page.click_settings_nav_bar()
         page.search_by_id()
@@ -306,7 +293,7 @@ class TestMain:
         page.ok_warning_server_to_connect()
         page.login()
         page.clear_all_device_lists()
-        page.connect_from_id()
+        page.connect_from_id(auth='no')
         page.close_connection()
         page.click_settings_nav_bar()
         page.search_by_alias()
@@ -319,19 +306,37 @@ class TestMain:
         page.search_by_id()
         page.search_by_alias()
 
+    @pytest.mark.parametrize("alias", ['Alias', 'Псевдоним'])
     @pytest.mark.main
     @pytest.mark.smoke
-    @allure.title('Задать псевдоним устройству')
-    @allure.testcase("")
-    def test_set_alias(self, connect_to_device):
+    @allure.title('Задать псевдоним устройству (Авторизованный)')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=128")
+    def test_set_alias(self, connect_to_device, alias):
         page = MainPage(connect_to_device)
         page.allow_access()
         page.ok_warning_server_to_connect()
         page.login()
         page.clear_all_device_lists()
+        page.connect_from_id(auth='no')
+        page.close_connection()
+        page.check_alias_last(alias)
+        page.check_alias_favorites(alias)
+        page.check_alias_address_book(alias)
+
+    @pytest.mark.parametrize("alias", ['Alias', 'Псевдоним'])
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Задать псевдоним устройству (Неавторизованный)')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=128")
+    def test_set_alias_un(self, connect_to_device, alias):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.clear_all_device_lists()
         page.connect_from_id()
         page.close_connection()
-        page.check_alias('alias')
+        page.check_alias_last(alias)
+        page.check_alias_favorites(alias)
 
 
 

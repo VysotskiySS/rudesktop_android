@@ -41,7 +41,7 @@ class MainPage(BasePage):
         self.wait_a_second(3)
         self.click(MainLocators.CONNECT_BTN, 'кнопка [Подключиться] в поле Удаленный идентификатор')
 
-    def connect_from_id(self, auth='no', save='no'):
+    def connect_from_id(self, auth='yes', save='no'):
         self.click_connection_nav_bar()
         self.clear_last_seanses()
         self.set_id(valid_remote_device_id)
@@ -50,11 +50,7 @@ class MainPage(BasePage):
             self.enter_passwd()
             if save == 'yes':
                 self.click_save_pass()
-                # self.click_show_hide_pass()
-                # self.click_save_pass()
-                # self.click_show_hide_pass()
-                # self.click_save_pass()
-                self.click(MainLocators.OK_BTN)
+            self.click(MainLocators.OK_BTN)
         self.check_connection_screen()
 
     def connect_from_invalid_id(self):
@@ -427,13 +423,8 @@ class MainPage(BasePage):
         self.click('//*[@content-desc="Запомнить пароль"]')
 
     @allure.step("Ввести пароль")
-    def enter_passwd(self, passwd='Kief22Mo'):
+    def enter_passwd(self, passwd=valid_password):
         self.set_text('//*[contains(@text, "Пароль")]', passwd)
-        # self.click_show_hide_pass()
-        # self.click_save_pass()
-        # self.click_show_hide_pass()
-        # self.click_save_pass()
-        # self.click(MainLocators.OK_BTN)
 
     @allure.step("Проверка что выполнено удаленное подключение")
     def check_connection_screen(self):
@@ -443,10 +434,12 @@ class MainPage(BasePage):
 
     @allure.step("Завершить подключение")
     def close_connection(self):
+        self.close_popup()
+        self.wait_a_second()
         self.wait_element('//*/android.widget.Button[1]')
-        self.click('//*/android.widget.Button[1]')
+        self.click('//*/android.widget.Button[1]', 'кнопка [Х] на панели окна подключения')
         self.wait_element(MainLocators.OK_BTN)
-        self.click(MainLocators.OK_BTN)
+        self.click_ok()
 
     @allure.step("Активировать опцию - запускать после включения")
     def start_service_after_start(self):
@@ -650,15 +643,19 @@ class MainPage(BasePage):
         self.wait_hidden_element('//*[@content-desc="Ошибка подключения"]')
         self.wait_hidden_element('//*[@text="Обнаружено нестабильное соединение, попытка повторного подключения..."]')
 
-    def check_alias(self, alias):
+    def check_alias_last(self, alias):
         self.click_settings_nav_bar()
         self.set_alias(alias)
         self.click_ok()
         device_alias = self.get_id_or_alias_device()
         assert alias == device_alias, f'Ожидался псевдоним устройства {alias}, но найден псевдоним {device_alias}'
+
+    def check_alias_favorites(self, alias):
         self.add_to_favorites()
         device_alias = self.get_id_or_alias_device()
         assert alias == device_alias
+
+    def check_alias_address_book(self, alias):
         self.add_to_address_book()
         device_alias = self.get_id_or_alias_device()
         assert alias == device_alias
