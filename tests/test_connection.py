@@ -85,3 +85,4 @@ class TestConnection:
         main.ok_warning_server_to_connect()
         main.connect_from_id()
         cs = CSPage(connect_to_device)
+        cs.check_chat()

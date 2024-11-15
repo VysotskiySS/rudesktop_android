@@ -1,10 +1,13 @@
 import allure
 import pyperclip
+# from faker.contrib.pytest.plugin import faker
 from pkginfo.sdist import SDist
-
+from faker import Faker
 from locators import *
 from pages.base_page import BasePage
 from pages.main_page import MainPage
+
+faker = Faker()
 
 class CSPage(BasePage):
     def __init__(self, d):
@@ -71,7 +74,20 @@ class CSPage(BasePage):
         self.wait_element('//*[@content-desc="Сожмите, чтобы увеличить"]')
         self.wait_element('//*[@content-desc="Масштаб экрана"]')
 
+    def get_msg_from_chat(self):
+        string =  self.get_description('//*/android.view.View/*')
+        string = string.split('\n')
+        msg = string
+        return msg
+
     @allure.step("")
     def check_chat(self):
         self.click(CSLocators.BUTTON_CHAT, 'кнопка [Чат] на панели экрана подключения')
+        text = faker.text()
+        self.set_text(CSLocators.CHAT_FIELD, text)
+        self.wait_element('//*/android.view.View[4]')
+        self.click('//*/android.view.View[4]')
+        msg = self.get_msg_from_chat(),
+        assert text == msg, f'Ожидался текст {text}, но получен текст {msg}'
+
 
