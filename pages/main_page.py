@@ -6,6 +6,7 @@ from locators import *
 from pages.base_page import BasePage
 
 class MainPage(BasePage):
+
     def __init__(self, d):
         super().__init__(d)
         self.d = d
@@ -560,31 +561,19 @@ class MainPage(BasePage):
     @allure.step("Проверка иконки подключения Прямое/Мост")
     def check_icon_connection_color(self, r, g, b):
         # Делаем скрин, определяем цвет пикселя в иконке по координатам и сравниваем с тем что на входе
-        self.click(CSLocators.BUTTON_DISPLAY_CONNECTION_SCREEN, 'кнопка [Дисплей]')
+        self.click(CSLocators.BUTTON_DISPLAY, 'кнопка [Дисплей]')
         x, y = self.get_element(CSLocators.ALL_SCREEN).center()
         y = 520
         self.get_screen()
         color = self.get_color_pixel(x,y)
         assert color == (r, g, b), f'Ожидалось {r, g, b}, а получено {color}'
-        self.click(CSLocators.BUTTON_DISPLAY_CONNECTION_SCREEN, 'кнопка [Дисплей]')
+        self.click(CSLocators.BUTTON_DISPLAY, 'кнопка [Дисплей]')
         self.close_connection()
 
     @allure.step("Активировать опцию [Всегда подключаться через мост]")
     def activate_connect_always_from_bridge(self):
         self.click_settings_nav_bar()
         self.click(MainLocators.CONNECTING_VIA_A_BRIDGE_SW)
-
-    @allure.step("Установить пароль операционной системы")
-    def set_password_os(self):
-        self.click(CSLocators.BUTTON_MORE_OPTION)
-        self.coordinate_click(761, 1543)
-        self.set_text('//*[contains(@text, "Пароль")]', 'Kief22Mo')
-        self.click_ok()
-
-    def check_password_os(self):
-        self.click(CSLocators.BLOCK_SESSION, 'пункт меню [Заблокировать сессию]')
-        self.click(CSLocators.BUTTON_MORE_OPTION, 'кнопка [...] на панели окна подключения')
-        self.click(CSLocators.PASSWORD_OS, 'пункт меню [Пароль операционной системы]')
 
     def click_search_btn(self):
         self.click(MainLocators.SEARCH_BTN, 'кнопка [Поиск]')
@@ -659,4 +648,6 @@ class MainPage(BasePage):
         self.add_to_address_book()
         device_alias = self.get_id_or_alias_device()
         assert alias == device_alias
+
+
 

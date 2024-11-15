@@ -23,7 +23,7 @@ class TestMain:
 
     @pytest.mark.main
     @pytest.mark.smoke
-    @allure.title('Авторизоваться (войти)')
+    @allure.title('Авторизоваться (войти) под локальной учетной записью')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?est_case=116")
     def test_login(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -74,7 +74,7 @@ class TestMain:
 
     @pytest.mark.main
     @pytest.mark.smoke
-    @allure.title('Подключиться из истории/Сохранение пароля')
+    @allure.title('Подключиться из истории / Сохранение пароля')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=129")
     def test_connect_from_history_with_saved_pass(self, connect_to_device):
         page = MainPage(connect_to_device)

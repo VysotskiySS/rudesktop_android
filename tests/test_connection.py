@@ -2,6 +2,7 @@
 from faker import Faker
 import pytest
 from pages.main_page import MainPage
+from pages.cs_page import CSPage
 from pages.base_page import *
 import allure
 
@@ -40,11 +41,36 @@ class TestConnection:
     @allure.title('Пароль операционной системы')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=150")
     def test_password_os(self, connect_to_device):
-        page = MainPage(connect_to_device)
-        page.allow_access()
-        page.ok_warning_server_to_connect()
-        page.connect_from_id()
-        page.set_password_os()
-        page.check_password_os()
-        page.get_screen()
+        main = MainPage(connect_to_device)
+        main.allow_access()
+        main.ok_warning_server_to_connect()
+        main.connect_from_id()
+        main = CSPage(connect_to_device)
+        main.set_password_os()
+        main.check_password_os()
+        main.get_screen()
         # Нужно добавить проверку на то что действительно прошла авторизация, пока кроме сравнения скрина или цвета точки ничего не придумал
+
+    @pytest.mark.connection
+    @pytest.mark.smoke
+    @allure.title('Скрыть / показать панель на экране подключения')
+    @allure.testcase("")
+    def test_panel_cs(self, connect_to_device):
+        main = MainPage(connect_to_device)
+        main.allow_access()
+        main.ok_warning_server_to_connect()
+        main.connect_from_id()
+        cs =  CSPage(connect_to_device)
+        cs.hide_show_panel_cs()
+
+    @pytest.mark.connection
+    @pytest.mark.smoke
+    @allure.title('')
+    @allure.testcase("")
+    def test_panel_cs(self, connect_to_device):
+        main = MainPage(connect_to_device)
+        main.allow_access()
+        main.ok_warning_server_to_connect()
+        main.connect_from_id()
+        cs = CSPage(connect_to_device)
+        cs.mouse_or_sensor_mode()

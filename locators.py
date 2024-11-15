@@ -142,14 +142,15 @@ class MainLocators:
 
 # CONNECTION_SCREEN
 class CSLocators:
-    BUTTON_X_CONNECTION_SCREEN = '//*/android.widget.Button[1]'
-    BUTTON_DISPLAY_CONNECTION_SCREEN = '//*/android.widget.Button[2]'
-    BUTTON_KEYBOARD_CONNECTION_SCREEN = '//*/android.widget.Button[3]'
-    BUTTON_MOUSE_CONNECTION_SCREEN = '//*/android.widget.Button[4]'
-    BUTTON_CHAT_CONNECTION_SCREEN = '//*/android.widget.Button[5]'
+    BUTTON_X = '//*/android.widget.Button[1]'
+    BUTTON_DISPLAY = '//*/android.widget.Button[2]'
+    BUTTON_KEYBOARD = '//*/android.widget.Button[3]'
+    BUTTON_MOUSE = '//*/android.widget.Button[4]'
+    BUTTON_CHAT = '//*/android.widget.Button[5]'
 
     BUTTON_MORE_OPTION = '//*/android.widget.Button[6]'
-    BUTTON_HIDE_CONNECTION_SCREEN = '//*/android.widget.Button[7]'
+    BUTTON_HIDE_PANEL = '//*/android.widget.Button[7]'
+    BUTTON_SHOW_PANEL = '//android.widget.Button'
     ALL_SCREEN = '//android.widget.FrameLayout[1]'
 
     # MORE OPTIONS
@@ -161,6 +162,10 @@ class CSLocators:
     BLOCK_SESSION = '//*[@content-desc="Заблокировать сессию"]'
     REBOOT_REMOTE_DEVICE = '//*[@content-desc="Перезапустить удаленное устройство"]'
     START_RECORD_SESSION = '//*[@content-desc="Начать запись сессии"]'
+
+    #MOUSE OR SENSOR
+    MOUSE_MODE_BTN = '//*[@content-desc="Режим мыши"]'
+    SENSOR_MODE_BTN = '//*[@content-desc="Сенсорный режим"]'
 
 
 
