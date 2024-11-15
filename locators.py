@@ -163,9 +163,16 @@ class CSLocators:
     REBOOT_REMOTE_DEVICE = '//*[@content-desc="Перезапустить удаленное устройство"]'
     START_RECORD_SESSION = '//*[@content-desc="Начать запись сессии"]'
 
-    #MOUSE OR SENSOR
+    # MOUSE OR SENSOR
     MOUSE_MODE_BTN = '//*[@content-desc="Режим мыши"]'
     SENSOR_MODE_BTN = '//*[@content-desc="Сенсорный режим"]'
+
+    # CHAT
+    TITLE_CHAT_WINDOW = '//*[@content-desc="Чат"]'
+    CHAT_FIELD = '//*[@text="Написать сообщение..."]'
+    CHAT_HIDE_BTN = '//*[@content-desc="Чат"]/android.widget.Button[1]'
+    CHAT_CLOSE_BTN = '//*[@content-desc="Чат"]/android.widget.Button[2]'
+
 
 
 

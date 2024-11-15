@@ -37,4 +37,41 @@ class CSPage(BasePage):
         self.click(CSLocators.BUTTON_MOUSE, 'кнопка [Мышь] на панели экрана подключения')
         self.wait_element(CSLocators.SENSOR_MODE_BTN)
         self.click(CSLocators.SENSOR_MODE_BTN, 'кнопка Сенсорный режим')
+        self.check_sensor_mode()
         self.click(CSLocators.MOUSE_MODE_BTN, 'кнопка Режим мыши')
+        self.check_mouse_mode()
+
+    @allure.step("Проверяем на наличие текст подсказок для режима управления [Режим мыши]")
+    def check_mouse_mode(self):
+        self.wait_element('//*[@content-desc="Касание одним пальцем"]')
+        self.wait_element('//*[@content-desc="Левая кнопка мыши"]')
+        self.wait_element('//*[@content-desc="Одно долгое нажатие пальцем"]')
+        self.wait_element('//*[@content-desc="Правая мышь"]')
+        self.wait_element('//*[@content-desc="Двойное нажатие и перемещение"]')
+        self.wait_element('//*[@content-desc="Перетаскивание мышью"]')
+        self.wait_element('//*[@content-desc="Тремя пальцами по вертикали"]')
+        self.wait_element('//*[@content-desc="Колесико мыши"]')
+        self.wait_element('//*[@content-desc="Движение двумя пальцами"]')
+        self.wait_element('//*[@content-desc="Перемещение экрана"]')
+        self.wait_element('//*[@content-desc="Сожмите, чтобы увеличить"]')
+        self.wait_element('//*[@content-desc="Масштаб экрана"]')
+
+    @allure.step("Проверяем на наличие текст подсказок для режима управления [Сенсорный режим]")
+    def check_sensor_mode(self):
+        self.wait_element('//*[@content-desc="Касание одним пальцем"]')
+        self.wait_element('//*[@content-desc="Левая кнопка мыши"]')
+        self.wait_element('//*[@content-desc="Одно долгое нажатие пальцем"]')
+        self.wait_element('//*[@content-desc="Правая мышь"]')
+        self.wait_element('//*[@content-desc="Движение одним пальцем"]')
+        self.wait_element('//*[@content-desc="Перетаскивание мышью"]')
+        self.wait_element('//*[@content-desc="Тремя пальцами по вертикали"]')
+        self.wait_element('//*[@content-desc="Колесико мыши"]')
+        self.wait_element('//*[@content-desc="Движение двумя пальцами"]')
+        self.wait_element('//*[@content-desc="Перемещение экрана"]')
+        self.wait_element('//*[@content-desc="Сожмите, чтобы увеличить"]')
+        self.wait_element('//*[@content-desc="Масштаб экрана"]')
+
+    @allure.step("")
+    def check_chat(self):
+        self.click(CSLocators.BUTTON_CHAT, 'кнопка [Чат] на панели экрана подключения')
+
