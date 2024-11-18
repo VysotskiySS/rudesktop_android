@@ -1,7 +1,4 @@
 import allure
-import pyperclip
-# from faker.contrib.pytest.plugin import faker
-from pkginfo.sdist import SDist
 from faker import Faker
 from locators import *
 from pages.base_page import BasePage
