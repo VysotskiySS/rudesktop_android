@@ -1,7 +1,5 @@
 import allure
 import pyperclip
-from pkginfo.sdist import SDist
-
 from locators import *
 from pages.base_page import BasePage
 
