@@ -28,9 +28,9 @@ class CSPage(BasePage):
 
     def hide_show_panel_cs(self):
         self.wait_element(CSLocators.BUTTON_HIDE_PANEL)
-        self.click(CSLocators.BUTTON_HIDE_PANEL)
+        self.click(CSLocators.BUTTON_HIDE_PANEL, 'кнопка [Скрыть панель]')
         self.wait_element(CSLocators.BUTTON_SHOW_PANEL)
-        self.click(CSLocators.BUTTON_SHOW_PANEL)
+        self.click(CSLocators.BUTTON_SHOW_PANEL, 'кнопка [Показать панель]')
         self.wait_element(CSLocators.BUTTON_HIDE_PANEL)
 
     def mouse_or_sensor_mode(self):
@@ -72,19 +72,25 @@ class CSPage(BasePage):
         self.wait_element('//*[@content-desc="Масштаб экрана"]')
 
     def get_msg_from_chat(self):
-        string =  self.get_description('//*/android.view.View/*')
+        string =  self.get_description('//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[3]/android.view.View[1]/android.view.View[1]/android.view.View')
         string = string.split('\n')
-        msg = string
+        msg = string[1]
         return msg
 
-    @allure.step("")
+    @allure.step("Нажать кнопку отправки сообщения в чат")
+    def click_send_msg(self):
+        self.wait_a_second(2)
+        self.click_img('../img/send_msg_btn.png')
+
+    @allure.step("Проверка отправки сообщения в чат")
     def check_chat(self):
         self.click(CSLocators.BUTTON_CHAT, 'кнопка [Чат] на панели экрана подключения')
         text = faker.text()
         self.set_text(CSLocators.CHAT_FIELD, text)
-        self.wait_element('//*/android.view.View[4]')
-        self.click('//*/android.view.View[4]')
-        msg = self.get_msg_from_chat(),
+        self.click_send_msg()
+        self.set_text(CSLocators.CHAT_FIELD, 'test')
+        self.click_send_msg()
+        msg = self.get_msg_from_chat()
         assert text == msg, f'Ожидался текст {text}, но получен текст {msg}'
 
 
