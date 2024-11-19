@@ -1,5 +1,7 @@
 import allure
 import pyperclip
+from rich.style import Style
+
 from locators import *
 from pages.base_page import BasePage
 
@@ -286,15 +288,30 @@ class MainPage(BasePage):
         self.wait_a_second()
         self.wait_hidden_element(MainLocators.WARNING_INVALID_EMAIL_OR_PASS)
         self.wait_hidden_element('//*[@content-desc="Локальный"]')
+        if method == 'local':
+            self.wait_element(f'//*[@content-desc="Выйти ({login})"]')
+        else:
+            self.wait_element(f'//*[@content-desc="Выйти ({login}@win2012.local)"]')
+
+    def logout(self, login=valid_login, method='local'):
+        self.click(MainLocators.LOGIN, 'кнопка [Выйти]')
+        if method == 'local':
+            self.wait_hidden_element(f'//*[@content-desc="Выйти ({login})"]')
+        else:
+            self.wait_hidden_element(f'//*[@content-desc="Выйти ({login}@win2012.local)"]')
 
     @allure.step("Авторизоваться с невалидными данными")
-    def login_invalid(self, login=f'{invalid_login}', password=f'{invalid_password}'):
-        self.click_settings_nav_bar()
+    def login_invalid(self, login=f'{invalid_login}', password=f'{invalid_password}', method='local'):
         self.click(MainLocators.LOGIN, 'кнопка [Войти]')
+        if method == 'domain':
+            self.click(MainLocators.DOMAIN_AUTH_METHOD_RB)
         self.set_text(MainLocators.LOGIN_FIELD, login)
         self.set_text(MainLocators.PASSWORD_FIELD, password)
         self.click(MainLocators.OK_BTN)
-        self.wait_element(MainLocators.WARNING_INVALID_EMAIL_OR_PASS)
+        if method == 'domain':
+            self.wait_element(MainLocators.WARNING_NOT_FOUND_USER_AD)
+        else:
+            self.wait_element(MainLocators.WARNING_INVALID_EMAIL_OR_PASS)
         self.click_cancel()
         self.wait_element(MainLocators.LOGIN)
 

@@ -89,7 +89,7 @@ class CSPage(BasePage):
         text = 'Съешь ещё этих мягких французских булок, да выпей чаю'
         self.set_text(CSLocators.CHAT_FIELD, text)
         self.click_send_msg()
-        self.set_text(CSLocators.CHAT_FIELD, 'test')
+        self.set_text(CSLocators.CHAT_FIELD, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')
         self.click_send_msg()
         msg = self.get_msg_from_chat()
         assert text == msg, f'Ожидался текст {text}, но получен текст {msg}'

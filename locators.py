@@ -120,6 +120,7 @@ class MainLocators:
     RESET_SETTINGS_CONFIRM = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.widget.Button[2]'
     RESET_SETTINGS_CLOSE = '//*[@content-desc="Закрыть"]'
     RESET_SETTINGS_CLOSE_EN = '//*[@content-desc="Close"]'
+    DOMAIN_AUTH_METHOD_RB = '//*[@content-desc="@win2012.local"]'
 
     # CHAT
     CHAT_HIDE = '//*[@content-desc="Чат"]/android.widget.Button[1]'
@@ -133,6 +134,7 @@ class MainLocators:
     SEE_OR_HIDE_PASS_BTN = '//*/android.widget.Button[1]'
     SAVE_PASS_SW = '//*[@content-desc="Запомнить пароль"]'
     WARNING_INVALID_EMAIL_OR_PASS = '//*[@content-desc="Неверный E-Mail или пароль"]'
+    WARNING_NOT_FOUND_USER_AD = '//*[@content-desc="Не удалось найти пользователя в службе каталогов"]'
     ADD_ID = '//*[@content-desc="Добавить ID"]'
     ADD_TAG = '//*[@content-desc="Добавить тег"]'
     CANCEL_SELECT_TAG = '//*[@content-desc="Отменить выбор всех тегов"]'

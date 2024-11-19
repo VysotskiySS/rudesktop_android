@@ -23,13 +23,14 @@ class TestMain:
 
     @pytest.mark.main
     @pytest.mark.smoke
-    @allure.title('Авторизоваться (войти) под локальной учетной записью')
+    @allure.title('Войти / Выйти под локальной учетной записью / Выход из учетной записи (выйти)')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?est_case=116")
     def test_login(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.ok_warning_server_to_connect()
         page.start_service()
         page.login()
+        page.logout()
 
     @pytest.mark.main
     @pytest.mark.smoke
@@ -44,22 +45,25 @@ class TestMain:
     @pytest.mark.main
     @pytest.mark.smoke
     @allure.title('Авторизоваться (войти) - невалидные данные')
-    @allure.testcase("")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?est_case=201")
     def test_login_invalid(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.ok_warning_server_to_connect()
         page.start_service()
+        page.click_settings_nav_bar()
         page.login_invalid()
+        page.login_invalid(method='domain')
 
     @pytest.mark.main
     @pytest.mark.smoke
-    @allure.title('Авторизоваться (войти) под доменной учетной записью')
-    @allure.testcase("")
+    @allure.title('Войти / Выйти под доменной учетной записью')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?est_case=200")
     def test_login_domain(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.ok_warning_server_to_connect()
         page.start_service()
         page.login(login=valid_domain_login, method='domain')
+        page.logout(login=valid_domain_login, method='domain')
 
     @pytest.mark.main
     @pytest.mark.smoke
