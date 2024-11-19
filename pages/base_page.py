@@ -10,7 +10,7 @@ from uiautomator2 import Direction
 import unittest
 from faker import Faker
 from PIL import Image
-import pyautogui as pag
+# import pyautogui as pag
 
 
 class BasePage:
@@ -30,15 +30,6 @@ class BasePage:
 
     def swipe(self, swipe_ext):
         self.d.swipe_ext(swipe_ext, scale=0.8)
-
-    def click_img(self, locator):
-        # Ищем изображение на экране
-        location = pag.locateOnScreen(locator)
-        if location:
-            # Кликаем по его центру
-            pag.click(pag.center(location))
-        else:
-            raise ValueError(f"Элемент{locator} не найден")
 
     def generate_random_email(self):
         domain = "@yandex.ru"

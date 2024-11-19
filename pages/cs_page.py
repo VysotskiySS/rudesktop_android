@@ -80,7 +80,8 @@ class CSPage(BasePage):
     @allure.step("Нажать кнопку отправки сообщения в чат")
     def click_send_msg(self):
         self.wait_a_second(2)
-        self.click_img('../img/send_msg_btn.png')
+        self.click('//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[4]')
+
 
     @allure.step("Проверка отправки сообщения в чат")
     def check_chat(self):
