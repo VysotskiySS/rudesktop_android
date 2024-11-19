@@ -647,5 +647,11 @@ class MainPage(BasePage):
         device_alias = self.get_id_or_alias_device()
         assert alias == device_alias
 
+    def check_msg_in_chat_main_window(self):
+        string = self.get_description('//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.view.View[1]/android.view.View')
+        string = string.split('\n')
+        msg = string[1]
+        text = 'Съешь ещё этих мягких французских булок, да выпей чаю'
+        assert msg == text, f'Ожидался текст {text}, но получен {msg}'
 
 

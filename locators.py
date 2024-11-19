@@ -172,6 +172,7 @@ class CSLocators:
     CHAT_FIELD = '//*[@text="Написать сообщение..."]'
     CHAT_HIDE_BTN = '//*[@content-desc="Чат"]/android.widget.Button[1]'
     CHAT_CLOSE_BTN = '//*[@content-desc="Чат"]/android.widget.Button[2]'
+    CHAT_SHOW_BTN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]'
 
 
 

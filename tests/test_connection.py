@@ -66,7 +66,7 @@ class TestConnection:
     @pytest.mark.connection
     @pytest.mark.smoke
     @allure.title('Режим мыши и сенсорный режим')
-    @allure.testcase("")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=199")
     def test_mouse_and_sensor_mode(self, connect_to_device):
         main = MainPage(connect_to_device)
         main.allow_access()
@@ -77,12 +77,18 @@ class TestConnection:
 
     @pytest.mark.connection
     @pytest.mark.smoke
-    @allure.title('Чат в окне подключения')
-    @allure.testcase("")
+    @allure.title('Чат')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=127")
     def test_chat(self, connect_to_device):
         main = MainPage(connect_to_device)
         main.allow_access()
         main.ok_warning_server_to_connect()
         main.connect_from_id()
         cs = CSPage(connect_to_device)
-        cs.check_chat()
+        cs.check_send_msg_to_chat()
+        cs.hide_chat()
+        cs.show_chat()
+        cs.close_chat()
+        main.close_connection()
+        main.click_chat_nav_bar()
+        main.check_msg_in_chat_main_window()

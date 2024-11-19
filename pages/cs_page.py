@@ -82,16 +82,33 @@ class CSPage(BasePage):
         self.wait_a_second(2)
         self.click('//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[4]')
 
-
-    @allure.step("Проверка отправки сообщения в чат")
-    def check_chat(self):
+    @allure.step("Отправить сообщение в чат")
+    def check_send_msg_to_chat(self):
         self.click(CSLocators.BUTTON_CHAT, 'кнопка [Чат] на панели экрана подключения')
-        text = faker.text()
+        # text = faker.text()
+        text = 'Съешь ещё этих мягких французских булок, да выпей чаю'
         self.set_text(CSLocators.CHAT_FIELD, text)
         self.click_send_msg()
         self.set_text(CSLocators.CHAT_FIELD, 'test')
         self.click_send_msg()
         msg = self.get_msg_from_chat()
         assert text == msg, f'Ожидался текст {text}, но получен текст {msg}'
+
+    @allure.step("Нажать скрыть чат")
+    def hide_chat(self):
+        self.wait_element(CSLocators.TITLE_CHAT_WINDOW)
+        self.click(CSLocators.CHAT_HIDE_BTN)
+        self.wait_hidden_element(CSLocators.TITLE_CHAT_WINDOW)
+
+    @allure.step("Нажать показать чат")
+    def show_chat(self):
+        self.click(CSLocators.CHAT_SHOW_BTN)
+        self.wait_element(CSLocators.TITLE_CHAT_WINDOW)
+
+    @allure.step("Закрыть чат")
+    def close_chat(self):
+        self.click(CSLocators.CHAT_CLOSE_BTN)
+        self.wait_hidden_element(CSLocators.TITLE_CHAT_WINDOW)
+        self.wait_hidden_element(CSLocators.CHAT_SHOW_BTN)
 
 
