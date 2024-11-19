@@ -626,6 +626,24 @@ class MainPage(BasePage):
         self.click_ok()
         self.wait_element('//*[@text="Ожидание перезагрузки удалённого устройства..."]')
         self.wait_a_second(60)
+
+        # # Поменяем ожидание на цикл с проверкой
+        # max_time = 100  # Максимальное время ожидания
+        # check_interval = 10  # Интервал проверки
+
+        # start_time = time.time()
+        # while time.time() - start_time < max_time:
+        #     waiting_reboot_gone = self.is_element_hidden('//*[@text="Ожидание перезагрузки удалённого устройства..."]')
+        #     connection_error_gone = self.is_element_hidden('//*[@content-desc="Ошибка подключения"]')
+        #     unstable_connection_gone = self.is_element_hidden(
+        #         '//*[@text="Обнаружено нестабильное соединение, попытка повторного подключения..."]')
+        #
+        #     # Проверка, все ли три условия выполнены
+        #     if waiting_reboot_gone and connection_error_gone and unstable_connection_gone:
+        #         break
+        #     print("Ожидание, пока все условия будут выполнены...")
+        #     time.sleep(check_interval)
+
         self.wait_hidden_element('//*[@text="Ожидание перезагрузки удалённого устройства..."]')
         self.wait_hidden_element('//*[@content-desc="Ошибка подключения"]')
         self.wait_hidden_element('//*[@text="Обнаружено нестабильное соединение, попытка повторного подключения..."]')
