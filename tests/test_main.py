@@ -10,6 +10,19 @@ import allure
 @allure.feature("Основной экран")
 class TestMain:
 
+    @pytest.mark.install
+    @allure.title('Установка apk с сайта Rudesktop.ru')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=202")
+    def test_install_apk_site(self, connect_to_device):
+        d = u2.connect('emulator-5554')
+        d.app_uninstall(package)
+        d.app_install(app_link)
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.click_settings_nav_bar()
+        page.check_version('2.7.732')
+
     @pytest.mark.main
     @pytest.mark.smoke
     @allure.title('Запустить службу')
@@ -341,6 +354,24 @@ class TestMain:
         page.close_connection()
         page.check_alias_last(alias)
         page.check_alias_favorites(alias)
+
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Удалить устройство со вкладки Последние сеансы')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=121")
+    def test_delete_from_lists(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.login()
+        page.clear_all_device_lists()
+        page.connect_from_id(auth='no')
+        page.close_connection()
+        page.check_id_last_seanses()
+        page.add_to_favorites()
+        page.add_to_address_book()
+        page.check_clear_all_device_lists()
+
 
 
 

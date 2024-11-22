@@ -2,7 +2,8 @@
 device_id = 'emulator-5554'
 # device_id = 'TSBM9L55QWWG4LIR'
 package = 'ru.desktop.flutter_hbb'
-app_link = 'https://192.168.10.74/package/rudesktop-2.7.703-[192.168.10.74].apk'
+# app_link = 'https://192.168.10.74/package/rudesktop-2.7.778-[192.168.10.74].apk'
+app_link = 'https://rudesktop.ru/download/rudesktop.apk'
 server_to_connect = '192.168.10.74:433'
 
 #Remote device

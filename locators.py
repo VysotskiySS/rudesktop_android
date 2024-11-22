@@ -38,6 +38,9 @@ class MainLocators:
     SEARCH_BTN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.widget.Button[1]'
     SEARCH_FIELD = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.widget.EditText[1]'
     CANCEL_SEARCH = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.widget.Button[1]'
+    TITLE_WRONG_PASS = '//*[@content-desc="Неверный пароль"]'
+    RETRY_ENTER_PASS = '//*[@content-desc="Попробовать снова"]'
+
 
     #CONNECTION
     BUTTON_MORE_OPTIONS_CONNECTION = '//*/android.widget.ImageView/*'

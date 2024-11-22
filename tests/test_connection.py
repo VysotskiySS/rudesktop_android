@@ -39,6 +39,7 @@ class TestConnection:
     @pytest.mark.connection
     @pytest.mark.smoke
     @allure.title('Пароль операционной системы')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=149")
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=150")
     def test_password_os(self, connect_to_device):
         main = MainPage(connect_to_device)
@@ -92,3 +93,17 @@ class TestConnection:
         main.close_connection()
         main.click_chat_nav_bar()
         main.check_msg_in_chat_main_window()
+
+    @pytest.mark.connection
+    @pytest.mark.smoke
+    @allure.title('Скрыть / Показать панель управления окна подключения')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=148")
+    def test_hide_panel(self, connect_to_device):
+        main = MainPage(connect_to_device)
+        main.allow_access()
+        main.ok_warning_server_to_connect()
+        main.connect_from_id()
+        cs = CSPage(connect_to_device)
+        cs.hide_panel()
+        cs.show_panel()
+

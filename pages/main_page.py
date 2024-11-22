@@ -54,6 +54,12 @@ class MainPage(BasePage):
             self.click(MainLocators.OK_BTN)
         self.check_connection_screen()
 
+    def check_id_last_seanses(self):
+        self.wait_a_second(2)
+        id_device_last = self.get_id_or_alias_device()
+        id_device_last = id_device_last.replace(' ', '')
+        assert id_device_last == valid_remote_device_id, f'Ожидался id {valid_remote_device_id}, но получен {id_device_last}'
+
     def connect_from_invalid_id(self):
         self.click_connection_nav_bar()
         self.set_id(invalid_remote_device_id)
@@ -485,6 +491,19 @@ class MainPage(BasePage):
         id_address_book = self.get_text_before_newline(id_address_book)
         assert id_address_book == id_last_seanses, f'ID устройства из адресной книги {id_address_book} не совпадает с ID устройства в последних сеансах {id_last_seanses}'
 
+    def check_clear_all_device_lists(self):
+        self.click(MainLocators.LAST_SEANSES)
+        assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) > 0, 'Нет устройств в списке'
+        self.clear_last_seanses()
+
+        self.click(MainLocators.FAVOTITES)
+        assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) > 0, 'Нет устройств в списке'
+        self.clear_favorites()
+
+        self.click(MainLocators.ADDRESS_BOOK)
+        assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) > 0, 'Нет устройств в списке'
+        self.clear_address_book()
+
     def clear_all_device_lists(self):
         self.clear_last_seanses()
         self.clear_favorites()
@@ -689,4 +708,21 @@ class MainPage(BasePage):
         text = 'Съешь ещё этих мягких французских булок, да выпей чаю'
         assert msg == text, f'Ожидался текст {text}, но получен {msg}'
 
+    @allure.step("Повторно ввести пароль")
+    def wrong_pass_retry(self):
+        if self.get_elements_amount(MainLocators.TITLE_WRONG_PASS) > 0:
+            self.click(MainLocators.RETRY_ENTER_PASS)
+            self.enter_passwd()
+            self.click_ok()
 
+    def check_version(self, version):
+        self.swipe_to_element(MainLocators.VERSION)
+        current_version = self.get_version()
+        assert version == current_version, f'Текущая версия {current_version} не совпала с ожидаемой версией {version}'
+
+    def get_version(self):
+        string = self.get_description(MainLocators.VERSION)
+        string = string.split('\n')
+        version = string[0]
+        version = version.split(': ')[1]
+        return version

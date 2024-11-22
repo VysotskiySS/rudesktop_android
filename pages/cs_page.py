@@ -111,4 +111,37 @@ class CSPage(BasePage):
         self.wait_hidden_element(CSLocators.TITLE_CHAT_WINDOW)
         self.wait_hidden_element(CSLocators.CHAT_SHOW_BTN)
 
+    @allure.step("Нажать кнопку [Скрыть панель управления окна подключения]")
+    def hide_panel(self):
+        with allure.step("Проверяем на наличие все кнопки панели"):
+            self.wait_element(CSLocators.BUTTON_X)
+            self.wait_element(CSLocators.BUTTON_DISPLAY)
+            self.wait_element(CSLocators.BUTTON_KEYBOARD)
+            self.wait_element(CSLocators.BUTTON_MOUSE)
+            self.wait_element(CSLocators.BUTTON_CHAT)
+            self.wait_element(CSLocators.BUTTON_MORE_OPTION)
+            self.wait_element(CSLocators.BUTTON_HIDE_PANEL)
+        with allure.step("Нажимаем кнопку скрыть панель"):
+            self.click(CSLocators.BUTTON_HIDE_PANEL)
+        with allure.step("Проверяем что кнопок нет"):
+            self.wait_hidden_element(CSLocators.BUTTON_DISPLAY)
+            self.wait_hidden_element(CSLocators.BUTTON_KEYBOARD)
+            self.wait_hidden_element(CSLocators.BUTTON_MOUSE)
+            self.wait_hidden_element(CSLocators.BUTTON_CHAT)
+            self.wait_hidden_element(CSLocators.BUTTON_MORE_OPTION)
+            self.wait_hidden_element(CSLocators.BUTTON_HIDE_PANEL)
+        with allure.step("Проверяем что кнопка показать панель отображается"):
+            self.wait_element(CSLocators.BUTTON_SHOW_PANEL)
 
+    @allure.step("Нажать кнопку [Показать панель управления окна подключения]")
+    def show_panel(self):
+        with allure.step("Нажимаем кнопку показать панель"):
+            self.click(CSLocators.BUTTON_SHOW_PANEL)
+        with allure.step("Проверяем на наличие все кнопки панели"):
+            self.wait_element(CSLocators.BUTTON_X)
+            self.wait_element(CSLocators.BUTTON_DISPLAY)
+            self.wait_element(CSLocators.BUTTON_KEYBOARD)
+            self.wait_element(CSLocators.BUTTON_MOUSE)
+            self.wait_element(CSLocators.BUTTON_CHAT)
+            self.wait_element(CSLocators.BUTTON_MORE_OPTION)
+            self.wait_element(CSLocators.BUTTON_HIDE_PANEL)
