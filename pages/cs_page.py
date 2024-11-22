@@ -145,3 +145,25 @@ class CSPage(BasePage):
             self.wait_element(CSLocators.BUTTON_CHAT)
             self.wait_element(CSLocators.BUTTON_MORE_OPTION)
             self.wait_element(CSLocators.BUTTON_HIDE_PANEL)
+
+    def check_color_active_element(self, x, y, rb='active'):
+        active_rb_color = (25, 138, 232)
+        inactive_rb_color = (255, 255, 255)
+        self.get_screen()
+        current_color = self.get_color_pixel(x, y)
+        if rb == 'active':
+            assert current_color == active_rb_color, f'Ожидался цвет {active_rb_color}, но получен {current_color}'
+        else:
+            assert current_color == inactive_rb_color, f'Ожидался цвет {inactive_rb_color}, но получен {current_color}'
+
+    def check_quality(self):
+        self.click(CSLocators.BUTTON_DISPLAY)
+        self.click(CSLocators.SHOW_QUALITY)
+
+        self.check_color_active_element(879, 1490)
+
+        self.check_color_active_element(881, 1087)
+        self.check_color_active_element(881, 960, rb='inactive')
+        self.check_color_active_element(881, 1209, rb='inactive')
+
+

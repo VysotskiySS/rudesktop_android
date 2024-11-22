@@ -16,7 +16,6 @@ class MainLocators:
     TITLE_CHANGE_CERT_SERVER = '//*[@content-desc="Сертификат сервера изменился"]'
     ACCEPT_NEW_CERT_BTN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.widget.Button[2]'
 
-
     # POPUP
     CANCEL_BTN = '//*[@content-desc="Отменить"]'
     OK_BTN = '//*[@content-desc="ОК"]'
@@ -40,7 +39,6 @@ class MainLocators:
     CANCEL_SEARCH = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.widget.Button[1]'
     TITLE_WRONG_PASS = '//*[@content-desc="Неверный пароль"]'
     RETRY_ENTER_PASS = '//*[@content-desc="Попробовать снова"]'
-
 
     #CONNECTION
     BUTTON_MORE_OPTIONS_CONNECTION = '//*/android.widget.ImageView/*'
@@ -179,7 +177,17 @@ class CSLocators:
     CHAT_CLOSE_BTN = '//*[@content-desc="Чат"]/android.widget.Button[2]'
     CHAT_SHOW_BTN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]'
 
-
+    # DISPLAY
+    ORIGINAL_SCALE_DISPLAY = '//*[@content-desc="Оригинал масштаба"]'
+    ADAPTIVE_SCALE_DISPLAY = '//*[@content-desc="Масштаб адаптивный"]'
+    GOOD_IMAGE_QUALITY = '//*[@content-desc="Хорошее качество изображения"]'
+    BALANCED_QUALITY = '//*[@content-desc="Сбалансированное качество"]'
+    FAST_REACTION_TIME = '//*[@content-desc="Быстрое время реакции"]'
+    SHOW_REMOTE_CURSOR = '//*[@content-desc="Показать удаленный курсор"]'
+    SHOW_QUALITY = '//*[@content-desc="Показать качество"]'
+    DISABLE_SOUND = '//*[@content-desc="Отключить звук"]'
+    DISABLE_CLIPBOARD = '//*[@content-desc="Отключить буфер обмена"]'
+    LOCK_SCREEN_AFTER_END_SESSION = '//*[@content-desc="Блокировка экрана после завершения сеанса"]'
 
 
 

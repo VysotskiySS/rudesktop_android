@@ -107,3 +107,14 @@ class TestConnection:
         cs.hide_panel()
         cs.show_panel()
 
+    @pytest.mark.connection
+    @pytest.mark.smoke
+    @allure.title('Показывать качество / Изменить качество')
+    @allure.testcase("")
+    def test_quality(self, connect_to_device):
+        main = MainPage(connect_to_device)
+        main.allow_access()
+        main.ok_warning_server_to_connect()
+        main.connect_from_id()
+        cs = CSPage(connect_to_device)
+        cs.check_quality()
