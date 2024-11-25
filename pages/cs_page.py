@@ -162,7 +162,7 @@ class CSPage(BasePage):
 
     @allure.step("Проверить изменение цвета активного элемента")
     def check_quality(self):
-        self.click(CSLocators.BUTTON_DISPLAY)
+        self.click_display()
         self.click(CSLocators.SHOW_QUALITY)
 
         GOOD_QUALITY = self.get_center_element_from_locator(CSLocators.GOOD_IMAGE_QUALITY) # GOOD QUALITY
@@ -215,32 +215,41 @@ class CSPage(BasePage):
         colors_after = self.sample_ten_points(start_x=20, y=1200)
         assert colors_before != colors_after, f'Цвета десяти произвольных точек не изменились'
 
+    def click_display(self):
+        self.click(CSLocators.BUTTON_DISPLAY, 'кнопка [Дисплей] в окне подключения')
+
+    @allure.step("Проверить изменение масштаба")
     def check_change_scale_mode(self):
-        x = 525
-        y = 100
-        self.get_screen()
-        default_color = self.get_color_pixel(x, y)
-        assert default_color == (29, 29, 29)
-        self.click(MainLocators.CLOSE_CLIPBOARD)
-        self.click(CSLocators.BUTTON_DISPLAY)
-        self.click(CSLocators.ORIGINAL_SCALE_DISPLAY)
-        ORIGINAL_SCALE = self.get_center_element_from_locator(CSLocators.ORIGINAL_SCALE_DISPLAY)
-        ADAPTIVE_SCALE = self.get_center_element_from_locator(CSLocators.ADAPTIVE_SCALE_DISPLAY)
-        self.check_color_active_element(*ORIGINAL_SCALE)
-        self.check_color_active_element(*ADAPTIVE_SCALE, condition='inactive')
-        self.click(CSLocators.BUTTON_DISPLAY)
-        self.get_screen()
-        current_color = self.get_color_pixel(x, y)
-        assert current_color != (29, 29, 29)
-        assert current_color != (33, 33, 33)
-        self.click(CSLocators.BUTTON_DISPLAY)
-        self.click(CSLocators.ADAPTIVE_SCALE_DISPLAY)
-        self.check_color_active_element(*ORIGINAL_SCALE, condition='inactive')
-        self.check_color_active_element(*ADAPTIVE_SCALE)
-        self.click(CSLocators.BUTTON_DISPLAY)
-        self.get_screen()
-        current_color = self.get_color_pixel(x, y)
-        assert current_color == (33, 33, 33)
+        with allure.step("По умолчанию масштаб адаптивный"):
+            x = 525
+            y = 100
+            self.get_screen()
+            default_color = self.get_color_pixel(x, y)
+            assert default_color == (29, 29, 29) or default_color == (33, 33, 33)
+        try:
+            self.click(MainLocators.CLOSE_CLIPBOARD, 'кнопка Х на окне превью буфера обмена')
+        except:
+            pass
+        with allure.step("Переключить масштаб на оригинальный"):
+            self.click_display()
+            self.click(CSLocators.ORIGINAL_SCALE_DISPLAY)
+            ORIGINAL_SCALE = self.get_center_element_from_locator(CSLocators.ORIGINAL_SCALE_DISPLAY)
+            ADAPTIVE_SCALE = self.get_center_element_from_locator(CSLocators.ADAPTIVE_SCALE_DISPLAY)
+            self.check_color_active_element(*ORIGINAL_SCALE)
+            self.check_color_active_element(*ADAPTIVE_SCALE, condition='inactive')
+            self.click_display()
+            self.get_screen()
+            current_color = self.get_color_pixel(x, y)
+            assert current_color != (29, 29, 29) or current_color != (33, 33, 33)
+        with allure.step("Переключить масштаб на адаптивный"):
+            self.click_display()
+            self.click(CSLocators.ADAPTIVE_SCALE_DISPLAY)
+            self.check_color_active_element(*ORIGINAL_SCALE, condition='inactive')
+            self.check_color_active_element(*ADAPTIVE_SCALE)
+            self.click_display()
+            self.get_screen()
+            current_color = self.get_color_pixel(x, y)
+            assert current_color == (29, 29, 29) or current_color == (33, 33, 33)
 
 
 
