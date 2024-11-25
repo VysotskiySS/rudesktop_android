@@ -34,17 +34,16 @@ class MainPage(BasePage):
     def set_id(self, id_string):
         self.click(MainLocators.REMOTE_ID_FIELD)
         for i in range(len(id_string)):
-        #     self.wait_a_second()
             self.d.send_keys(id_string[i])
 
     def click_connect(self):
         self.wait_a_second(3)
         self.click(MainLocators.CONNECT_BTN, 'кнопка [Подключиться] в поле Удаленный идентификатор')
 
-    def connect_from_id(self, auth='yes', save='no'):
+    def connect_from_id(self, auth='yes', save='no', id=valid_remote_device_id):
         self.click_connection_nav_bar()
         self.clear_last_seanses()
-        self.set_id(valid_remote_device_id)
+        self.set_id(id)
         self.click_connect()
         if auth == 'yes':
             self.enter_passwd()

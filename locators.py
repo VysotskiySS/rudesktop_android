@@ -12,6 +12,7 @@ class MainLocators:
     OK_KEYBOARD = '//*[@resource-id="com.google.android.inputmethod.latin:id/key_pos_ime_action"]/android.widget.FrameLayout[1]'
     X_BTN_CLIPBOARD = '//*[@resource-id="com.android.systemui:id/dismiss_button"]'
     CLIPBOARD_PREVIEW = '//*[@resource-id="com.android.systemui:id/clipboard_preview"]'
+    CLOSE_CLIPBOARD = '//*[@resource-id="com.android.systemui:id/dismiss_image"]'
     PERMISSION_ALLOW_BTN = '//*[@resource-id="com.android.permissioncontroller:id/permission_allow_foreground_only_button"]'
 
     CHANGE_CERT_WARNING_TITLE = '//*[@content-desc="Сертификат сервера изменился"]'

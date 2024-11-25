@@ -110,7 +110,7 @@ class TestConnection:
     @pytest.mark.connection
     @pytest.mark.smoke
     @allure.title('Показывать качество / Изменить качество')
-    @allure.testcase("")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=141")
     def test_quality(self, connect_to_device):
         main = MainPage(connect_to_device)
         main.allow_access()
@@ -122,7 +122,7 @@ class TestConnection:
     @pytest.mark.connection
     @pytest.mark.smoke
     @allure.title('Вставить Ctrl + Alt + Del')
-    @allure.testcase("")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=156")
     def test_ctrl_alt_del(self, connect_to_device):
         main = MainPage(connect_to_device)
         main.allow_access()
@@ -130,3 +130,16 @@ class TestConnection:
         main.connect_from_id()
         cs = CSPage(connect_to_device)
         cs.send_ctrl_alt_del()
+
+    @pytest.mark.connection
+    @pytest.mark.smoke
+    @allure.title('Изменение масштаба')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=143")
+    def test_change_scale(self, connect_to_device):
+        main = MainPage(connect_to_device)
+        main.allow_access()
+        main.ok_warning_server_to_connect()
+        main.login()
+        main.connect_from_id(auth='no')
+        cs = CSPage(connect_to_device)
+        cs.check_change_scale_mode()

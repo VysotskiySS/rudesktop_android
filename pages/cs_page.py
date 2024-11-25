@@ -1,5 +1,7 @@
 import allure
 from faker import Faker
+from pygments.lexer import default
+
 from locators import *
 from pages.base_page import BasePage
 from pages.main_page import MainPage
@@ -205,13 +207,43 @@ class CSPage(BasePage):
             colors.append(color)
         return colors
 
-    @allure.step("Отплавить на устройство Ctrl + Alt + Del")
+    @allure.step("Отправить на устройство Ctrl + Alt + Del")
     def send_ctrl_alt_del(self):
         self.click(CSLocators.BUTTON_MORE_OPTION, 'кнопка [...] в окне подключения')
         colors_before = self.sample_ten_points(start_x=20, y=1200)
         self.click(CSLocators.INSERT_CTRL_ALT_DEL, 'вставить Ctrl + Alt + Del')
         colors_after = self.sample_ten_points(start_x=20, y=1200)
         assert colors_before != colors_after, f'Цвета десяти произвольных точек не изменились'
+
+    def check_change_scale_mode(self):
+        x = 525
+        y = 100
+        self.get_screen()
+        default_color = self.get_color_pixel(x, y)
+        assert default_color == (29, 29, 29)
+        self.click(MainLocators.CLOSE_CLIPBOARD)
+        self.click(CSLocators.BUTTON_DISPLAY)
+        self.click(CSLocators.ORIGINAL_SCALE_DISPLAY)
+        ORIGINAL_SCALE = self.get_center_element_from_locator(CSLocators.ORIGINAL_SCALE_DISPLAY)
+        ADAPTIVE_SCALE = self.get_center_element_from_locator(CSLocators.ADAPTIVE_SCALE_DISPLAY)
+        self.check_color_active_element(*ORIGINAL_SCALE)
+        self.check_color_active_element(*ADAPTIVE_SCALE, condition='inactive')
+        self.click(CSLocators.BUTTON_DISPLAY)
+        self.get_screen()
+        current_color = self.get_color_pixel(x, y)
+        assert current_color != (29, 29, 29)
+        assert current_color != (33, 33, 33)
+        self.click(CSLocators.BUTTON_DISPLAY)
+        self.click(CSLocators.ADAPTIVE_SCALE_DISPLAY)
+        self.check_color_active_element(*ORIGINAL_SCALE, condition='inactive')
+        self.check_color_active_element(*ADAPTIVE_SCALE)
+        self.click(CSLocators.BUTTON_DISPLAY)
+        self.get_screen()
+        current_color = self.get_color_pixel(x, y)
+        assert current_color == (33, 33, 33)
+
+
+
 
 
 
