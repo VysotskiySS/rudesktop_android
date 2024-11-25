@@ -1,6 +1,5 @@
 import allure
 import pyperclip
-from rich.style import Style
 
 from locators import *
 from pages.base_page import BasePage
