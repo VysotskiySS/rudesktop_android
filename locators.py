@@ -13,8 +13,11 @@ class MainLocators:
     X_BTN_CLIPBOARD = '//*[@resource-id="com.android.systemui:id/dismiss_button"]'
     CLIPBOARD_PREVIEW = '//*[@resource-id="com.android.systemui:id/clipboard_preview"]'
     PERMISSION_ALLOW_BTN = '//*[@resource-id="com.android.permissioncontroller:id/permission_allow_foreground_only_button"]'
-    TITLE_CHANGE_CERT_SERVER = '//*[@content-desc="Сертификат сервера изменился"]'
+
+    CHANGE_CERT_WARNING_TITLE = '//*[@content-desc="Сертификат сервера изменился"]'
+    CHANGE_CERT_TEXT = '//*[contains(@content-desc="Сертификат сервера не является доверенным. Это может быть по разным причинам, например:")]'
     ACCEPT_NEW_CERT_BTN = '//*[@resource-id="android:id/content"]/android.widget.FrameLayout[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.widget.Button[2]'
+    CLOSE_BTN = '//*[@content-desc="Закрыть"]'
 
     # POPUP
     CANCEL_BTN = '//*[@content-desc="Отменить"]'

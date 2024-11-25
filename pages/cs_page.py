@@ -146,24 +146,73 @@ class CSPage(BasePage):
             self.wait_element(CSLocators.BUTTON_MORE_OPTION)
             self.wait_element(CSLocators.BUTTON_HIDE_PANEL)
 
-    def check_color_active_element(self, x, y, rb='active'):
-        active_rb_color = (25, 138, 232)
-        inactive_rb_color = (255, 255, 255)
+    def check_color_active_element(self, x, y, condition='active'):
+        active_color = (25, 138, 232)
+        inactive_color = (255, 255, 255)
         self.get_screen()
         current_color = self.get_color_pixel(x, y)
-        if rb == 'active':
-            assert current_color == active_rb_color, f'Ожидался цвет {active_rb_color}, но получен {current_color}'
+        r, g, b = current_color
+        if condition == 'active':
+            # странным образом цвет пикселя активного элемента даже в одной конкретной точке может отличаться поэтому просто смотрим что преобладает синий
+            assert b > r and b > g, f'Ожидался цвет {active_color}, но получен {current_color}'
         else:
-            assert current_color == inactive_rb_color, f'Ожидался цвет {inactive_rb_color}, но получен {current_color}'
+            assert current_color == inactive_color, f'Ожидался цвет {inactive_color}, но получен {current_color}'
 
+    @allure.step("Проверить изменение цвета активного элемента")
     def check_quality(self):
         self.click(CSLocators.BUTTON_DISPLAY)
         self.click(CSLocators.SHOW_QUALITY)
 
-        self.check_color_active_element(879, 1490)
+        GOOD_QUALITY = self.get_center_element_from_locator(CSLocators.GOOD_IMAGE_QUALITY) # GOOD QUALITY
+        BALANCE_QUALITY = self.get_center_element_from_locator(CSLocators.BALANCED_QUALITY)  # BALANCE QUALITY
+        FAST_REACT_TIME = self.get_center_element_from_locator(CSLocators.FAST_REACTION_TIME)  # FAST REACT TIME
 
-        self.check_color_active_element(881, 1087)
-        self.check_color_active_element(881, 960, rb='inactive')
-        self.check_color_active_element(881, 1209, rb='inactive')
+        with allure.step("Чек бокс - Показать качество"):
+            self.check_color_active_element(879, 1490) # SHOW QUALITY
+            self.click(CSLocators.SHOW_QUALITY)
+            self.check_color_active_element(879, 1490, condition='inactive')  # SHOW QUALITY
+        with allure.step("По умолчанию активный радиобаттон - Сбалансированное качество"):
+            self.check_color_active_element(*GOOD_QUALITY, condition='inactive') # GOOD QUALITY
+            self.check_color_active_element(*BALANCE_QUALITY) # BALANCE QUALITY
+            self.check_color_active_element(*FAST_REACT_TIME, condition='inactive') # FAST REACT TIME
+        with allure.step("Переключаем качество на - Хорошее качество изображения"):
+            self.click(CSLocators.GOOD_IMAGE_QUALITY)
+            self.check_color_active_element(*GOOD_QUALITY) # GOOD QUALITY
+            self.check_color_active_element(*BALANCE_QUALITY, condition='inactive') # BALANCE QUALITY
+            self.check_color_active_element(*FAST_REACT_TIME, condition='inactive') # FAST REACT TIME
+        with allure.step("Переключаем качество на - Быстрое время реакции"):
+            self.click(CSLocators.FAST_REACTION_TIME)
+            self.check_color_active_element(*GOOD_QUALITY, condition='inactive') # GOOD QUALITY
+            self.check_color_active_element(*BALANCE_QUALITY, condition='inactive') # BALANCE QUALITY
+            self.check_color_active_element(*FAST_REACT_TIME) # FAST REACT TIME
+        with allure.step("Переключаем качество на - Сбалансированное качество"):
+            self.click(CSLocators.BALANCED_QUALITY)
+            self.check_color_active_element(*GOOD_QUALITY, condition='inactive') # GOOD QUALITY
+            self.check_color_active_element(*BALANCE_QUALITY) # BALANCE QUALITY
+            self.check_color_active_element(*FAST_REACT_TIME, condition='inactive') # FAST REACT TIME
+
+    def get_center_element_from_locator(self, locator):
+        x, y = self.get_element(locator).center()
+        x = x + 340
+        return x, y
+
+    @allure.step("Берем десять точек на экране и получаем цвет")
+    def sample_ten_points(self, start_x, y, step=100):
+        colors = []
+        for i in range(10):
+            x = start_x + i * step
+            color = self.get_color_pixel(x, y)
+            colors.append(color)
+        return colors
+
+    @allure.step("Отплавить на устройство Ctrl + Alt + Del")
+    def send_ctrl_alt_del(self):
+        self.click(CSLocators.BUTTON_MORE_OPTION, 'кнопка [...] в окне подключения')
+        colors_before = self.sample_ten_points(start_x=20, y=1200)
+        self.click(CSLocators.INSERT_CTRL_ALT_DEL, 'вставить Ctrl + Alt + Del')
+        colors_after = self.sample_ten_points(start_x=20, y=1200)
+        assert colors_before != colors_after, f'Цвета десяти произвольных точек не изменились'
+
+
 
 

@@ -118,3 +118,15 @@ class TestConnection:
         main.connect_from_id()
         cs = CSPage(connect_to_device)
         cs.check_quality()
+
+    @pytest.mark.connection
+    @pytest.mark.smoke
+    @allure.title('Вставить Ctrl + Alt + Del')
+    @allure.testcase("")
+    def test_ctrl_alt_del(self, connect_to_device):
+        main = MainPage(connect_to_device)
+        main.allow_access()
+        main.ok_warning_server_to_connect()
+        main.connect_from_id()
+        cs = CSPage(connect_to_device)
+        cs.send_ctrl_alt_del()
