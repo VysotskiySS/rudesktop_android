@@ -18,7 +18,7 @@ class MainPage(BasePage):
             self.click(MainLocators.BACK_BTN, 'кнопка [назад]')
 
     def accept_new_cert(self):
-        if self.get_elements_amount(MainLocators.TITLE_CHANGE_CERT_SERVER) >0:
+        if self.get_elements_amount(MainLocators.CHANGE_CERT_WARNING_TITLE) >0:
             self.click(MainLocators.ACCEPT_NEW_CERT_BTN)
             self.wait_a_second(10)
 
