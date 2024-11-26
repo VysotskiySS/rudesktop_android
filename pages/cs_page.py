@@ -160,10 +160,13 @@ class CSPage(BasePage):
         else:
             assert current_color == inactive_color, f'Ожидался цвет {inactive_color}, но получен {current_color}'
 
+    def click_show_quality(self):
+        self.click(CSLocators.SHOW_QUALITY, 'кнопка [Показать качество]')
+
     @allure.step("Проверить изменение цвета активного элемента")
     def check_quality(self):
         self.click_display()
-        self.click(CSLocators.SHOW_QUALITY)
+        self.click_show_quality()
 
         GOOD_QUALITY = self.get_center_element_from_locator(CSLocators.GOOD_IMAGE_QUALITY) # GOOD QUALITY
         BALANCE_QUALITY = self.get_center_element_from_locator(CSLocators.BALANCED_QUALITY)  # BALANCE QUALITY
@@ -171,8 +174,9 @@ class CSPage(BasePage):
 
         with allure.step("Чек бокс - Показать качество"):
             self.check_color_active_element(879, 1490) # SHOW QUALITY
-            self.click(CSLocators.SHOW_QUALITY)
+            self.click_show_quality()
             self.check_color_active_element(879, 1490, condition='inactive')  # SHOW QUALITY
+            self.click_show_quality()
         with allure.step("По умолчанию активный радиобаттон - Сбалансированное качество"):
             self.check_color_active_element(*GOOD_QUALITY, condition='inactive') # GOOD QUALITY
             self.check_color_active_element(*BALANCE_QUALITY) # BALANCE QUALITY
@@ -250,6 +254,14 @@ class CSPage(BasePage):
             self.get_screen()
             current_color = self.get_color_pixel(x, y)
             assert current_color == (29, 29, 29) or current_color == (33, 33, 33)
+        with allure.step("Переключить масштаб на оригинальный через кнопку [...]"):
+            self.click(CSLocators.BUTTON_MORE_OPTION, 'кнопка [...] на панели окна подключения')
+            self.click(CSLocators.ORIGINAL_SCALE, 'кнопка [Оригинальный масштаб]')
+            self.get_screen()
+            current_color = self.get_color_pixel(x, y)
+            assert current_color != (29, 29, 29) or current_color != (33, 33, 33)
+
+
 
 
 

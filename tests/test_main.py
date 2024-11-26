@@ -238,40 +238,6 @@ class TestMain:
 
     @pytest.mark.main
     @pytest.mark.smoke
-    @allure.title('Добавить в адресную книгу / Удалить из адресной книги')
-    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=124")
-    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=125")
-    def test_add_and_delete_from_address_book(self, connect_to_device):
-        page = MainPage(connect_to_device)
-        page.allow_access()
-        page.ok_warning_server_to_connect()
-        page.connect_from_id()
-        page.close_connection()
-        page.login()
-        page.clear_address_book()
-        page.click_connection_nav_bar()
-        page.add_to_address_book()
-        page.clear_address_book()
-
-    @pytest.mark.main
-    @pytest.mark.smoke
-    @allure.title('Добавить в избранное / Удалить из избранного')
-    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=122")
-    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=123")
-    def test_add_and_delete_from_favorites(self, connect_to_device):
-        page = MainPage(connect_to_device)
-        page.allow_access()
-        page.ok_warning_server_to_connect()
-        page.connect_from_id()
-        page.close_connection()
-        page.login()
-        page.clear_favorites()
-        page.click_connection_nav_bar()
-        page.add_to_favorites()
-        page.clear_favorites()
-
-    @pytest.mark.main
-    @pytest.mark.smoke
     @allure.title('Обновление временного пароля')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=173")
     def test_update_temp_pass(self, connect_to_device):
@@ -359,7 +325,7 @@ class TestMain:
     @pytest.mark.smoke
     @allure.title('Удалить устройство со вкладки Последние сеансы')
     @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=121")
-    def test_delete_from_lists(self, connect_to_device):
+    def test_delete_from_last_session(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.allow_access()
         page.ok_warning_server_to_connect()
@@ -370,9 +336,67 @@ class TestMain:
         page.check_id_last_seanses()
         page.add_to_favorites()
         page.add_to_address_book()
-        page.check_clear_all_device_lists()
+        page.check_clear_last_session()
 
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Добавить в избранное / Удалить из избранного')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=122")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=123")
+    def test_add_and_delete_from_favorites(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.login()
+        page.clear_all_device_lists()
+        page.connect_from_id(auth='no')
+        page.close_connection()
+        page.check_clear_favorites()
 
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Удалить устройство со вкладки Последние сеансы (неавтор.)')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=121")
+    def test_delete_from_last_session_un(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.clear_all_device_lists()
+        page.connect_from_id()
+        page.close_connection()
+        page.check_id_last_seanses()
+        page.add_to_favorites()
+        page.add_to_address_book()
+        page.check_clear_last_session()
 
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Добавить в избранное / Удалить из избранного (неавтор.)')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=122")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=123")
+    def test_add_and_delete_from_favorites_un(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.clear_all_device_lists()
+        page.connect_from_id()
+        page.close_connection()
+        page.check_clear_favorites()
+
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('Добавить в адресную книгу / Удалить из адресной книги')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=124")
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=125")
+    def test_add_and_delete_from_address_book(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.allow_access()
+        page.ok_warning_server_to_connect()
+        page.login()
+        page.clear_all_device_lists()
+        page.connect_from_id(auth='no')
+        page.close_connection()
+        page.add_to_address_book()
+        page.check_clear_address_book()
 
 

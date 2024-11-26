@@ -7,7 +7,7 @@ app_link = 'https://rudesktop.ru/download/rudesktop.apk'
 server_to_connect = '192.168.10.74:433'
 
 #Remote device
-valid_remote_device_id = '41578628'
+valid_remote_device_id = '000111333'
 valid_password = 'Kief22Mo'
 valid_login = 'rude'
 

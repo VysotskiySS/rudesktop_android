@@ -34,7 +34,7 @@ class MainLocators:
     # CONNECTION_TAB
     REMOTE_ID_FIELD = '//*[@text="Удаленный идентификатор"]'
     CONNECT_BTN = '//*/android.widget.Button[1]'
-    LAST_SEANSES = '//*[@content-desc="Последние сеансы"]'
+    LAST_SESSION = '//*[@content-desc="Последние сеансы"]'
     FAVOTITES = '//*[@content-desc="Избранное"]'
     ADDRESS_BOOK = '//*[@content-desc="Адресная книга"]'
     MESSAGE_UPDATE_APP = '//*[@content-desc="Приложение устарело. Обновите его через Google Play или на сайте rudesktop.ru"]'

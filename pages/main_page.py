@@ -37,12 +37,12 @@ class MainPage(BasePage):
             self.d.send_keys(id_string[i])
 
     def click_connect(self):
-        self.wait_a_second(3)
+        self.wait_a_second()
         self.click(MainLocators.CONNECT_BTN, 'кнопка [Подключиться] в поле Удаленный идентификатор')
 
     def connect_from_id(self, auth='yes', save='no', id=valid_remote_device_id):
         self.click_connection_nav_bar()
-        self.clear_last_seanses()
+        self.clear_last_session()
         self.set_id(id)
         self.click_connect()
         if auth == 'yes':
@@ -51,6 +51,10 @@ class MainPage(BasePage):
                 self.click_save_pass()
             self.click(MainLocators.OK_BTN)
         self.check_connection_screen()
+
+    def reconnect_without_pass(self):
+        self.click_connection_nav_bar()
+        self.click_connect()
 
     def check_id_last_seanses(self):
         self.wait_a_second(2)
@@ -477,9 +481,12 @@ class MainPage(BasePage):
         self.click_access_nav_bar()
         self.wait_hidden_element('//*[contains(@content-desc, "Служба не запущена")]')
 
+    def open_last_session(self):
+        self.click(MainLocators.LAST_SESSION, 'вкладка [Последние сеансы]')
+
     @allure.step("Добавить устройство в Адресную книгу")
     def add_to_address_book(self):
-        self.click(MainLocators.LAST_SEANSES, 'вкладка [Последние сеансы]')
+        self.open_last_session()
         id_last_seanses = self.get_description(MainLocators.DEVICE_IN_LIST)
         id_last_seanses = self.get_text_before_newline(id_last_seanses)
         self.click_more_option_connect()
@@ -489,21 +496,47 @@ class MainPage(BasePage):
         id_address_book = self.get_text_before_newline(id_address_book)
         assert id_address_book == id_last_seanses, f'ID устройства из адресной книги {id_address_book} не совпадает с ID устройства в последних сеансах {id_last_seanses}'
 
-    def check_clear_all_device_lists(self):
-        self.click(MainLocators.LAST_SEANSES)
-        assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) > 0, 'Нет устройств в списке'
-        self.clear_last_seanses()
+    @allure.step("Удалить устройство со вкладки [Последние сеансы]")
+    def check_clear_last_session(self):
+        with allure.step("Удалить устройство со вкладки [Последние сеансы]"):
+            self.open_last_session()
+            assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) > 0, 'Нет устройств в списке'
+            self.clear_last_session()
+        with allure.step("Проверяем что устройство удалилось так-же и с вкладки [Избранное]"):
+            self.click(MainLocators.FAVOTITES)
+            assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) == 0, 'Устройство найдено в списке. При удалении со вкладки "Последние сеансы", устройство должно удаляться и с вкладки "Избранное"'
+        with allure.step("Проверяем что устройство ранее добавленное в избранное и удаленное из последних сеансов не добавляется при повторном подключении в избранное"):
+            self.open_last_session()
+            self.reconnect_without_pass()
+            self.close_connection()
+            assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) > 0, 'Нет устройств в списке'
+            self.click(MainLocators.FAVOTITES)
+            assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) == 0, 'Устройство найдено в списке'
 
-        self.click(MainLocators.FAVOTITES)
-        assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) > 0, 'Нет устройств в списке'
-        self.clear_favorites()
+    @allure.step("Удалить устройство со вкладки [Избранное]")
+    def check_clear_favorites(self):
+        with allure.step("Удалить устройство со вкладки [Избранное]"):
+            self.add_to_favorites()
+            self.clear_favorites()
+            self.open_last_session()
+            assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) == 0, 'Устройство найдено в списке'
 
-        self.click(MainLocators.ADDRESS_BOOK)
-        assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) > 0, 'Нет устройств в списке'
-        self.clear_address_book()
+    @allure.step("Удалить устройство со вкладки [Адресная книга]")
+    def check_clear_address_book(self):
+        with allure.step("Удалить устройство со вкладки [Адресная книга]"):
+            self.click(MainLocators.ADDRESS_BOOK)
+            assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) > 0, 'Нет устройств в списке'
+            self.clear_address_book()
+        with allure.step("Проверяем что устройство ранее добавленное в адресную книгу и удаленное из последних сеансов не добавляется при повторном подключении в адресную книгу"):
+            self.open_last_session()
+            self.reconnect_without_pass()
+            self.close_connection()
+            assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) > 0, 'Нет устройств в списке'
+            self.click(MainLocators.ADDRESS_BOOK)
+            assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) == 0, 'Устройство найдено в списке'
 
     def clear_all_device_lists(self):
-        self.clear_last_seanses()
+        self.clear_last_session()
         self.clear_favorites()
         self.clear_address_book()
 
@@ -512,7 +545,7 @@ class MainPage(BasePage):
         self.click_connection_nav_bar()
         self.click(MainLocators.ADDRESS_BOOK, 'вкладка Адресная книга')
         self.del_all_devices_from_list()
-        self.wait_element('//*[@content-desc="Пусто"]')
+        # self.wait_element('//*[@content-desc="Пусто"]')
 
     @allure.step("Удалить все устройства из списка")
     def del_all_devices_from_list(self, count_save_in_list=0):
@@ -532,13 +565,13 @@ class MainPage(BasePage):
 
     @allure.step("Добавить устройство в Избранное")
     def add_to_favorites(self):
-        self.click(MainLocators.LAST_SEANSES, 'вкладка [Последние сеансы]')
-        id_last_seanses = self.get_description(MainLocators.DEVICE_IN_LIST)
+        self.open_last_session()
+        id_last_session = self.get_description(MainLocators.DEVICE_IN_LIST)
         self.click_more_option_connect()
         self.click(MainLocators.ADD_TO_FAVORITES, 'кнопка [Добавить в Избранное]')
         self.click(MainLocators.FAVOTITES, 'вкладка [Избранное]')
         id_favorites = self.get_description(MainLocators.DEVICE_IN_LIST)
-        assert id_favorites == id_last_seanses, f'ID устройства из адресной книги {id_favorites} не совпадает с ID устройства в последних сеансах {id_last_seanses}'
+        assert id_favorites == id_last_session, f'ID устройства из адресной книги {id_favorites} не совпадает с ID устройства в последних сеансах {id_last_session}'
 
     @allure.step("Переименовать устройство")
     def set_alias(self, alias):
@@ -563,9 +596,9 @@ class MainPage(BasePage):
         assert alias in name, f'Ожидалось {alias}, но в строке {name} не найдено'
 
     @allure.step("Очистить список последних сеансов")
-    def clear_last_seanses(self):
+    def clear_last_session(self):
         self.click_connection_nav_bar()
-        self.click(MainLocators.LAST_SEANSES, 'вкладка Последние сеансы')
+        self.click(MainLocators.LAST_SESSION, 'вкладка Последние сеансы')
         self.wait_a_second(2)
         self.del_all_devices_from_list()
 
