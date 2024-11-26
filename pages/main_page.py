@@ -503,14 +503,14 @@ class MainPage(BasePage):
             assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) > 0, 'Нет устройств в списке'
             self.clear_last_session()
         with allure.step("Проверяем что устройство удалилось так-же и с вкладки [Избранное]"):
-            self.click(MainLocators.FAVOTITES)
+            self.click(MainLocators.FAVORITES)
             assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) == 0, 'Устройство найдено в списке. При удалении со вкладки "Последние сеансы", устройство должно удаляться и с вкладки "Избранное"'
         with allure.step("Проверяем что устройство ранее добавленное в избранное и удаленное из последних сеансов не добавляется при повторном подключении в избранное"):
             self.open_last_session()
             self.reconnect_without_pass()
             self.close_connection()
             assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) > 0, 'Нет устройств в списке'
-            self.click(MainLocators.FAVOTITES)
+            self.click(MainLocators.FAVORITES)
             assert self.get_elements_amount(MainLocators.BUTTON_MORE_OPTIONS_CONNECTION) == 0, 'Устройство найдено в списке'
 
     @allure.step("Удалить устройство со вкладки [Избранное]")
@@ -558,7 +558,7 @@ class MainPage(BasePage):
     @allure.step("Очистить избранное")
     def clear_favorites(self):
         self.click_connection_nav_bar()
-        self.click(MainLocators.FAVOTITES, 'вкладка Избранное')
+        self.click(MainLocators.FAVORITES, 'вкладка Избранное')
         self.wait_a_second(2)
         self.del_all_devices_from_list()
         self.wait_element('//*[@content-desc="Пусто"]')
@@ -569,7 +569,7 @@ class MainPage(BasePage):
         id_last_session = self.get_description(MainLocators.DEVICE_IN_LIST)
         self.click_more_option_connect()
         self.click(MainLocators.ADD_TO_FAVORITES, 'кнопка [Добавить в Избранное]')
-        self.click(MainLocators.FAVOTITES, 'вкладка [Избранное]')
+        self.click(MainLocators.FAVORITES, 'вкладка [Избранное]')
         id_favorites = self.get_description(MainLocators.DEVICE_IN_LIST)
         assert id_favorites == id_last_session, f'ID устройства из адресной книги {id_favorites} не совпадает с ID устройства в последних сеансах {id_last_session}'
 
