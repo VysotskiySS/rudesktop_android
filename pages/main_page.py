@@ -17,6 +17,7 @@ class MainPage(BasePage):
             self.click(MainLocators.ALLOW_ACCESS_TO_MANAGE_ALL_FILES_SWITCH, 'свитч Разрешить доступ на управление всеми файлами')
             self.click(MainLocators.BACK_BTN, 'кнопка [назад]')
 
+    @allure.step("Принять новый сертификат сервера")
     def accept_new_cert(self):
         if self.get_elements_amount(MainLocators.CHANGE_CERT_WARNING_TITLE) >0:
             self.click(MainLocators.ACCEPT_NEW_CERT_BTN)
@@ -56,7 +57,7 @@ class MainPage(BasePage):
         self.click_connection_nav_bar()
         self.click_connect()
 
-    def check_id_last_seanses(self):
+    def check_id_last_sessions(self):
         self.wait_a_second(2)
         id_device_last = self.get_id_or_alias_device()
         id_device_last = id_device_last.replace(' ', '')
@@ -117,11 +118,11 @@ class MainPage(BasePage):
     def click_ok(self):
         self.click(MainLocators.OK_BTN, 'кнопка [ОК]')
 
-    def change_server(self, server_to_connect):
+    def change_server(self, server_id):
         self.click(MainLocators.SERVER_TO_CONNECT, 'кнопка [Сервер для подключения]')
         self.click('//*/android.widget.EditText')
         self.d.clear_text()
-        self.d.send_keys(server_to_connect)
+        self.d.send_keys(server_id)
         self.click_ok()
 
     def check_change_language(self):
@@ -138,23 +139,28 @@ class MainPage(BasePage):
         self.click(MainLocators.DEFAULT_LANGUAGE, 'пункт меню Язык интерфейса')
         self.wait_element('//*[@content-desc="Язык интерфейса"]')
 
+    @allure.step("Проверить смену темы")
     def check_change_theme(self):
-        self.click(MainLocators.NIGHT_THEME_SETTINGS, 'кнопка [Ночная тема] на экране Настройки')
-        self.click(MainLocators.NIGHT_THEME)
-        color = self.get_color('//*[@content-desc="Ночная тема"]')
-        assert color == (27, 27, 27), f'Цвет иконки {color} а должен быть (27, 27, 27)'
-        self.click(MainLocators.NIGHT_THEME_SETTINGS, 'кнопка [Ночная тема] на экране Настройки')
-        self.click(MainLocators.SYSTEM_THEME)
-        color = self.get_color('//*[@content-desc="Ночная тема"]')
-        assert color == (240, 240, 240), f'Цвет иконки {color} а должен быть (240, 240, 240)'
-        self.click(MainLocators.NIGHT_THEME_SETTINGS, 'кнопка [Ночная тема] на экране Настройки')
-        self.click(MainLocators.NIGHT_THEME)
-        color = self.get_color('//*[@content-desc="Ночная тема"]')
-        assert color == (27, 27, 27), f'Цвет иконки {color} а должен быть (27, 27, 27)'
-        self.click(MainLocators.NIGHT_THEME_SETTINGS, 'кнопка [Ночная тема] на экране Настройки')
-        self.click(MainLocators.DAYTIME_THEME)
-        color = self.get_color('//*[@content-desc="Ночная тема"]')
-        assert color == (240, 240, 240), f'Цвет иконки {color} а должен быть (240, 240, 240)'
+        with allure.step("Включить ночную тему"):
+            self.click(MainLocators.NIGHT_THEME_SETTINGS, 'кнопка [Ночная тема] на экране Настройки')
+            self.click(MainLocators.NIGHT_THEME)
+            color = self.get_color('//*[@content-desc="Ночная тема"]')
+            assert color == (27, 27, 27), f'Цвет иконки {color} а должен быть (27, 27, 27)'
+        with allure.step("Включить системную тему"):
+            self.click(MainLocators.NIGHT_THEME_SETTINGS, 'кнопка [Ночная тема] на экране Настройки')
+            self.click(MainLocators.SYSTEM_THEME)
+            color = self.get_color('//*[@content-desc="Ночная тема"]')
+            assert color == (240, 240, 240), f'Цвет иконки {color} а должен быть (240, 240, 240)'
+        with allure.step("Включить ночную тему"):
+            self.click(MainLocators.NIGHT_THEME_SETTINGS, 'кнопка [Ночная тема] на экране Настройки')
+            self.click(MainLocators.NIGHT_THEME)
+            color = self.get_color('//*[@content-desc="Ночная тема"]')
+            assert color == (27, 27, 27), f'Цвет иконки {color} а должен быть (27, 27, 27)'
+        with allure.step("Включить светлую тему"):
+            self.click(MainLocators.NIGHT_THEME_SETTINGS, 'кнопка [Ночная тема] на экране Настройки')
+            self.click(MainLocators.DAYTIME_THEME)
+            color = self.get_color('//*[@content-desc="Ночная тема"]')
+            assert color == (240, 240, 240), f'Цвет иконки {color} а должен быть (240, 240, 240)'
 
     def change_settings(self):
         self.click(MainLocators.LANGUAGE, 'кнопка [Язык интерфейса]')
@@ -487,14 +493,14 @@ class MainPage(BasePage):
     @allure.step("Добавить устройство в Адресную книгу")
     def add_to_address_book(self):
         self.open_last_session()
-        id_last_seanses = self.get_description(MainLocators.DEVICE_IN_LIST)
-        id_last_seanses = self.get_text_before_newline(id_last_seanses)
+        id_last_sessions = self.get_description(MainLocators.DEVICE_IN_LIST)
+        id_last_sessions= self.get_text_before_newline(id_last_sessions)
         self.click_more_option_connect()
         self.click(MainLocators.ADD_TO_ADDRESS_BOOK, 'кнопка [Добавить в адресную книгу]')
         self.click(MainLocators.ADDRESS_BOOK, 'вкладка [Адресная книга]')
         id_address_book = self.get_description(MainLocators.DEVICE_IN_LIST)
         id_address_book = self.get_text_before_newline(id_address_book)
-        assert id_address_book == id_last_seanses, f'ID устройства из адресной книги {id_address_book} не совпадает с ID устройства в последних сеансах {id_last_seanses}'
+        assert id_address_book == id_last_sessions, f'ID устройства из адресной книги {id_address_book} не совпадает с ID устройства в последних сеансах {id_last_sessions}'
 
     @allure.step("Удалить устройство со вкладки [Последние сеансы]")
     def check_clear_last_session(self):
