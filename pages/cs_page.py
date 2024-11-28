@@ -1,7 +1,5 @@
 import allure
 from faker import Faker
-from pygments.lexer import default
-
 from locators import *
 from pages.base_page import BasePage
 from pages.main_page import MainPage
