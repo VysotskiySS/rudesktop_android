@@ -143,3 +143,27 @@ class TestConnection:
         main.connect_from_id(auth='no')
         cs = CSPage(connect_to_device)
         cs.check_change_scale_mode()
+
+    @pytest.mark.connection
+    @pytest.mark.smoke
+    @allure.title('Меню [...] на панели в окне подключения')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=203")
+    def test_more_options(self, connect_to_device):
+        main = MainPage(connect_to_device)
+        main.allow_access()
+        main.ok_warning_server_to_connect()
+        main.connect_from_id()
+        cs = CSPage(connect_to_device)
+        cs.check_more_options()
+
+    @pytest.mark.connection
+    @pytest.mark.smoke
+    @allure.title('Меню [Дисплей] на панели в окне подключения')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=203")
+    def test_display_options(self, connect_to_device):
+        main = MainPage(connect_to_device)
+        main.allow_access()
+        main.ok_warning_server_to_connect()
+        main.connect_from_id()
+        cs = CSPage(connect_to_device)
+        cs.check_display_options()

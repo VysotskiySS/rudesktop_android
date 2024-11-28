@@ -62,10 +62,11 @@ class BasePage:
         current_date = date.today()
         return current_date
 
-    def get_screen(self):
+    def get_screen(self, attach='true'):
         screen = "screen.png"
         self.d.screenshot(screen)
-        allure.attach.file(f'./{screen}', attachment_type=allure.attachment_type.PNG)
+        if attach == 'true':
+            allure.attach.file(f'./{screen}', attachment_type=allure.attachment_type.PNG)
 
     def truncate_string(self, input_string, n):
         return input_string[:n]
