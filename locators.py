@@ -169,6 +169,7 @@ class CSLocators:
     BLOCK_SESSION = '//*[@content-desc="Заблокировать сессию"]'
     REBOOT_REMOTE_DEVICE = '//*[@content-desc="Перезапустить удаленное устройство"]'
     START_RECORD_SESSION = '//*[@content-desc="Начать запись сессии"]'
+    STOP_RECORD_SESSION = '//*[@content-desc="Остановить запись сессии"]'
 
     # MOUSE OR SENSOR
     MOUSE_MODE_BTN = '//*[@content-desc="Режим мыши"]'

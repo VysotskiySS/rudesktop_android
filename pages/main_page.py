@@ -172,6 +172,10 @@ class MainPage(BasePage):
         self.d.app_start(package)
         self.wait_a_second()
 
+    @allure.step("Остановить приложение")
+    def stop_app(self):
+        self.d.app_stop(package)
+
     @allure.step("Сбросить настройки")
     def reset_settings(self):
         self.change_settings()
@@ -262,12 +266,13 @@ class MainPage(BasePage):
     def click_x_on_clipboard_preview(self):
         if self.get_elements_amount(MainLocators.X_BTN_CLIPBOARD) > 0:
             self.click(MainLocators.X_BTN_CLIPBOARD, 'кнопка [Х] на clipboard preview')
+            self.wait_a_second(2)
 
     def check_copy_id(self):
         # self.update_temp_pass()
         self.copy_temp_pass()
-        text_to_paste = pyperclip.paste()
         self.click_x_on_clipboard_preview()
+        text_to_paste = pyperclip.paste()
         self.click_chat_nav_bar()
         self.set_text(MainLocators.CHAT_FIELD, text_to_paste)
         self.wait_a_second(3)

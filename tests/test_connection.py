@@ -167,3 +167,16 @@ class TestConnection:
         main.connect_from_id()
         cs = CSPage(connect_to_device)
         cs.check_display_options()
+
+    @pytest.mark.connection
+    @pytest.mark.smoke
+    @allure.title('Начать / Остановить запись сессии')
+    @allure.testcase("https://dev.corp.rudesktop.ru/-/testy/projects/2/suites/8?test_case=206")
+    def test_record_session(self, connect_to_device):
+        main = MainPage(connect_to_device)
+        main.allow_access()
+        main.ok_warning_server_to_connect()
+        main.connect_from_id()
+        cs = CSPage(connect_to_device)
+        cs.check_record_session()
+

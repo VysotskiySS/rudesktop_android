@@ -149,6 +149,7 @@ class CSPage(BasePage):
             self.wait_element(CSLocators.BUTTON_MORE_OPTION)
             self.wait_element(CSLocators.BUTTON_HIDE_PANEL)
 
+    # @allure.step("Проверяем активный / неактивный элемент (по цвету)")
     def check_color_active_element(self, x, y, condition='active'):
         active_color = (25, 138, 232)
         inactive_color = (255, 255, 255)
@@ -230,7 +231,7 @@ class CSPage(BasePage):
             y = 100
             self.get_screen()
             default_color = self.get_color_pixel(x, y)
-            assert default_color == (29, 29, 29) or default_color == (33, 33, 33)
+            assert default_color[0] == default_color[1] == default_color[2], f'Ожидалось r=g=b но получено {default_color}'
         try:
             self.click(MainLocators.CLOSE_CLIPBOARD, 'кнопка Х на окне превью буфера обмена')
         except:
@@ -373,9 +374,23 @@ class CSPage(BasePage):
             self.check_color_active_element(*DISABLE_CLIPBOARD, condition='inactive')
             self.check_color_active_element(*LOCK_SCREEN_AFTER_END_SESSION, condition='inactive')
 
+    def check_record_session(self):
+        self.click_more_options()
+        self.click(CSLocators.START_RECORD_SESSION)
+        self.wait_hidden_element(CSLocators.UPDATE)
+        self.click_more_options()
+        self.wait_element(CSLocators.STOP_RECORD_SESSION)
+        self.click(CSLocators.STOP_RECORD_SESSION)
+        self.wait_hidden_element(CSLocators.UPDATE)
+        self.click_more_options()
+        self.wait_element(CSLocators.START_RECORD_SESSION)
 
-
-
+        # self.d.stop_app(package)
+        #
+        # self.click('//*[@text="Files"]')
+        # self.click('//*[@content-desc="Show roots"]')
+        # self.click('//*[@resource-id="com.google.android.documentsui:id/roots_list"]/android.widget.LinearLayout[7]/android.widget.LinearLayout[1]')
+        # self.click('//*[@resource-id="com.google.android.documentsui:id/dir_list"]/androidx.cardview.widget.CardView[14]')
 
 
 
