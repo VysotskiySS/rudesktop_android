@@ -163,7 +163,19 @@ class CSPage(BasePage):
             assert current_color == inactive_color, f'Ожидался цвет {inactive_color}, но получен {current_color}'
 
     def click_show_quality(self):
-        self.click(CSLocators.SHOW_QUALITY, 'кнопка [Показать качество]')
+        self.click(CSLocators.SHOW_QUALITY, 'чек-бокс [Показать качество]')
+
+    def click_show_remote_cursor(self):
+        self.click(CSLocators.SHOW_REMOTE_CURSOR, 'чек-бокс [Показать удаленный курсор]')
+
+    def click_disable_sound(self):
+        self.click(CSLocators.DISABLE_SOUND, 'чек-бокс [Выключить звук]')
+
+    def click_disable_clipboard(self):
+        self.click(CSLocators.DISABLE_CLIPBOARD, 'чек-бокс [Выключить буфер обмена]')
+
+    def click_lock_screen_after_end_session(self):
+        self.click(CSLocators.LOCK_SCREEN_AFTER_END_SESSION, 'чек-бокс [Заблокировать экран после завершения сессии]')
 
     @allure.step("Проверить изменение цвета активного элемента")
     def check_quality(self):
@@ -244,7 +256,6 @@ class CSPage(BasePage):
             self.check_color_active_element(*ORIGINAL_SCALE)
             self.check_color_active_element(*ADAPTIVE_SCALE, condition='inactive')
             self.click_display()
-            self.get_screen()
             current_color = self.get_color_pixel(x, y)
             assert current_color != (29, 29, 29) or current_color != (33, 33, 33)
         with allure.step("Переключить масштаб на адаптивный"):
@@ -253,7 +264,6 @@ class CSPage(BasePage):
             self.check_color_active_element(*ORIGINAL_SCALE, condition='inactive')
             self.check_color_active_element(*ADAPTIVE_SCALE)
             self.click_display()
-            self.get_screen()
             current_color = self.get_color_pixel(x, y)
             assert current_color == (29, 29, 29) or current_color == (33, 33, 33)
         with allure.step("Переключить масштаб на оригинальный через кнопку [...]"):
@@ -303,35 +313,35 @@ class CSPage(BasePage):
             self.check_color_active_element(*DISABLE_CLIPBOARD, condition='inactive')
             self.check_color_active_element(*LOCK_SCREEN_AFTER_END_SESSION, condition='inactive')
         with allure.step("Проверить что можно выбрать все чек-боксы"):
-            self.click(CSLocators.SHOW_REMOTE_CURSOR)
+            self.click_show_remote_cursor()
             self.check_color_active_element(*SHOW_REMOTE_CURSOR)
             self.check_color_active_element(*SHOW_QUALITY, condition='inactive')
             self.check_color_active_element(*DISABLE_SOUND, condition='inactive')
             self.check_color_active_element(*DISABLE_CLIPBOARD, condition='inactive')
             self.check_color_active_element(*LOCK_SCREEN_AFTER_END_SESSION, condition='inactive')
 
-            self.click(CSLocators.SHOW_QUALITY)
+            self.click_show_quality()
             self.check_color_active_element(*SHOW_REMOTE_CURSOR)
             self.check_color_active_element(*SHOW_QUALITY)
             self.check_color_active_element(*DISABLE_SOUND, condition='inactive')
             self.check_color_active_element(*DISABLE_CLIPBOARD, condition='inactive')
             self.check_color_active_element(*LOCK_SCREEN_AFTER_END_SESSION, condition='inactive')
 
-            self.click(CSLocators.DISABLE_SOUND)
+            self.click_disable_sound()
             self.check_color_active_element(*SHOW_REMOTE_CURSOR)
             self.check_color_active_element(*SHOW_QUALITY)
             self.check_color_active_element(*DISABLE_SOUND)
             self.check_color_active_element(*DISABLE_CLIPBOARD, condition='inactive')
             self.check_color_active_element(*LOCK_SCREEN_AFTER_END_SESSION, condition='inactive')
 
-            self.click(CSLocators.DISABLE_CLIPBOARD)
+            self.click_disable_clipboard()
             self.check_color_active_element(*SHOW_REMOTE_CURSOR)
             self.check_color_active_element(*SHOW_QUALITY)
             self.check_color_active_element(*DISABLE_SOUND)
             self.check_color_active_element(*DISABLE_CLIPBOARD)
             self.check_color_active_element(*LOCK_SCREEN_AFTER_END_SESSION, condition='inactive')
 
-            self.click(CSLocators.LOCK_SCREEN_AFTER_END_SESSION)
+            self.click_lock_screen_after_end_session()
             self.check_color_active_element(*SHOW_REMOTE_CURSOR)
             self.check_color_active_element(*SHOW_QUALITY)
             self.check_color_active_element(*DISABLE_SOUND)
@@ -339,35 +349,35 @@ class CSPage(BasePage):
             self.check_color_active_element(*LOCK_SCREEN_AFTER_END_SESSION)
 
         with allure.step("Проверить что можно снять все чек-боксы"):
-            self.click(CSLocators.SHOW_REMOTE_CURSOR)
+            self.click_show_remote_cursor()
             self.check_color_active_element(*SHOW_REMOTE_CURSOR, condition='inactive')
             self.check_color_active_element(*SHOW_QUALITY)
             self.check_color_active_element(*DISABLE_SOUND)
             self.check_color_active_element(*DISABLE_CLIPBOARD)
             self.check_color_active_element(*LOCK_SCREEN_AFTER_END_SESSION)
 
-            self.click(CSLocators.SHOW_QUALITY)
+            self.click_show_quality()
             self.check_color_active_element(*SHOW_REMOTE_CURSOR, condition='inactive')
             self.check_color_active_element(*SHOW_QUALITY, condition='inactive')
             self.check_color_active_element(*DISABLE_SOUND)
             self.check_color_active_element(*DISABLE_CLIPBOARD)
             self.check_color_active_element(*LOCK_SCREEN_AFTER_END_SESSION)
 
-            self.click(CSLocators.DISABLE_SOUND)
+            self.click_disable_sound()
             self.check_color_active_element(*SHOW_REMOTE_CURSOR, condition='inactive')
             self.check_color_active_element(*SHOW_QUALITY, condition='inactive')
             self.check_color_active_element(*DISABLE_SOUND, condition='inactive')
             self.check_color_active_element(*DISABLE_CLIPBOARD)
             self.check_color_active_element(*LOCK_SCREEN_AFTER_END_SESSION)
 
-            self.click(CSLocators.DISABLE_CLIPBOARD)
+            self.click_disable_clipboard()
             self.check_color_active_element(*SHOW_REMOTE_CURSOR, condition='inactive')
             self.check_color_active_element(*SHOW_QUALITY, condition='inactive')
             self.check_color_active_element(*DISABLE_SOUND, condition='inactive')
             self.check_color_active_element(*DISABLE_CLIPBOARD, condition='inactive')
             self.check_color_active_element(*LOCK_SCREEN_AFTER_END_SESSION)
 
-            self.click(CSLocators.LOCK_SCREEN_AFTER_END_SESSION)
+            self.click_lock_screen_after_end_session()
             self.check_color_active_element(*SHOW_REMOTE_CURSOR, condition='inactive')
             self.check_color_active_element(*SHOW_QUALITY, condition='inactive')
             self.check_color_active_element(*DISABLE_SOUND, condition='inactive')

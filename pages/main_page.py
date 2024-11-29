@@ -377,7 +377,12 @@ class MainPage(BasePage):
 
     @allure.step("Нажать кнопку [...] в блоке Теги")
     def click_more_option_address_book(self):
-        self.coordinate_click(980, 583) # не смог подобрать локатор, пока клик по координатам, ЗАМЕНИТЬ!!!
+        # self.coordinate_click(980, 583) # не смог подобрать локатор, пока клик по координатам, ЗАМЕНИТЬ!!!
+        # отталкиваемся от поля поиск со смещением вниз на 110px
+        center = self.get_element(MainLocators.SEARCH_BTN).center()
+        x, y = center
+        y = y + 110
+        self.coordinate_click(x,y)
 
     @allure.step("Добавить устройство в адресную книгу по ID")
     def add_device_to_address_book_from_id(self):
@@ -768,3 +773,5 @@ class MainPage(BasePage):
         version = string[0]
         version = version.split(': ')[1]
         return version
+
+
